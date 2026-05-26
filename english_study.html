@@ -1,0 +1,2801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>궁극의 영어 공부 노트 · Spaced Repetition</title>
+<style>
+  :root {
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --text: #1c2541;
+    --muted: #6c7a93;
+    --primary: #4f6dff;
+    --primary-soft: #eef1ff;
+    --accent: #16a085;
+    --warn: #e67e22;
+    --danger: #e74c3c;
+    --good: #27ae60;
+    --border: #e4e7ef;
+    --shadow: 0 4px 14px rgba(20, 30, 60, 0.06);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  .app { max-width: 960px; margin: 0 auto; padding: 24px 20px 80px; }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+  header h1 { font-size: 22px; margin: 0; letter-spacing: -0.3px; }
+  header .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+  .tab { background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+    padding: 8px 14px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 500; }
+  .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+  .panel { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 22px; margin-bottom: 16px; border: 1px solid var(--border); }
+
+  /* Study card */
+  .study-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
+    color: var(--muted); font-size: 13px; flex-wrap: wrap; gap: 8px; }
+  .chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    background: var(--primary-soft); color: var(--primary); }
+
+  .card {
+    background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%);
+    border: 1px solid var(--border); border-radius: 18px;
+    padding: 36px 28px; min-height: 280px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; cursor: pointer; user-select: none;
+    transition: transform 0.15s ease;
+  }
+  .card:hover { transform: translateY(-1px); }
+  .card .prompt-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .card .prompt-text { font-size: 28px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
+  .card .hint { color: var(--muted); font-size: 13px; }
+
+  .card.flipped .prompt-text { font-size: 36px; color: var(--primary); }
+  .card .ipa { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .card .meaning { font-size: 18px; margin-top: 14px; }
+
+  .examples-list { margin-top: 16px; width: 100%; display: flex; flex-direction: column; gap: 6px; }
+  .example-item { padding: 10px 14px; background: var(--primary-soft); border-radius: 10px;
+    color: var(--text); font-size: 14px; line-height: 1.5; text-align: left; display: flex;
+    align-items: flex-start; gap: 8px; }
+  .example-item .num { color: var(--primary); font-weight: 700; flex-shrink: 0; }
+  .example-item .txt { flex: 1; }
+
+  .card .collocations { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .colloc-tag { background: #f1f3f9; color: var(--text); font-size: 12px; padding: 4px 10px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 4px; }
+
+  .tts-btn { background: white; border: 1px solid var(--border); border-radius: 50%; width: 30px; height: 30px;
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+    transition: background 0.15s; }
+  .tts-btn:hover { background: var(--primary-soft); }
+  .tts-btn svg { width: 14px; height: 14px; fill: var(--primary); }
+  .tts-btn.lg { width: 36px; height: 36px; margin-left: 8px; }
+  .tts-btn.lg svg { width: 16px; height: 16px; }
+  .tts-btn.sm { width: 22px; height: 22px; }
+  .tts-btn.sm svg { width: 11px; height: 11px; }
+
+  .actions { display: flex; gap: 10px; margin-top: 18px; }
+  .actions button { flex: 1; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
+    font-weight: 600; font-size: 14px; transition: transform 0.1s; }
+  .actions button:active { transform: scale(0.98); }
+  .btn-again { background: #fde2e1; color: var(--danger); }
+  .btn-hard { background: #fff1d6; color: var(--warn); }
+  .btn-good { background: #d8f4e3; color: var(--good); }
+  .btn-easy { background: #d6e3ff; color: var(--primary); }
+
+  .flip-hint { text-align: center; margin-top: 14px; color: var(--muted); font-size: 13px; }
+
+  /* Filters / category select */
+  .filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .filter-row select, .filter-row input { padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 13px; background: white; color: var(--text); }
+
+  /* Word list */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; }
+  td .word { font-weight: 600; }
+  td .ex { color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .icon-btn { background: none; border: none; cursor: pointer; padding: 4px; color: var(--muted); }
+  .icon-btn:hover { color: var(--primary); }
+  .icon-btn.del:hover { color: var(--danger); }
+
+  /* Form */
+  form .field { margin-bottom: 12px; }
+  form label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
+  form input, form textarea, form select {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 14px; font-family: inherit; color: var(--text); background: white;
+  }
+  form textarea { resize: vertical; min-height: 60px; }
+  form .row { display: flex; gap: 10px; }
+  form .row .field { flex: 1; }
+  form .submit { background: var(--primary); color: white; border: none; padding: 12px 20px;
+    border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  form .submit:hover { opacity: 0.95; }
+
+  /* Stats */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .stat { background: var(--primary-soft); padding: 16px; border-radius: 12px; text-align: center; }
+  .stat .v { font-size: 26px; font-weight: 700; color: var(--primary); }
+  .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* Empty state */
+  .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
+  .empty h3 { color: var(--text); margin: 8px 0; }
+  .empty button { margin-top: 12px; background: var(--primary); color: white; border: none;
+    padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+
+  /* Backup */
+  .backup-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .backup-row button, .backup-row label {
+    background: var(--primary-soft); color: var(--primary); border: 1px solid var(--border);
+    padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;
+  }
+  .danger-btn { background: #fde2e1 !important; color: var(--danger) !important; }
+
+  /* Sentence prompt */
+  .sentence-box { margin-top: 16px; padding: 14px; background: #fffbea; border-radius: 10px;
+    border-left: 3px solid #f1c40f; font-size: 13px; color: var(--text); width: 100%; box-sizing: border-box; }
+  .sentence-box textarea { width: 100%; margin-top: 8px; padding: 8px; border: 1px solid var(--border);
+    border-radius: 6px; font-family: inherit; font-size: 13px; min-height: 50px; }
+
+  /* Quiz UI */
+  .quiz-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .quiz-type-card { background: var(--surface); border: 2px solid var(--border); border-radius: 14px;
+    padding: 16px; cursor: pointer; transition: all 0.15s; }
+  .quiz-type-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .quiz-type-card.selected { border-color: var(--primary); background: var(--primary-soft); }
+  .quiz-type-card .qt-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .quiz-type-card .qt-desc { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .quiz-type-card .qt-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px;
+    background: #f1f3f9; color: var(--muted); margin-top: 8px; font-weight: 600; }
+  .quiz-type-card .qt-tag.prod { background: #fde2e1; color: var(--danger); }
+  .quiz-type-card .qt-tag.rec { background: #d6e3ff; color: var(--primary); }
+  .quiz-type-card .qt-tag.smart { background: linear-gradient(90deg, #ede9fe, #ddd6fe); color: #6d28d9; }
+  .stage-pill { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px; font-weight: 700; margin-left: 4px; vertical-align: middle; }
+
+  .quiz-start-btn { background: var(--primary); color: white; border: none; padding: 14px 28px;
+    border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; }
+  .quiz-start-btn:hover { opacity: 0.95; }
+  .quiz-start-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  .quiz-progress { background: #eef0f7; border-radius: 999px; height: 8px; margin-bottom: 16px; overflow: hidden; }
+  .quiz-progress .bar { background: var(--primary); height: 100%; transition: width 0.3s; }
+
+  .quiz-question { background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%);
+    border: 1px solid var(--border); border-radius: 18px; padding: 32px 24px; min-height: 200px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .quiz-prompt-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .quiz-prompt { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .quiz-prompt.smaller { font-size: 20px; line-height: 1.6; }
+  .quiz-ipa { color: var(--muted); font-size: 14px; }
+  .quiz-audio-icon { font-size: 60px; margin: 20px 0; cursor: pointer; user-select: none; transition: transform 0.15s; }
+  .quiz-audio-icon:hover { transform: scale(1.1); }
+
+  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+  .quiz-option { background: white; border: 2px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; cursor: pointer; font-size: 14px; text-align: left; transition: all 0.15s; color: var(--text); }
+  .quiz-option:hover { border-color: var(--primary); background: var(--primary-soft); }
+  .quiz-option.correct { border-color: var(--good); background: #d8f4e3; color: var(--good); font-weight: 600; }
+  .quiz-option.wrong { border-color: var(--danger); background: #fde2e1; color: var(--danger); }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-option .opt-num { font-weight: 700; color: var(--muted); margin-right: 8px; }
+
+  .quiz-text-input { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 12px;
+    font-size: 18px; font-family: inherit; text-align: center; margin-top: 20px; color: var(--text); background: white; }
+  .quiz-text-input:focus { outline: none; border-color: var(--primary); }
+  .quiz-text-input.correct { border-color: var(--good); background: #d8f4e3; }
+  .quiz-text-input.wrong { border-color: var(--danger); background: #fde2e1; }
+  .quiz-submit { background: var(--primary); color: white; border: none; padding: 12px 24px;
+    border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+
+  .quiz-feedback { margin-top: 16px; padding: 14px; border-radius: 12px; font-size: 14px; text-align: center; }
+  .quiz-feedback.correct { background: #d8f4e3; color: var(--good); }
+  .quiz-feedback.wrong { background: #fde2e1; color: var(--danger); }
+  .quiz-feedback .answer-detail { margin-top: 8px; padding: 10px; background: rgba(255,255,255,0.6); border-radius: 8px; font-size: 13px; color: var(--text); }
+  .quiz-feedback .answer-detail .word { font-weight: 700; }
+
+  .quiz-controls { display: flex; gap: 10px; margin-top: 14px; justify-content: center; }
+  .quiz-next { background: var(--primary); color: white; border: none; padding: 12px 28px;
+    border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .quiz-fudge { background: #fff1d6; color: var(--warn); border: none; padding: 12px 20px;
+    border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .quiz-fudge:hover { opacity: 0.9; }
+
+  .quiz-results { text-align: center; padding: 20px 0; }
+  .quiz-results .score { font-size: 56px; font-weight: 800; color: var(--primary); line-height: 1; }
+  .quiz-results .score-label { color: var(--muted); margin-top: 6px; font-size: 14px; }
+  .quiz-results .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 24px 0; }
+  .quiz-results .summary .item { background: var(--primary-soft); border-radius: 10px; padding: 12px; }
+  .quiz-results .summary .item .v { font-size: 22px; font-weight: 700; color: var(--primary); }
+  .quiz-results .summary .item .l { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .wrong-list { text-align: left; margin-top: 16px; }
+  .wrong-list h4 { color: var(--danger); margin: 0 0 10px 0; }
+  .wrong-item { background: #fff8f7; border-left: 3px solid var(--danger); padding: 10px 14px;
+    border-radius: 6px; margin-bottom: 8px; font-size: 13px; }
+  .wrong-item .your { color: var(--danger); text-decoration: line-through; }
+  .wrong-item .right { color: var(--good); font-weight: 600; }
+
+  /* Notification */
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--text); color: white; padding: 10px 20px; border-radius: 999px;
+    font-size: 13px; opacity: 0; transition: opacity 0.3s; z-index: 1000; }
+  .toast.show { opacity: 0.95; }
+
+  @media (max-width: 600px) {
+    .app { padding: 16px 14px 80px; }
+    .card { padding: 28px 18px; min-height: 240px; }
+    .card .prompt-text { font-size: 24px; }
+    .card.flipped .prompt-text { font-size: 28px; }
+    .actions button { padding: 12px 4px; font-size: 13px; }
+    table { font-size: 12px; }
+    th:nth-child(3), td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div>
+      <h1>📘 궁극의 영어 공부 노트</h1>
+      <div class="sub">Spaced Repetition · Active Recall · TTS · Auto-Save</div>
+    </div>
+    <div class="sub" id="todayInfo"></div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="study">📖 학습</button>
+    <button class="tab" data-tab="quiz">🎯 퀴즈</button>
+    <button class="tab" data-tab="list">📋 단어장</button>
+    <button class="tab" data-tab="add">➕ 추가</button>
+    <button class="tab" data-tab="stats">📊 통계</button>
+    <button class="tab" data-tab="backup">💾 백업</button>
+    <button class="tab" data-tab="sync">☁️ 동기화</button>
+    <button class="tab" data-tab="guide">💡 가이드</button>
+  </div>
+
+  <!-- STUDY TAB -->
+  <section id="tab-study" class="panel">
+    <div class="filter-row">
+      <select id="studyCategory"><option value="all">전체 카테고리</option></select>
+      <select id="studyMode">
+        <option value="due">복습할 단어만 (추천)</option>
+        <option value="all">전체 단어</option>
+        <option value="new">새 단어만</option>
+        <option value="hard">어려운 단어만</option>
+      </select>
+      <select id="studyDirection">
+        <option value="k2e">한국어 → 영어 (Production)</option>
+        <option value="e2k">영어 → 한국어 (Recognition)</option>
+      </select>
+    </div>
+    <div id="studyArea"></div>
+  </section>
+
+  <!-- QUIZ TAB -->
+  <section id="tab-quiz" class="panel" style="display:none;">
+    <div id="quizContainer"></div>
+  </section>
+
+  <!-- LIST TAB -->
+  <section id="tab-list" class="panel" style="display:none;">
+    <div class="filter-row">
+      <input id="searchInput" type="text" placeholder="🔍 단어 검색..." />
+      <select id="filterCategory"><option value="all">전체</option></select>
+      <select id="sortBy">
+        <option value="recent">최근 추가순</option>
+        <option value="alpha">알파벳순</option>
+        <option value="due">복습 임박순</option>
+        <option value="hardest">정답률 낮은순</option>
+      </select>
+    </div>
+    <div style="overflow-x: auto;">
+      <table id="wordTable">
+        <thead>
+          <tr>
+            <th>단어</th>
+            <th>뜻 / 표현</th>
+            <th>예문</th>
+            <th>다음 복습</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="wordTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ADD TAB -->
+  <section id="tab-add" class="panel" style="display:none;">
+    <h3 style="margin-top:0;">단어 추가 / 수정</h3>
+    <form id="wordForm">
+      <input type="hidden" id="editId" />
+      <div class="row">
+        <div class="field">
+          <label>영어 단어 *</label>
+          <input id="f_word" required placeholder="예: mitigate" />
+        </div>
+        <div class="field">
+          <label>발음 (IPA, 선택)</label>
+          <input id="f_ipa" placeholder="예: /ˈmɪtɪɡeɪt/" />
+        </div>
+      </div>
+      <div class="field">
+        <label>한국어 뜻 *</label>
+        <input id="f_meaning" required placeholder="예: 완화하다, 줄이다" />
+      </div>
+      <div class="field">
+        <label>예문 (영어, 줄바꿈으로 여러 개 입력 가능)</label>
+        <textarea id="f_examples" placeholder="여러 예문은 줄을 바꿔서 입력하세요"></textarea>
+      </div>
+      <div class="field">
+        <label>Collocations (콤마로 구분)</label>
+        <input id="f_collocations" placeholder="예: mitigate crosstalk, mitigate damage" />
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>카테고리 *</label>
+          <select id="f_category" required></select>
+        </div>
+        <div class="field">
+          <label>메모 (선택)</label>
+          <input id="f_note" placeholder="자유 메모" />
+        </div>
+      </div>
+      <button type="submit" class="submit">저장</button>
+      <button type="button" id="cancelEdit" style="margin-left:8px; background:#eee; color:#555; border:none; padding:12px 20px; border-radius:10px; cursor:pointer; display:none;">취소</button>
+    </form>
+  </section>
+
+  <!-- STATS TAB -->
+  <section id="tab-stats" class="panel" style="display:none;">
+    <h3 style="margin-top:0;">📊 학습 통계</h3>
+    <div class="stats-grid" id="statsGrid"></div>
+    <div style="margin-top: 20px;">
+      <h4>카테고리별 진행 상황</h4>
+      <div id="categoryStats"></div>
+    </div>
+    <div style="margin-top: 20px;">
+      <h4>🧠 학습 단계 분포 (Production 진척도)</h4>
+      <div id="stageStats"></div>
+    </div>
+    <div style="margin-top: 20px;">
+      <h4>SRS 분포 (복습 간격별 단어 수)</h4>
+      <div id="intervalStats"></div>
+    </div>
+  </section>
+
+  <!-- BACKUP TAB -->
+  <section id="tab-backup" class="panel" style="display:none;">
+    <h3 style="margin-top:0;">💾 백업 / 복원</h3>
+    <p style="color: var(--muted); font-size: 13px;">
+      모든 단어와 학습 진행 상황은 이 브라우저에 자동 저장됩니다.<br>
+      다른 컴퓨터로 옮기거나 안전하게 보관하려면 아래에서 내보내기 하세요.
+    </p>
+    <div class="backup-row">
+      <button id="exportBtn">📤 JSON 내보내기</button>
+      <label>📥 JSON 가져오기<input id="importInput" type="file" accept="application/json" style="display:none;"/></label>
+      <button id="resetBtn" class="danger-btn">⚠️ 전체 초기화</button>
+    </div>
+    <p style="color: var(--muted); font-size: 12px; margin-top: 16px;">
+      ※ 가져오기를 하면 현재 데이터에 새 단어가 병합됩니다 (같은 단어는 덮어쓰지 않음).<br>
+      ※ "전체 초기화"는 모든 데이터를 지우고 기본 단어로 되돌립니다. 되돌릴 수 없습니다.
+    </p>
+  </section>
+
+  <!-- SYNC TAB -->
+  <section id="tab-sync" class="panel" style="display:none;">
+    <div id="syncContainer"></div>
+  </section>
+
+  <!-- GUIDE TAB -->
+  <section id="tab-guide" class="panel" style="display:none;">
+    <h3 style="margin-top:0;">💡 처음이세요? 빠른 시작 가이드</h3>
+
+    <div style="background:#eef1ff; border-left:4px solid var(--primary); padding:16px 20px; border-radius:10px; margin-bottom:20px; font-size:14px; line-height:1.8;">
+      <div style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:8px;">🚀 30초 시작</div>
+      1. 위에서 <b>🎯 퀴즈</b> 탭 클릭<br>
+      2. <b>🧠 Smart Quiz</b> (자동 진행) 선택<br>
+      3. 카테고리 하나 선택 (예: 일상 회화)<br>
+      4. <b>🚀 퀴즈 시작</b> 누르기<br>
+      <br>
+      그게 다입니다. 나머지는 시스템이 알아서 해줍니다.
+    </div>
+
+    <h4 style="margin-top:24px;">📚 이 노트는 뭐 하는 도구인가요?</h4>
+    <p style="line-height:1.7;">
+      영어 단어를 <b>"보면 아는 단계"</b>에서 <b>"실제로 쓸 수 있는 단계"</b>로 끌어올리는 학습 도구입니다.
+      Spaced Repetition System (SRS, 간격 반복)과 5단계 학습 진행을 결합해, 매일 어떤 단어를 어떤 방식으로 복습할지 자동으로 선택해 줍니다.
+    </p>
+    <p style="line-height:1.7;">
+      기본으로 100개 단어가 들어 있고, 직접 추가/수정/삭제 가능합니다. 미국식 발음이 모든 단어/예문에 붙어 있어요.
+    </p>
+
+    <h4 style="margin-top:24px;">⭐ 가장 중요한 한 가지</h4>
+    <div style="background:#fffbea; border-left:4px solid #f1c40f; padding:14px 18px; border-radius:8px; font-size:13px; line-height:1.7;">
+      <b>"틀린 직후 정답을 보고 맞히는 건 '복구 연습'이지 '외운 것'이 아니다."</b><br><br>
+      그래서 이 앱은 결과를 5가지로 자동 분류합니다:
+      <ul style="margin:8px 0;">
+        <li>🧊 <b>Cold Correct</b> — 첫 시도 빠른 정답 (≈10초 이내) → <b>진짜 외운 거</b>, 단계 올라감</li>
+        <li>🌤️ <b>Medium Correct</b> — 첫 시도 정답이지만 약간 느림 → 같은 간격 유지</li>
+        <li>🐢 <b>Slow Correct</b> — 첫 시도 정답인데 25초 이상 → 한 단계 후퇴</li>
+        <li>❌ <b>First Miss</b> — 첫 시도 실패 → 내일 다시</li>
+        <li>🩹 <b>Recovered</b> — 정답 보고 다시 맞힘 → <b>단계 안 올라감</b>, 내일 첫 시도에서 진짜 증명해야 함</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top:24px;">🪜 5단계 학습 진행 (점진적 난이도)</h4>
+    <p style="font-size:13px; color:var(--muted);">각 단어는 정답이 누적되면서 다음 단계로 자동 진행됩니다. 새 단어는 Stage 1부터 시작, 정답이 빠르면 한 단계씩 올라가요.</p>
+    <ol style="line-height:1.9;">
+      <li>🔍 <b>Recognition</b> — 영어 단어 보고 뜻 4지선다 <span style="color:var(--muted);">(새 단어 진입)</span></li>
+      <li>🧩 <b>Fill-in-the-Blank</b> — 예문 빈칸 채우기 <span style="color:var(--muted);">(문맥 힌트 있음)</span></li>
+      <li>📝 <b>Dictation</b> — 듣고 영어로 받아쓰기 <span style="color:var(--muted);">(청각 cue 있음)</span></li>
+      <li>✍️ <b>Production K→E</b> — 한국어 뜻만 보고 영어 직접 입력 <span style="color:var(--muted);">(가장 빡센 핵심 단계)</span></li>
+      <li>🌟 <b>Sentence Production</b> — 단어로 내 문장 직접 만들기 <span style="color:var(--muted);">(Active vocabulary)</span></li>
+    </ol>
+
+    <h4 style="margin-top:24px;">📅 매일 루틴</h4>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:8px;">
+      <div style="background:var(--primary-soft); padding:14px 16px; border-radius:10px;">
+        <b style="color:var(--primary);">⚡ 바쁜 날 (5분)</b>
+        <ul style="margin:6px 0; padding-left:18px; font-size:13px; line-height:1.7;">
+          <li>🧠 Smart Quiz 10문제</li>
+          <li>끝</li>
+        </ul>
+      </div>
+      <div style="background:#e8f6f1; padding:14px 16px; border-radius:10px;">
+        <b style="color:#16a085;">🎯 보통 날 (15~20분)</b>
+        <ul style="margin:6px 0; padding-left:18px; font-size:13px; line-height:1.7;">
+          <li>🧠 Smart Quiz 20문제 (복습 임박순)</li>
+          <li>결과 화면에서 "🔄 틀린 것만 다시"</li>
+          <li>오늘 새로 본 단어 1~2개로 내 문장 만들기</li>
+        </ul>
+      </div>
+      <div style="background:#fff1e6; padding:14px 16px; border-radius:10px;">
+        <b style="color:#e67e22;">🔥 집중하는 날 (40분+)</b>
+        <ul style="margin:6px 0; padding-left:18px; font-size:13px; line-height:1.7;">
+          <li>🧠 Smart Quiz 50문제</li>
+          <li>📖 학습 탭에서 새 카테고리 한 바퀴</li>
+          <li>틀린 단어 별도로 받아쓰기</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin-top:24px;">🏷️ 단어에 붙는 뱃지 읽는 법</h4>
+    <ul style="line-height:1.9;">
+      <li><b>카테고리</b> (예: 📰 뉴스·시사) — 단어가 속한 그룹</li>
+      <li><b>Stage 1~5</b> — 현재 학습 단계</li>
+      <li><b>🧊×N</b> — 연속 Cold Correct 횟수 (높을수록 진짜 외운 단어)</li>
+      <li><b>✅ 오늘 정답 / ❌ 오늘 실패 / 🩹 오늘 복구</b> — 오늘의 첫 시도 결과</li>
+    </ul>
+
+    <h4 style="margin-top:24px;">❓ 자주 묻는 질문</h4>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">"N일 후 복습"은 자동으로 그날 출제되나요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        Smart Quiz를 "복습 임박순" 또는 학습 탭을 "복습할 단어만"으로 열면 자동 출제됩니다. "랜덤"으로 열면 SRS와 무관하게 무작위로 뽑혀요. 기본 설정이 "복습 임박순"이라서 그냥 시작 누르면 SRS가 알아서 굴러갑니다.
+      </p>
+    </details>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">새 단어 추가는 어디서 하나요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        ➕ 추가 탭. 단어, 발음(IPA, 선택), 뜻, 예문(줄바꿈으로 여러 개 가능), collocation(콤마 구분), 카테고리 입력. 새 단어는 Stage 1로 시작합니다.
+      </p>
+    </details>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">데이터가 사라지진 않나요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        브라우저의 localStorage에 자동 저장됩니다. 다른 컴퓨터로 옮기거나 백업하려면 💾 백업 탭 → "JSON 내보내기". 파일 위치가 바뀌면 데이터가 분리될 수 있으니 정기 백업 권장.
+      </p>
+    </details>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">타이핑할 때 오타로 틀렸어요. 정답 처리 안 되나요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        타이핑/받아쓰기/빈칸 퀴즈에서 틀리면 "😅 사실 맞췄어 (오타였음)" 버튼이 뜹니다. 누르면 Cold Correct로 재평가됩니다.
+      </p>
+    </details>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">📖 학습 탭과 🎯 퀴즈 탭 차이가 뭐예요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        <b>학습 탭</b>: 카드 뒤집기 + 자기 평가 (다시/어려움/좋음/쉬움). 새 단어 익히기, 가볍게 훑기.<br>
+        <b>퀴즈 탭</b>: 객관식·타이핑·받아쓰기 등 자동 채점 + 응답시간 측정. 진짜 실력 점검.<br>
+        대부분 시간은 🎯 퀴즈 탭의 🧠 Smart Quiz를 쓰면 됩니다.
+      </p>
+    </details>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">하루에 새 단어 몇 개가 좋아요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        과학적으로는 10~20개가 무난합니다. 100개 한 번에 외우려고 하면 복습 부담이 폭발해요. ➕ 추가에서 매일 조금씩 늘리는 게 효율적.
+      </p>
+    </details>
+    <details style="margin-bottom:8px; background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">⌨️ 단축키 있나요?</summary>
+      <p style="font-size:13px; line-height:1.7; margin:8px 0 0;">
+        학습 카드: <b>Space</b> = 뒤집기, <b>1/2/3/4</b> = 다시/어려움/좋음/쉬움.<br>
+        퀴즈 타이핑: <b>Enter</b> = 제출/다음.<br>
+        문장 만들기: <b>Ctrl/Cmd+Enter</b> = 제출.
+      </p>
+    </details>
+
+    <h4 style="margin-top:24px;">📊 통계에서 봐야 할 것</h4>
+    <ul style="line-height:1.9;">
+      <li>🏆 <b>True Master</b> — coldStreak ≥ 3 & Stage ≥ 5. 진짜 외운 단어 수.</li>
+      <li>⚠️ <b>Passive 위험</b> — 보면 아는데 직접 못 쓰는 단어. 가장 조심해야 할 그룹.</li>
+      <li>🔁 <b>Fragile</b> — 자주 까먹는 단어.</li>
+      <li>🧊 <b>오늘 Cold Correct</b> — 오늘 진짜 외운 단어 수 (표면 정답률과 분리됨).</li>
+    </ul>
+    <p style="font-size:13px; color:var(--muted); line-height:1.7;">
+      표면 정답률 90%라도 Cold Correct 30%면 실제로는 passive vocabulary가 많은 것입니다. 정직한 지표는 Cold Correct입니다.
+    </p>
+
+    <h4 style="margin-top:24px;">🧪 과학적 근거 (더 알고 싶으면)</h4>
+    <details style="background:#f8f9fc; padding:10px 14px; border-radius:8px;">
+      <summary style="cursor:pointer; font-weight:600;">왜 이렇게 만들었나? — 참고 연구</summary>
+      <div style="font-size:13px; line-height:1.8; margin:8px 0 0;">
+        <p><b>Roediger & Karpicke (2006, 2008)</b> — Testing Effect: 단순 재학습보다 스스로 꺼내는 retrieval practice가 장기 기억을 더 강화한다. 그래서 객관식보다 타이핑이 강함.</p>
+        <p><b>Cepeda et al. (2006, 2009)</b> — Spacing Effect: 몰아서 외우는 것보다 간격을 둔 분산 학습이 장기 회상에 유리. 단, 너무 짧거나 너무 길어도 안 됨 (nonmonotonic gap effect).</p>
+        <p><b>Candry et al. (2020), Li (2022)</b> — L2 어휘 학습에서 retrieval practice가 단순 반복보다 효과적.</p>
+        <p><b>First-Attempt Mastery Rule</b> — Karpicke의 desirable difficulty 개념을 따라, 같은 세션에서 정답을 본 직후 다시 맞히는 건 short-term recovery이지 spaced retrieval success가 아니므로 SRS 승급에서 제외.</p>
+      </div>
+    </details>
+  </section>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- Firebase SDK (compat) — loaded from CDN. Required for ☁️ 동기화. App works offline if these fail. -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+<script>
+/* ============================================================
+   STATE & PERSISTENCE
+============================================================ */
+const STORAGE_KEY = 'engStudyData_v2';
+const SRS_INTERVALS = [1, 2, 4, 7, 14, 30, 60, 120];
+
+// Learning stages — each word progresses gradually through these.
+// Order: easy recognition → context-aided production → audio-cued production → pure production → active use.
+// Listening MC is NOT part of stage progression (used as auxiliary diagnostic only).
+const STAGES = {
+  1: { num: 1, label: 'Recognition E→K',     short: '🔍 인식',     quiz: 'mc_e2k',    color: '#94a3b8', desc: '영어 단어를 보고 뜻 알기 (새 단어 진입)' },
+  2: { num: 2, label: 'Fill-in-the-Blank',   short: '🧩 빈칸',     quiz: 'fill_blank',color: '#7c3aed', desc: '예문 속 빈칸에 단어 채우기 (문맥 힌트가 있어 완전 production보다 쉬움)' },
+  3: { num: 3, label: 'Dictation',           short: '📝 받아쓰기', quiz: 'dictation', color: '#0891b2', desc: 'TTS 듣고 영어 직접 입력 (발음+철자 연결, 청각 cue 있는 production)' },
+  4: { num: 4, label: 'Production K→E',      short: '✍️ 쓰기',     quiz: 'type_k2e',  color: '#4f6dff', desc: '한국어 뜻만 보고 영어 직접 입력 (진짜 어려운 핵심 단계)' },
+  5: { num: 5, label: 'Sentence Production', short: '🌟 문장',     quiz: 'sentence',  color: '#16a34a', desc: '단어를 사용해 내 문장 직접 만들기 (Active vocabulary)' },
+};
+const MAX_STAGE = 5;
+
+function stageBadge(stage) {
+  const s = STAGES[stage] || STAGES[1];
+  return `<span style="display:inline-block; font-size:10px; padding:2px 8px; border-radius:999px; background:${s.color}22; color:${s.color}; font-weight:700;">Stage ${s.num} · ${s.short}</span>`;
+}
+
+const CATEGORIES = {
+  news:         { label: '뉴스·시사',     icon: '📰', bg: '#fde7e4', color: '#c0392b' },
+  work:         { label: '직장·비즈니스', icon: '💼', bg: '#e3e9ff', color: '#3a55d9' },
+  conversation: { label: '일상 회화',     icon: '🗣️', bg: '#dff3ec', color: '#117a5c' },
+  emotion:      { label: '감정·반응',     icon: '😶', bg: '#ede1ff', color: '#7e3fc7' },
+  relationship: { label: '사람·관계',     icon: '🤝', bg: '#ffdeec', color: '#c1387c' },
+  opinion:      { label: '생각·의견',     icon: '💡', bg: '#cef0ee', color: '#00796b' },
+  action:       { label: '동작·상황',     icon: '🎯', bg: '#dbdcff', color: '#4527a0' },
+  nuance:       { label: '정도·뉘앙스',   icon: '🔍', bg: '#fff0c9', color: '#b9770e' },
+  media:        { label: '미드·영화',     icon: '🍿', bg: '#ffd9ee', color: '#a91879' },
+  formal:       { label: '격식 빈출',     icon: '🌟', bg: '#e2e5ee', color: '#37474f' },
+};
+
+const DEFAULT_WORDS = [
+  // ============ 📰 뉴스·시사 (news) ============
+  { word: "crackdown", ipa: "/ˈkrækdaʊn/", meaning: "단속, 강력한 단속", category: "news",
+    examples: ["The government announced a nationwide crackdown on tax evasion.", "There's been a crackdown on illegal parking in the downtown area.", "The crackdown on speeding led to a 30% drop in accidents."],
+    collocations: ["a crackdown on", "nationwide crackdown", "launch a crackdown"] },
+  { word: "backlash", ipa: "/ˈbæklæʃ/", meaning: "반발, 역풍", category: "news",
+    examples: ["The CEO's comments sparked a huge backlash on social media.", "The new policy faced backlash from both employees and customers.", "She wasn't prepared for the backlash her article received."],
+    collocations: ["spark a backlash", "face backlash", "public backlash"] },
+  { word: "loophole", ipa: "/ˈluːphoʊl/", meaning: "(법의) 허점, 빠져나갈 구멍", category: "news",
+    examples: ["Wealthy individuals often exploit tax loopholes to pay less.", "The lawyer found a loophole in the contract.", "They closed the legal loophole that allowed the practice."],
+    collocations: ["tax loophole", "legal loophole", "close a loophole"] },
+  { word: "watchdog", ipa: "/ˈwɑːtʃdɔːɡ/", meaning: "감시 기구, 감시자", category: "news",
+    examples: ["The consumer watchdog issued a warning about the product.", "Press freedom watchdogs criticized the new law.", "The agency acts as a watchdog over financial institutions."],
+    collocations: ["consumer watchdog", "watchdog over", "industry watchdog"] },
+  { word: "whistleblower", ipa: "/ˈwɪslˌbloʊər/", meaning: "내부 고발자", category: "news",
+    examples: ["The whistleblower exposed years of corporate fraud.", "Whistleblowers are legally protected in most countries.", "She became a whistleblower after witnessing safety violations."],
+    collocations: ["protect whistleblowers", "become a whistleblower", "whistleblower protection"] },
+  { word: "scrutiny", ipa: "/ˈskruːtəni/", meaning: "면밀한 검토, 정밀 조사", category: "news",
+    examples: ["The company's finances came under intense scrutiny.", "His past is being subjected to public scrutiny.", "The proposal didn't hold up under close scrutiny."],
+    collocations: ["under scrutiny", "close scrutiny", "public scrutiny"] },
+  { word: "overhaul", ipa: "/ˈoʊvərhɔːl/", meaning: "전면 개편, 정비", category: "news",
+    examples: ["The entire education system needs an overhaul.", "They're planning to overhaul the customer service department.", "The app got a complete overhaul last month."],
+    collocations: ["complete overhaul", "need an overhaul", "major overhaul"] },
+  { word: "rollout", ipa: "/ˈroʊlaʊt/", meaning: "출시, 단계적 도입", category: "news",
+    examples: ["The rollout of the new software has been delayed.", "The vaccine rollout was slower than expected.", "We'll do a gradual rollout starting next quarter."],
+    collocations: ["gradual rollout", "vaccine rollout", "phased rollout"] },
+  { word: "fallout", ipa: "/ˈfɔːlaʊt/", meaning: "후폭풍, 여파", category: "news",
+    examples: ["The political fallout from the scandal was severe.", "Companies are still dealing with the fallout of the pandemic.", "He resigned amid the fallout from the investigation."],
+    collocations: ["fallout from", "political fallout", "deal with the fallout"] },
+  { word: "leverage", ipa: "/ˈlevərɪdʒ/", meaning: "활용하다, (영향력을 위한) 지렛대", category: "news",
+    examples: ["She leveraged her experience to land the job.", "Small companies can leverage social media for marketing.", "He used his connections as leverage in the negotiation."],
+    collocations: ["leverage experience", "use as leverage", "leverage technology"] },
+
+  // ============ 💼 직장·비즈니스 (work) ============
+  { word: "streamline", ipa: "/ˈstriːmlaɪn/", meaning: "간소화하다, 능률화하다", category: "work",
+    examples: ["We need to streamline the approval process.", "The new software streamlines our workflow significantly.", "They streamlined operations by cutting unnecessary meetings."],
+    collocations: ["streamline the process", "streamline operations", "streamline workflow"] },
+  { word: "bandwidth", ipa: "/ˈbændwɪdθ/", meaning: "처리 능력, 여력 (정신적·시간적)", category: "work",
+    examples: ["I don't have the bandwidth to take on another project this week.", "Do you have the bandwidth to help me with this?", "Honestly, my mental bandwidth is shot right now."],
+    collocations: ["have the bandwidth", "mental bandwidth", "limited bandwidth"] },
+  { word: "circle back", ipa: "/ˈsɜːrkl bæk/", meaning: "다시 논의하다, 다시 연락하다", category: "work",
+    examples: ["Let's circle back on this next Monday.", "I'll circle back with you once I hear from the client.", "Can we circle back to the budget question?"],
+    collocations: ["circle back on", "circle back to", "circle back with"] },
+  { word: "touch base", ipa: "/tʌtʃ beɪs/", meaning: "가볍게 연락하다, 안부를 묻다", category: "work",
+    examples: ["I just wanted to touch base about tomorrow's meeting.", "Let's touch base later this week.", "She touched base with her team every Friday."],
+    collocations: ["touch base with", "touch base about", "touch base later"] },
+  { word: "align", ipa: "/əˈlaɪn/", meaning: "의견·방향을 일치시키다", category: "work",
+    examples: ["We need to align on the project goals before we start.", "Are we aligned on the timeline?", "Let's align with the marketing team on this."],
+    collocations: ["align on", "align with", "be aligned"] },
+  { word: "takeaway", ipa: "/ˈteɪkəweɪ/", meaning: "핵심 요점, 시사점", category: "work",
+    examples: ["The main takeaway from the meeting was that we need more data.", "What's your key takeaway from the book?", "There were three big takeaways from the presentation."],
+    collocations: ["key takeaway", "main takeaway", "big takeaway"] },
+  { word: "caveat", ipa: "/ˈkæviæt/", meaning: "주의 사항, 단서", category: "work",
+    examples: ["The deal sounds great, but there's one major caveat.", "With that caveat in mind, I think we should proceed.", "He accepted the offer with several caveats."],
+    collocations: ["one caveat", "with a caveat", "major caveat"] },
+  { word: "pushback", ipa: "/ˈpʊʃbæk/", meaning: "반발, 반대", category: "work",
+    examples: ["The proposal got a lot of pushback from senior management.", "Expect some pushback when you announce the changes.", "There was minimal pushback on the new policy."],
+    collocations: ["get pushback", "face pushback", "expect pushback"] },
+  { word: "ramp up", ipa: "/ræmp ʌp/", meaning: "늘리다, 강화하다", category: "work",
+    examples: ["We're ramping up production to meet demand.", "The company is ramping up its hiring efforts.", "They ramped up security after the incident."],
+    collocations: ["ramp up production", "ramp up hiring", "ramp up efforts"] },
+  { word: "wind down", ipa: "/waɪnd daʊn/", meaning: "마무리하다, 휴식을 취하다", category: "work",
+    examples: ["The project is winding down after two years.", "I like to wind down with a book before bed.", "The company is winding down its European operations."],
+    collocations: ["wind down operations", "wind down with", "winding down"] },
+
+  // ============ 🗣️ 일상 회화 (conversation) ============
+  { word: "squeamish", ipa: "/ˈskwiːmɪʃ/", meaning: "비위가 약한, 까다로운", category: "conversation",
+    examples: ["I'm too squeamish to watch horror movies.", "Don't be so squeamish — it's just a small cut.", "She's squeamish about needles."],
+    collocations: ["squeamish about", "too squeamish", "get squeamish"] },
+  { word: "clingy", ipa: "/ˈklɪŋi/", meaning: "매달리는, 떨어지지 않으려는", category: "conversation",
+    examples: ["My ex was way too clingy.", "The puppy gets clingy when I leave the house.", "He doesn't like clingy partners."],
+    collocations: ["too clingy", "clingy partner", "get clingy"] },
+  { word: "needy", ipa: "/ˈniːdi/", meaning: "애정·관심을 갈구하는", category: "conversation",
+    examples: ["I don't want to seem needy, but can you call me back?", "Her last boyfriend was emotionally needy.", "Cats can be needy in their own subtle way."],
+    collocations: ["seem needy", "emotionally needy", "needy partner"] },
+  { word: "petty", ipa: "/ˈpeti/", meaning: "사소한, 옹졸한", category: "conversation",
+    examples: ["Stop being so petty about who paid for lunch.", "It was such a petty argument over nothing.", "Don't get petty — just let it go."],
+    collocations: ["petty argument", "be petty", "petty about"] },
+  { word: "shady", ipa: "/ˈʃeɪdi/", meaning: "수상한, 미덥지 않은", category: "conversation",
+    examples: ["That guy seems pretty shady to me.", "The whole business deal sounded shady.", "I got some shady vibes from that website."],
+    collocations: ["shady deal", "shady vibes", "look shady"] },
+  { word: "sketchy", ipa: "/ˈsketʃi/", meaning: "수상쩍은, 위험해 보이는", category: "conversation",
+    examples: ["The neighborhood gets a little sketchy at night.", "That restaurant looks sketchy — let's go somewhere else.", "His explanation sounded sketchy."],
+    collocations: ["sketchy neighborhood", "sound sketchy", "look sketchy"] },
+  { word: "cheesy", ipa: "/ˈtʃiːzi/", meaning: "유치한, 느끼한", category: "conversation",
+    examples: ["The movie was so cheesy I couldn't stop laughing.", "He sent me the cheesiest love letter.", "I know it's cheesy, but I love romantic comedies."],
+    collocations: ["cheesy movie", "cheesy line", "cheesy love letter"] },
+  { word: "corny", ipa: "/ˈkɔːrni/", meaning: "진부한, 닭살 돋는", category: "conversation",
+    examples: ["Dad jokes are always corny.", "The wedding speech was kind of corny.", "Stop being so corny in front of my friends."],
+    collocations: ["corny joke", "corny speech", "be corny"] },
+  { word: "cringe", ipa: "/krɪndʒ/", meaning: "오글거리다, 움찔하다", category: "conversation",
+    examples: ["His attempt to flirt was pure cringe.", "I cringe every time I watch my old videos.", "The whole scene made me cringe."],
+    collocations: ["pure cringe", "make me cringe", "cringe at"] },
+  { word: "bummer", ipa: "/ˈbʌmər/", meaning: "실망스러운 일", category: "conversation",
+    examples: ["That's such a bummer about your trip getting canceled.", "Rain on your birthday? Bummer.", "It's a bummer he can't make it."],
+    collocations: ["such a bummer", "what a bummer", "total bummer"] },
+
+  // ============ 😶 감정·반응 (emotion) ============
+  { word: "overwhelmed", ipa: "/ˌoʊvərˈwelmd/", meaning: "압도된, 벅찬", category: "emotion",
+    examples: ["I'm completely overwhelmed with work right now.", "She felt overwhelmed by all the kindness people showed her.", "New parents often feel overwhelmed."],
+    collocations: ["feel overwhelmed", "overwhelmed by", "completely overwhelmed"] },
+  { word: "underwhelmed", ipa: "/ˌʌndərˈwelmd/", meaning: "기대 이하로 실망한", category: "emotion",
+    examples: ["Honestly, I was underwhelmed by the movie.", "The food was good but I was underwhelmed by the service.", "She seemed underwhelmed by the gift."],
+    collocations: ["underwhelmed by", "feel underwhelmed", "leave underwhelmed"] },
+  { word: "resent", ipa: "/rɪˈzent/", meaning: "분개하다, 원망하다", category: "emotion",
+    examples: ["I resent the way he talks to me.", "She resented having to work weekends.", "He resents his brother for being more successful."],
+    collocations: ["resent the way", "resent having to", "resent someone for"] },
+  { word: "dread", ipa: "/dred/", meaning: "몹시 두려워하다", category: "emotion",
+    examples: ["I dread Monday mornings.", "She's been dreading the meeting all week.", "He dreaded telling his parents the news."],
+    collocations: ["dread Mondays", "dread doing", "dread the thought of"] },
+  { word: "bummed", ipa: "/bʌmd/", meaning: "실망한, 풀이 죽은", category: "emotion",
+    examples: ["I was so bummed when the concert got canceled.", "She seemed pretty bummed after the breakup.", "Don't be bummed — there'll be other chances."],
+    collocations: ["bummed about", "so bummed", "pretty bummed"] },
+  { word: "fed up", ipa: "/fed ʌp/", meaning: "진절머리 난, 신물 난", category: "emotion",
+    examples: ["I'm fed up with his excuses.", "She got fed up and quit her job.", "Honestly, I'm fed up with this weather."],
+    collocations: ["fed up with", "get fed up", "totally fed up"] },
+  { word: "hung up on", ipa: "/hʌŋ ʌp ɑːn/", meaning: "~에 집착하는, ~을 못 잊는", category: "emotion",
+    examples: ["Why are you so hung up on what he said?", "She's still hung up on her ex.", "Don't get hung up on the details."],
+    collocations: ["hung up on", "still hung up on", "get hung up on"] },
+  { word: "freaked out", ipa: "/friːkt aʊt/", meaning: "깜짝 놀란, 패닉 상태인", category: "emotion",
+    examples: ["I freaked out when I saw the spider.", "She freaked out over the surprise party.", "Don't freak out, but I lost your sweater."],
+    collocations: ["freak out when", "freak out over", "don't freak out"] },
+  { word: "chill", ipa: "/tʃɪl/", meaning: "진정하다, 편안한", category: "emotion",
+    examples: ["Just chill — everything's going to be fine.", "He's a really chill guy.", "Let's chill at my place tonight."],
+    collocations: ["just chill", "chill guy", "chill out"] },
+  { word: "vent", ipa: "/vent/", meaning: "푸념하다, 감정을 토로하다", category: "emotion",
+    examples: ["I just need to vent for a minute.", "She vented to her best friend about her boss.", "Sorry for venting — thanks for listening."],
+    collocations: ["need to vent", "vent to someone", "vent about"] },
+
+  // ============ 🤝 사람·관계 (relationship) ============
+  { word: "flaky", ipa: "/ˈfleɪki/", meaning: "약속을 잘 안 지키는, 변덕스러운", category: "relationship",
+    examples: ["He's so flaky — he cancels plans last minute every time.", "I can't rely on her, she's too flaky.", "Sorry for being flaky lately, work's been crazy."],
+    collocations: ["so flaky", "too flaky", "be flaky"] },
+  { word: "passive-aggressive", ipa: "/ˈpæsɪv əˈɡresɪv/", meaning: "수동 공격적인", category: "relationship",
+    examples: ["Her passive-aggressive comments drive me crazy.", "Leaving dirty dishes in his sink was a passive-aggressive move.", "Stop being passive-aggressive and just tell me what's wrong."],
+    collocations: ["passive-aggressive comment", "passive-aggressive move", "be passive-aggressive"] },
+  { word: "condescending", ipa: "/ˌkɑːndɪˈsendɪŋ/", meaning: "잘난 척하는, 깔보는", category: "relationship",
+    examples: ["I hate the way he talks to me — it's so condescending.", "Don't be condescending; I'm not stupid.", "Her tone was condescending throughout the meeting."],
+    collocations: ["condescending tone", "so condescending", "condescending attitude"] },
+  { word: "patronizing", ipa: "/ˈpeɪtrənaɪzɪŋ/", meaning: "가르치려 드는, 거만한", category: "relationship",
+    examples: ["Stop being so patronizing — I know how to do my job.", "His patronizing attitude offended everyone.", "She gave me a patronizing smile."],
+    collocations: ["patronizing attitude", "patronizing smile", "be patronizing"] },
+  { word: "nosy", ipa: "/ˈnoʊzi/", meaning: "참견하기 좋아하는, 캐묻기 좋아하는", category: "relationship",
+    examples: ["My neighbor is so nosy — she asks about everything.", "Don't be nosy, it's none of your business.", "I don't mean to be nosy, but are you two dating?"],
+    collocations: ["nosy neighbor", "don't be nosy", "nosy question"] },
+  { word: "pushy", ipa: "/ˈpʊʃi/", meaning: "강요하는, 밀어붙이는", category: "relationship",
+    examples: ["The salesperson was way too pushy.", "I don't want to seem pushy, but have you decided?", "Her parents were pushy about her career choice."],
+    collocations: ["too pushy", "pushy salesperson", "seem pushy"] },
+  { word: "judgmental", ipa: "/dʒʌdʒˈmentl/", meaning: "비판적인, 함부로 재단하는", category: "relationship",
+    examples: ["Try not to be so judgmental about people you don't know.", "I love my mom but she's super judgmental.", "He gave me a judgmental look when I ordered dessert."],
+    collocations: ["judgmental look", "super judgmental", "be judgmental"] },
+  { word: "wholesome", ipa: "/ˈhoʊlsəm/", meaning: "건전한, 마음이 따뜻해지는", category: "relationship",
+    examples: ["Their relationship is so wholesome — it's adorable.", "I love watching wholesome content after a long day.", "The whole family dinner was so wholesome."],
+    collocations: ["wholesome content", "wholesome relationship", "so wholesome"] },
+  { word: "savage", ipa: "/ˈsævɪdʒ/", meaning: "가차없는, 신랄한 (슬랭)", category: "relationship",
+    examples: ["Her comeback was absolutely savage.", "The review was savage but fair.", "He's savage in negotiations."],
+    collocations: ["savage comeback", "savage review", "absolutely savage"] },
+
+  // ============ 💡 생각·의견 (opinion) ============
+  { word: "assume", ipa: "/əˈsuːm/", meaning: "추정하다, 가정하다", category: "opinion",
+    examples: ["Don't assume you know what I'm thinking.", "I assumed you'd be there.", "Let's not assume the worst."],
+    collocations: ["assume the worst", "don't assume", "safely assume"] },
+  { word: "acknowledge", ipa: "/əkˈnɑːlɪdʒ/", meaning: "인정하다, 받아들이다", category: "opinion",
+    examples: ["He refused to acknowledge his mistake.", "She acknowledged that I had a point.", "The company acknowledged the issue and apologized."],
+    collocations: ["acknowledge a mistake", "acknowledge that", "publicly acknowledge"] },
+  { word: "address", ipa: "/əˈdres/", meaning: "다루다, (문제를) 해결하다", category: "opinion",
+    examples: ["We need to address this problem before it gets worse.", "The CEO addressed the rumors in a public statement.", "Her speech addressed several important topics."],
+    collocations: ["address the problem", "address the issue", "address rumors"] },
+  { word: "dismiss", ipa: "/dɪsˈmɪs/", meaning: "일축하다, 묵살하다", category: "opinion",
+    examples: ["He dismissed my concerns as paranoia.", "Don't dismiss her ideas so quickly.", "The judge dismissed the case."],
+    collocations: ["dismiss concerns", "dismiss the case", "easily dismiss"] },
+  { word: "endorse", ipa: "/ɪnˈdɔːrs/", meaning: "지지하다, 보증하다", category: "opinion",
+    examples: ["The athlete endorses several major brands.", "I can't endorse this decision in good conscience.", "The newspaper endorsed the candidate."],
+    collocations: ["endorse a candidate", "endorse a brand", "officially endorse"] },
+  { word: "advocate", ipa: "/ˈædvəkeɪt/", meaning: "옹호하다, 지지자", category: "opinion",
+    examples: ["She advocates for stronger animal protection laws.", "He's an advocate for mental health awareness.", "I wouldn't advocate skipping the meeting."],
+    collocations: ["advocate for", "strong advocate", "mental health advocate"] },
+  { word: "downplay", ipa: "/ˈdaʊnpleɪ/", meaning: "축소하다, 대수롭지 않게 여기다", category: "opinion",
+    examples: ["He tried to downplay the seriousness of the situation.", "Don't downplay your achievements.", "The company downplayed the data breach."],
+    collocations: ["downplay the situation", "downplay achievements", "downplay risks"] },
+  { word: "highlight", ipa: "/ˈhaɪlaɪt/", meaning: "강조하다, 부각시키다", category: "opinion",
+    examples: ["The report highlights several key issues.", "Let me highlight the main points.", "The trip's highlight was visiting the museum."],
+    collocations: ["highlight the issue", "highlight the main", "the highlight of"] },
+  { word: "underscore", ipa: "/ˌʌndərˈskɔːr/", meaning: "강조하다, 두드러지게 하다", category: "opinion",
+    examples: ["The incident underscores the need for better safety measures.", "Her speech underscored the importance of education.", "Recent events underscore why we need change."],
+    collocations: ["underscore the need", "underscore the importance", "underscore why"] },
+  { word: "reiterate", ipa: "/riˈɪtəreɪt/", meaning: "거듭 말하다, 반복하다", category: "opinion",
+    examples: ["Let me reiterate my point one more time.", "She reiterated that she had no intention of leaving.", "I want to reiterate how much I appreciate this."],
+    collocations: ["reiterate the point", "want to reiterate", "reiterate that"] },
+
+  // ============ 🎯 동작·상황 (action) ============
+  { word: "navigate", ipa: "/ˈnævɪɡeɪt/", meaning: "헤쳐 나가다, 능숙히 다루다", category: "action",
+    examples: ["It's hard to navigate office politics as a new employee.", "She's learning to navigate life after divorce.", "He navigated the difficult conversation well."],
+    collocations: ["navigate office politics", "navigate a conversation", "navigate life"] },
+  { word: "tackle", ipa: "/ˈtækl/", meaning: "(문제를) 다루다, 씨름하다", category: "action",
+    examples: ["Let's tackle this problem one step at a time.", "The team is tackling climate change head-on.", "I need to tackle my inbox today."],
+    collocations: ["tackle the problem", "tackle climate change", "tackle head-on"] },
+  { word: "juggle", ipa: "/ˈdʒʌɡl/", meaning: "동시에 처리하다, 곡예하듯 다루다", category: "action",
+    examples: ["She juggles three jobs and a family.", "It's hard to juggle work and personal life.", "He's juggling too many projects right now."],
+    collocations: ["juggle responsibilities", "juggle work and life", "juggle projects"] },
+  { word: "prioritize", ipa: "/praɪˈɔːrətaɪz/", meaning: "우선순위를 두다", category: "action",
+    examples: ["You need to prioritize your health.", "I prioritize sleep over almost everything.", "Let's prioritize the most urgent tasks."],
+    collocations: ["prioritize health", "prioritize tasks", "prioritize over"] },
+  { word: "procrastinate", ipa: "/proʊˈkræstɪneɪt/", meaning: "미루다, 꾸물거리다", category: "action",
+    examples: ["I always procrastinate on my taxes.", "Stop procrastinating and just start the project.", "She procrastinated until the last minute."],
+    collocations: ["procrastinate on", "stop procrastinating", "tend to procrastinate"] },
+  { word: "linger", ipa: "/ˈlɪŋɡər/", meaning: "오래 머무르다, 남다", category: "action",
+    examples: ["The smell of coffee lingered in the kitchen.", "We lingered at the restaurant for hours.", "Doubts about the decision lingered in his mind."],
+    collocations: ["linger in the air", "doubts linger", "linger over"] },
+  { word: "hover", ipa: "/ˈhʌvər/", meaning: "맴돌다, (위에서) 과보호하다", category: "action",
+    examples: ["Stop hovering — I can do this myself.", "The helicopter hovered above the building.", "Her mom hovers over her constantly."],
+    collocations: ["hover over", "stop hovering", "hover above"] },
+  { word: "brace", ipa: "/breɪs/", meaning: "대비하다, 마음의 준비를 하다", category: "action",
+    examples: ["Brace yourself — the news isn't good.", "The city is bracing for the storm.", "We need to brace for impact."],
+    collocations: ["brace yourself", "brace for impact", "brace for the storm"] },
+  { word: "cope", ipa: "/koʊp/", meaning: "대처하다, 견뎌내다", category: "action",
+    examples: ["I don't know how she copes with so much stress.", "He's coping with the loss as best he can.", "Some people cope better than others."],
+    collocations: ["cope with stress", "cope with loss", "cope better"] },
+  { word: "bail", ipa: "/beɪl/", meaning: "(약속을) 빠지다, 도중에 그만두다", category: "action",
+    examples: ["He bailed on us at the last minute.", "Sorry to bail, but something came up.", "She bailed halfway through the movie."],
+    collocations: ["bail on", "sorry to bail", "bail halfway through"] },
+
+  // ============ 🔍 정도·뉘앙스 (nuance) ============
+  { word: "arguably", ipa: "/ˈɑːrɡjuəbli/", meaning: "거의 틀림없이, 아마", category: "nuance",
+    examples: ["He's arguably the best player on the team.", "This is arguably her finest work.", "Arguably, the policy did more harm than good."],
+    collocations: ["arguably the best", "arguably one of", "arguably more"] },
+  { word: "presumably", ipa: "/prɪˈzuːməbli/", meaning: "아마, 추측건대", category: "nuance",
+    examples: ["He's late, presumably stuck in traffic.", "Presumably, you've already read the report?", "She'll come, presumably with her husband."],
+    collocations: ["presumably because", "presumably you", "presumably stuck"] },
+  { word: "supposedly", ipa: "/səˈpoʊzɪdli/", meaning: "듣기로는, 아마", category: "nuance",
+    examples: ["He's supposedly the best surgeon in the city.", "The restaurant is supposedly amazing.", "She's supposedly moving to Paris next year."],
+    collocations: ["supposedly the best", "supposedly amazing", "supposedly going to"] },
+  { word: "allegedly", ipa: "/əˈledʒɪdli/", meaning: "주장에 따르면, 의혹상", category: "nuance",
+    examples: ["He allegedly stole money from the company.", "The suspect allegedly fled the country.", "She allegedly threatened her coworker."],
+    collocations: ["allegedly stole", "allegedly involved", "allegedly threatened"] },
+  { word: "virtually", ipa: "/ˈvɜːrtʃuəli/", meaning: "사실상, 거의", category: "nuance",
+    examples: ["The two products are virtually identical.", "It's virtually impossible to get a reservation there.", "He has virtually no experience in this field."],
+    collocations: ["virtually identical", "virtually impossible", "virtually no"] },
+  { word: "inherently", ipa: "/ɪnˈhɪrəntli/", meaning: "본질적으로, 본래", category: "nuance",
+    examples: ["The job is inherently dangerous.", "There's nothing inherently wrong with disagreeing.", "The system is inherently biased."],
+    collocations: ["inherently dangerous", "inherently wrong", "inherently biased"] },
+  { word: "ultimately", ipa: "/ˈʌltɪmətli/", meaning: "결국, 궁극적으로", category: "nuance",
+    examples: ["Ultimately, it's your decision.", "Ultimately, the project was a success.", "We all ultimately want the same thing."],
+    collocations: ["ultimately your decision", "ultimately want", "ultimately responsible"] },
+  { word: "subsequently", ipa: "/ˈsʌbsɪkwəntli/", meaning: "그 후에, 그 뒤에", category: "nuance",
+    examples: ["He was fired and subsequently sued the company.", "The product was launched and subsequently recalled.", "She moved to Berlin and subsequently learned German."],
+    collocations: ["subsequently sued", "subsequently recalled", "subsequently learned"] },
+  { word: "admittedly", ipa: "/ədˈmɪtɪdli/", meaning: "인정하건대, 솔직히 말하면", category: "nuance",
+    examples: ["Admittedly, I wasn't paying close attention.", "The film, admittedly, has its flaws.", "Admittedly, the price is a bit high."],
+    collocations: ["admittedly difficult", "admittedly the film", "admittedly the price"] },
+  { word: "frankly", ipa: "/ˈfræŋkli/", meaning: "솔직히, 까놓고 말하면", category: "nuance",
+    examples: ["Frankly, I don't care what he thinks.", "Frankly, the food wasn't that good.", "I'll be frank with you — this isn't working."],
+    collocations: ["frankly I", "to be frank", "frankly speaking"] },
+
+  // ============ 🍿 미드·영화 (media) ============
+  { word: "creepy", ipa: "/ˈkriːpi/", meaning: "소름끼치는, 으스스한 (creep = 소름끼치는 사람)", category: "media",
+    examples: ["That guy at the bar was such a creep.", "The abandoned house was really creepy.", "He gives me creepy vibes."],
+    collocations: ["creepy vibes", "such a creep", "really creepy"] },
+  { word: "jerk", ipa: "/dʒɜːrk/", meaning: "못된 놈, 재수 없는 사람", category: "media",
+    examples: ["Don't be a jerk — apologize to her.", "My boss can be a real jerk sometimes.", "He's not a jerk, he's just stressed."],
+    collocations: ["don't be a jerk", "real jerk", "such a jerk"] },
+  { word: "cringe-worthy", ipa: "/ˈkrɪndʒwɜːrði/", meaning: "오글거리는, 보기 민망한", category: "media",
+    examples: ["His speech was absolutely cringe-worthy.", "The dialogue in that movie was cringe-worthy.", "That was the most cringe-worthy moment of my life."],
+    collocations: ["cringe-worthy moment", "cringe-worthy dialogue", "absolutely cringe-worthy"] },
+  { word: "broke", ipa: "/broʊk/", meaning: "빈털터리인, 돈이 없는", category: "media",
+    examples: ["I'm broke until payday.", "He's been broke ever since he lost his job.", "We're flat broke right now."],
+    collocations: ["flat broke", "broke until payday", "totally broke"] },
+  { word: "swamped", ipa: "/swɑːmpt/", meaning: "일이 산더미인, 정신없이 바쁜", category: "media",
+    examples: ["I'm swamped with emails today.", "She's been swamped at work all month.", "Sorry I haven't called — I've been swamped."],
+    collocations: ["swamped with", "swamped at work", "totally swamped"] },
+  { word: "stoked", ipa: "/stoʊkt/", meaning: "신난, 들뜬", category: "media",
+    examples: ["I'm so stoked about the concert tomorrow!", "He was stoked when he got the job.", "She's stoked to see you again."],
+    collocations: ["stoked about", "so stoked", "stoked to"] },
+  { word: "hyped", ipa: "/haɪpt/", meaning: "들떠 있는, 기대 가득한", category: "media",
+    examples: ["Everyone's hyped about the new season.", "I'm hyped for the trip next week.", "The crowd was super hyped."],
+    collocations: ["hyped for", "hyped about", "super hyped"] },
+  { word: "clueless", ipa: "/ˈkluːləs/", meaning: "아무것도 모르는, 무지한", category: "media",
+    examples: ["He's completely clueless about how relationships work.", "I'm clueless when it comes to fixing cars.", "She seems clueless about what's going on."],
+    collocations: ["completely clueless", "clueless about", "totally clueless"] },
+  { word: "oblivious", ipa: "/əˈblɪviəs/", meaning: "알아채지 못하는, 무관심한", category: "media",
+    examples: ["He was oblivious to her feelings.", "She walked past me, completely oblivious.", "They seem oblivious to the danger."],
+    collocations: ["oblivious to", "completely oblivious", "blissfully oblivious"] },
+  { word: "fluke", ipa: "/fluːk/", meaning: "요행, 우연한 행운", category: "media",
+    examples: ["Winning the lottery was a complete fluke.", "His success wasn't a fluke — he worked hard for it.", "It was a fluke that we ran into each other."],
+    collocations: ["complete fluke", "wasn't a fluke", "pure fluke"] },
+
+  // ============ 🌟 격식 있는 빈출 (formal) ============
+  { word: "mitigate", ipa: "/ˈmɪtɪɡeɪt/", meaning: "완화하다, 줄이다", category: "formal",
+    examples: ["We need to mitigate the risks before launching.", "The company took steps to mitigate the damage.", "Exercise can help mitigate stress."],
+    collocations: ["mitigate the risks", "mitigate damage", "mitigate stress"] },
+  { word: "exacerbate", ipa: "/ɪɡˈzæsərbeɪt/", meaning: "악화시키다", category: "formal",
+    examples: ["The drought has exacerbated food shortages.", "His comments only exacerbated the situation.", "Stress can exacerbate health problems."],
+    collocations: ["exacerbate the situation", "exacerbate problems", "only exacerbate"] },
+  { word: "alleviate", ipa: "/əˈliːvieɪt/", meaning: "완화하다, 경감시키다", category: "formal",
+    examples: ["The medicine helped alleviate the pain.", "The new policy aims to alleviate poverty.", "Talking to a friend can alleviate anxiety."],
+    collocations: ["alleviate pain", "alleviate poverty", "alleviate anxiety"] },
+  { word: "undermine", ipa: "/ˌʌndərˈmaɪn/", meaning: "약화시키다, 깎아내리다", category: "formal",
+    examples: ["His behavior undermines the entire team.", "The scandal undermined public trust.", "Don't undermine your own arguments."],
+    collocations: ["undermine trust", "undermine the team", "undermine confidence"] },
+  { word: "bolster", ipa: "/ˈboʊlstər/", meaning: "강화하다, 북돋우다", category: "formal",
+    examples: ["The new evidence bolsters her case.", "The company bolstered its security measures.", "His support bolstered my confidence."],
+    collocations: ["bolster confidence", "bolster the case", "bolster security"] },
+  { word: "hinder", ipa: "/ˈhɪndər/", meaning: "방해하다, 저해하다", category: "formal",
+    examples: ["Bad weather hindered the rescue efforts.", "Don't let fear hinder your progress.", "The lack of funding hindered the project."],
+    collocations: ["hinder progress", "hinder efforts", "hinder development"] },
+  { word: "foster", ipa: "/ˈfɔːstər/", meaning: "조성하다, 육성하다", category: "formal",
+    examples: ["The program fosters creativity in children.", "We need to foster a culture of trust.", "Reading together fosters a love of learning."],
+    collocations: ["foster creativity", "foster a culture", "foster growth"] },
+  { word: "compelling", ipa: "/kəmˈpelɪŋ/", meaning: "설득력 있는, 강렬한", category: "formal",
+    examples: ["She made a compelling argument.", "The book was so compelling I couldn't put it down.", "There's no compelling reason to change."],
+    collocations: ["compelling argument", "compelling reason", "compelling evidence"] },
+  { word: "daunting", ipa: "/ˈdɔːntɪŋ/", meaning: "벅찬, 기죽이는", category: "formal",
+    examples: ["Starting a business can be daunting.", "The task ahead seems daunting.", "It was a daunting challenge, but she succeeded."],
+    collocations: ["daunting task", "daunting challenge", "seem daunting"] },
+  { word: "nuanced", ipa: "/ˈnuːɑːnst/", meaning: "미묘한, 섬세하게 차이를 살린", category: "formal",
+    examples: ["The issue is more nuanced than people realize.", "She gave a nuanced answer to a difficult question.", "His understanding of the topic is very nuanced."],
+    collocations: ["nuanced answer", "nuanced understanding", "more nuanced"] },
+];
+
+let state = loadState();
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (s && s.words && Array.isArray(s.words)) {
+      // merge any new default words that aren't in user's data
+      const existing = new Set(s.words.map(w => w.word.toLowerCase()));
+      const today = todayStr();
+      DEFAULT_WORDS.forEach(dw => {
+        if (!existing.has(dw.word.toLowerCase())) {
+          s.words.push({
+            id: cryptoId(), ...dw,
+            note: "", createdAt: today,
+            box: 0, reps: 0, lapses: 0,
+            lastReviewed: null, nextReview: today,
+            history: [], userSentence: "",
+            learningStage: 1,
+          });
+        }
+      });
+      // migration: assign learningStage and first-attempt fields to old words
+      s.words.forEach(w => {
+        if (typeof w.learningStage !== 'number') {
+          w.learningStage = Math.min(MAX_STAGE, Math.max(1, Math.floor((w.reps || 0) / 2) + 1));
+        }
+        // cap to current MAX_STAGE (legacy data may have used 6 stages)
+        if (w.learningStage > MAX_STAGE) w.learningStage = MAX_STAGE;
+        if (w.learningStage < 1) w.learningStage = 1;
+        if (typeof w.coldStreak !== 'number') w.coldStreak = 0;
+        if (typeof w.failedToday !== 'boolean') w.failedToday = false;
+        if (typeof w.recoveredToday !== 'boolean') w.recoveredToday = false;
+        if (typeof w.passedToday !== 'boolean') w.passedToday = false;
+        if (typeof w.lastAttemptDate === 'undefined') w.lastAttemptDate = null;
+        if (typeof w.lastResponseMs !== 'number') w.lastResponseMs = 0;
+      });
+      return s;
+    }
+  } catch (e) {}
+  return seedInitial();
+}
+
+function seedInitial() {
+  const today = todayStr();
+  return {
+    words: DEFAULT_WORDS.map(w => ({
+      id: cryptoId(),
+      ...w,
+      collocations: w.collocations || [],
+      examples: w.examples || [],
+      note: "",
+      createdAt: today,
+      box: 0,
+      reps: 0,
+      lapses: 0,
+      lastReviewed: null,
+      nextReview: today,
+      history: [],
+      userSentence: "",
+      learningStage: 1,
+      // First-attempt science fields:
+      lastAttemptDate: null,
+      failedToday: false,
+      recoveredToday: false,
+      passedToday: false,
+      coldStreak: 0,         // consecutive first-attempt fast successes across days
+      lastResponseMs: 0,
+    })),
+    settings: { newPerDay: 10, dailyGoal: 30 },
+    log: {},
+  };
+}
+
+function cryptoId() {
+  return Math.random().toString(36).slice(2, 11);
+}
+
+function saveState() {
+  state.lastUpdated = Date.now();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (typeof syncState !== 'undefined' && syncState.enabled) schedulePush();
+}
+
+/* ============================================================
+   DATE HELPERS
+============================================================ */
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+function addDays(dateStr, days) {
+  const d = new Date(dateStr); d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+function daysUntil(dateStr) {
+  const today = new Date(todayStr());
+  const target = new Date(dateStr);
+  return Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+}
+
+/* ============================================================
+   CATEGORY HELPERS
+============================================================ */
+function catLabel(key) {
+  const c = CATEGORIES[key];
+  return c ? `${c.icon} ${c.label}` : key;
+}
+function catChip(key) {
+  const c = CATEGORIES[key];
+  if (!c) return `<span class="chip">${escapeHtml(key)}</span>`;
+  return `<span class="chip" style="background:${c.bg};color:${c.color};">${c.icon} ${escapeHtml(c.label)}</span>`;
+}
+function populateCategorySelects() {
+  const selects = [
+    { id: 'studyCategory', includeAll: true },
+    { id: 'filterCategory', includeAll: true },
+    { id: 'f_category', includeAll: false },
+  ];
+  selects.forEach(({ id, includeAll }) => {
+    const el = document.getElementById(id);
+    const opts = includeAll ? `<option value="all">전체${id==='studyCategory'?' 카테고리':''}</option>` : '';
+    el.innerHTML = opts + Object.entries(CATEGORIES).map(([k, c]) =>
+      `<option value="${k}">${c.icon} ${c.label}</option>`
+    ).join('');
+  });
+}
+
+/* ============================================================
+   TABS
+============================================================ */
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const tabName = btn.dataset.tab;
+    ['study','quiz','list','add','stats','backup','sync','guide'].forEach(t => {
+      document.getElementById('tab-' + t).style.display = (t === tabName) ? 'block' : 'none';
+    });
+    if (tabName === 'list') renderList();
+    if (tabName === 'stats') renderStats();
+    if (tabName === 'study') renderStudy();
+    if (tabName === 'quiz') renderQuiz();
+    if (tabName === 'sync') renderSyncTab();
+  });
+});
+
+/* ============================================================
+   STUDY MODE
+============================================================ */
+let currentQueue = [];
+let currentIdx = 0;
+let currentFlipped = false;
+
+function buildQueue() {
+  const cat = document.getElementById('studyCategory').value;
+  const mode = document.getElementById('studyMode').value;
+  const today = todayStr();
+  let pool = state.words.filter(w => cat === 'all' || w.category === cat);
+  if (mode === 'due') {
+    pool = pool.filter(w => !w.nextReview || w.nextReview <= today);
+  } else if (mode === 'new') {
+    pool = pool.filter(w => w.reps === 0 && w.lapses === 0);
+  } else if (mode === 'hard') {
+    pool = pool.filter(w => w.lapses >= 2);
+  }
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool;
+}
+
+function renderStudy() {
+  currentQueue = buildQueue();
+  currentIdx = 0;
+  currentFlipped = false;
+  showCard();
+}
+
+function showCard() {
+  const area = document.getElementById('studyArea');
+  if (currentQueue.length === 0) {
+    area.innerHTML = `
+      <div class="empty">
+        <div style="font-size: 48px;">🎉</div>
+        <h3>오늘 복습할 단어가 없습니다!</h3>
+        <p>새 단어를 추가하거나 다른 모드로 학습해 보세요.</p>
+      </div>`;
+    return;
+  }
+  if (currentIdx >= currentQueue.length) {
+    const reviewed = currentQueue.length;
+    area.innerHTML = `
+      <div class="empty">
+        <div style="font-size: 48px;">✅</div>
+        <h3>이번 세션 완료!</h3>
+        <p>${reviewed}개의 단어를 복습했습니다.</p>
+        <button onclick="renderStudy()">한 번 더 학습</button>
+      </div>`;
+    return;
+  }
+
+  const w = currentQueue[currentIdx];
+  const direction = document.getElementById('studyDirection').value;
+
+  const promptSide = direction === 'k2e'
+    ? `<div class="prompt-label">한국어 → 영어</div>
+       <div class="prompt-text">${escapeHtml(w.meaning)}</div>
+       <div class="hint">영어로 말해보고 카드를 클릭하세요</div>`
+    : `<div class="prompt-label">영어 → 한국어</div>
+       <div class="prompt-text">${escapeHtml(w.word)} <button class="tts-btn lg" onclick="event.stopPropagation();speak('${escapeJs(w.word)}')" title="발음 듣기">${speakerIcon()}</button></div>
+       <div class="hint">뜻을 떠올리고 카드를 클릭하세요</div>`;
+
+  const examples = (w.examples && w.examples.length > 0) ? w.examples : (w.example ? [w.example] : []);
+
+  const answerSide = `
+    <div class="prompt-label">정답</div>
+    <div class="prompt-text">${escapeHtml(w.word)}
+      <button class="tts-btn lg" onclick="event.stopPropagation();speak('${escapeJs(w.word)}')" title="단어 발음">${speakerIcon()}</button>
+    </div>
+    ${w.ipa ? `<div class="ipa">${escapeHtml(w.ipa)}</div>` : ''}
+    <div class="meaning">${escapeHtml(w.meaning)}</div>
+    ${examples.length > 0 ? `
+      <div class="examples-list">
+        ${examples.map((ex, i) => `
+          <div class="example-item">
+            <div class="num">${i+1}.</div>
+            <div class="txt">${escapeHtml(ex)}</div>
+            <button class="tts-btn" onclick="event.stopPropagation();speak('${escapeJs(ex)}')" title="예문 발음">${speakerIcon()}</button>
+          </div>
+        `).join('')}
+      </div>` : ''}
+    ${w.collocations && w.collocations.length > 0 ? `
+      <div class="collocations">
+        ${w.collocations.map(c => `<span class="colloc-tag">${escapeHtml(c)}<button class="tts-btn sm" onclick="event.stopPropagation();speak('${escapeJs(c)}')">${speakerIcon(10)}</button></span>`).join('')}
+      </div>` : ''}
+    ${w.reps >= 3 ? `
+      <div class="sentence-box">
+        ✏️ <b>직접 문장 만들기</b> (Productive Vocabulary 단계)<br>
+        자신의 상황·연구·일상과 연결해 <code>${escapeHtml(w.word)}</code>를 사용한 영어 문장을 만들어 보세요.
+        <textarea id="userSentence_${w.id}" placeholder="예: I propose a routing strategy to mitigate crosstalk in bump-field regions.">${escapeHtml(w.userSentence || '')}</textarea>
+        <button onclick="event.stopPropagation();saveSentence('${w.id}')" style="margin-top:6px; background:var(--primary); color:white; border:none; padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px;">저장</button>
+      </div>` : ''}
+  `;
+
+  area.innerHTML = `
+    <div class="study-meta">
+      <div>${catChip(w.category)}</div>
+      <div>${currentIdx + 1} / ${currentQueue.length} · reps ${w.reps} · lapses ${w.lapses}</div>
+    </div>
+    <div class="card ${currentFlipped ? 'flipped' : ''}" id="studyCard">
+      ${currentFlipped ? answerSide : promptSide}
+    </div>
+    ${currentFlipped ? `
+      <div class="actions">
+        <button class="btn-again" onclick="rate('again')">🔴 다시</button>
+        <button class="btn-hard" onclick="rate('hard')">🟠 어려움</button>
+        <button class="btn-good" onclick="rate('good')">🟢 좋음</button>
+        <button class="btn-easy" onclick="rate('easy')">🔵 쉬움</button>
+      </div>` : `
+      <div class="flip-hint">카드를 클릭하면 정답이 나옵니다 (또는 Space 키)</div>
+    `}
+  `;
+
+  document.getElementById('studyCard').addEventListener('click', () => {
+    if (!currentFlipped) { currentFlipped = true; showCard(); }
+  });
+}
+
+function rate(result) {
+  const w = currentQueue[currentIdx];
+  const today = todayStr();
+  w.lastReviewed = today;
+  w.history.push({ date: today, result });
+
+  if (result === 'again') {
+    w.lapses += 1;
+    w.box = 0;
+    w.nextReview = addDays(today, 1);
+    // stage stays — don't punish too hard
+  } else if (result === 'hard') {
+    w.box = Math.max(0, w.box);
+    w.reps += 1;
+    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
+  } else if (result === 'good') {
+    w.reps += 1;
+    w.box = Math.min(w.box + 1, SRS_INTERVALS.length - 1);
+    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
+    w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 1);
+  } else if (result === 'easy') {
+    w.reps += 1;
+    w.box = Math.min(w.box + 2, SRS_INTERVALS.length - 1);
+    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
+    w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 2);
+  }
+
+  if (!state.log[today]) state.log[today] = { reviewed: 0, correct: 0 };
+  state.log[today].reviewed += 1;
+  if (result !== 'again') state.log[today].correct += 1;
+
+  const masterIdx = state.words.findIndex(x => x.id === w.id);
+  if (masterIdx >= 0) state.words[masterIdx] = w;
+
+  saveState();
+  currentIdx += 1;
+  currentFlipped = false;
+  showCard();
+  updateTodayInfo();
+}
+
+function saveSentence(id) {
+  const w = state.words.find(x => x.id === id);
+  const el = document.getElementById('userSentence_' + id);
+  if (w && el) {
+    w.userSentence = el.value;
+    saveState();
+    toast("문장이 저장되었습니다.");
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('tab-study').style.display === 'none') return;
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  if (e.code === 'Space') {
+    e.preventDefault();
+    if (!currentFlipped) { currentFlipped = true; showCard(); }
+  } else if (currentFlipped) {
+    if (e.key === '1') rate('again');
+    else if (e.key === '2') rate('hard');
+    else if (e.key === '3') rate('good');
+    else if (e.key === '4') rate('easy');
+  }
+});
+
+/* ============================================================
+   TTS (American English)
+============================================================ */
+let voices = [];
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) {
+    toast("이 브라우저는 TTS를 지원하지 않습니다.");
+    return;
+  }
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = 0.95;
+  const usVoice = voices.find(v => v.lang === 'en-US' && (v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('English')));
+  if (usVoice) utter.voice = usVoice;
+  else {
+    const anyUs = voices.find(v => v.lang === 'en-US');
+    if (anyUs) utter.voice = anyUs;
+  }
+  speechSynthesis.speak(utter);
+}
+
+function speakerIcon(size = 14) {
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
+}
+
+/* ============================================================
+   WORD LIST
+============================================================ */
+function renderList() {
+  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cat = document.getElementById('filterCategory').value;
+  const sort = document.getElementById('sortBy').value;
+
+  let list = state.words.filter(w => {
+    if (cat !== 'all' && w.category !== cat) return false;
+    if (search) {
+      const examples = (w.examples || []).join(' ');
+      const hay = (w.word + ' ' + w.meaning + ' ' + examples + ' ' + (w.collocations||[]).join(' ')).toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+
+  if (sort === 'recent') list.sort((a,b) => (b.createdAt||'').localeCompare(a.createdAt||''));
+  else if (sort === 'alpha') list.sort((a,b) => a.word.localeCompare(b.word));
+  else if (sort === 'due') list.sort((a,b) => (a.nextReview||'').localeCompare(b.nextReview||''));
+  else if (sort === 'hardest') list.sort((a,b) => (b.lapses||0) - (a.lapses||0));
+
+  const body = document.getElementById('wordTableBody');
+  if (list.length === 0) {
+    body.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:30px;">검색 결과 없음</td></tr>`;
+    return;
+  }
+  const today = todayStr();
+  body.innerHTML = list.map(w => {
+    const days = daysUntil(w.nextReview || today);
+    let dueText;
+    if (days <= 0) dueText = `<span style="color:var(--danger); font-weight:600;">오늘 복습</span>`;
+    else if (days === 1) dueText = `<span style="color:var(--warn);">내일</span>`;
+    else dueText = `${days}일 후`;
+
+    const firstExample = (w.examples && w.examples[0]) || w.example || '';
+
+    let dailyBadge = '';
+    if (w.lastAttemptDate === today) {
+      if (w.recoveredToday) dailyBadge = `<span style="font-size:10px; padding:2px 6px; border-radius:999px; background:#f3e8ff; color:#a855f7; font-weight:700;">🩹 오늘 복구</span>`;
+      else if (w.failedToday) dailyBadge = `<span style="font-size:10px; padding:2px 6px; border-radius:999px; background:#fde2e1; color:var(--danger); font-weight:700;">❌ 오늘 실패</span>`;
+      else if (w.passedToday) dailyBadge = `<span style="font-size:10px; padding:2px 6px; border-radius:999px; background:#d8f4e3; color:var(--good); font-weight:700;">✅ 오늘 정답</span>`;
+    }
+    const coldStreakBadge = (w.coldStreak || 0) >= 2
+      ? `<span style="font-size:10px; padding:2px 6px; border-radius:999px; background:#dcfce7; color:#15803d; font-weight:700;" title="연속 cold-correct">🧊×${w.coldStreak}</span>` : '';
+    return `
+      <tr>
+        <td>
+          <span class="word">${escapeHtml(w.word)}</span>
+          <button class="tts-btn sm" style="margin-left:4px;vertical-align:middle;" onclick="speak('${escapeJs(w.word)}')">${speakerIcon(11)}</button>
+          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">${catChip(w.category)} ${stageBadge(w.learningStage || 1)} ${coldStreakBadge} ${dailyBadge}</div>
+        </td>
+        <td>
+          <div>${escapeHtml(w.meaning)}</div>
+          ${(w.collocations||[]).length>0 ? `<div class="ex">${w.collocations.map(c=>escapeHtml(c)).join(' · ')}</div>` : ''}
+        </td>
+        <td><div class="ex">${escapeHtml(firstExample)}</div></td>
+        <td>${dueText}<div class="ex">reps ${w.reps} · lapses ${w.lapses}</div></td>
+        <td>
+          <button class="icon-btn" onclick="editWord('${w.id}')" title="수정">✏️</button>
+          <button class="icon-btn del" onclick="deleteWord('${w.id}')" title="삭제">🗑️</button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+document.getElementById('searchInput').addEventListener('input', renderList);
+document.getElementById('filterCategory').addEventListener('change', renderList);
+document.getElementById('sortBy').addEventListener('change', renderList);
+document.getElementById('studyCategory').addEventListener('change', renderStudy);
+document.getElementById('studyMode').addEventListener('change', renderStudy);
+document.getElementById('studyDirection').addEventListener('change', renderStudy);
+
+function editWord(id) {
+  const w = state.words.find(x => x.id === id);
+  if (!w) return;
+  document.querySelector('.tab[data-tab="add"]').click();
+  document.getElementById('editId').value = id;
+  document.getElementById('f_word').value = w.word;
+  document.getElementById('f_ipa').value = w.ipa || '';
+  document.getElementById('f_meaning').value = w.meaning;
+  const ex = (w.examples && w.examples.length>0) ? w.examples.join('\n') : (w.example || '');
+  document.getElementById('f_examples').value = ex;
+  document.getElementById('f_collocations').value = (w.collocations || []).join(', ');
+  document.getElementById('f_category').value = w.category;
+  document.getElementById('f_note').value = w.note || '';
+  document.getElementById('cancelEdit').style.display = 'inline-block';
+}
+
+function deleteWord(id) {
+  if (!confirm('이 단어를 삭제하시겠습니까?')) return;
+  state.words = state.words.filter(w => w.id !== id);
+  saveState();
+  renderList();
+  toast("삭제되었습니다.");
+}
+
+/* ============================================================
+   ADD / EDIT FORM
+============================================================ */
+document.getElementById('wordForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const id = document.getElementById('editId').value;
+  const data = {
+    word: document.getElementById('f_word').value.trim(),
+    ipa: document.getElementById('f_ipa').value.trim(),
+    meaning: document.getElementById('f_meaning').value.trim(),
+    examples: document.getElementById('f_examples').value.split('\n').map(s => s.trim()).filter(Boolean),
+    collocations: document.getElementById('f_collocations').value.split(',').map(s => s.trim()).filter(Boolean),
+    category: document.getElementById('f_category').value,
+    note: document.getElementById('f_note').value.trim(),
+  };
+  if (!data.word || !data.meaning) { toast("단어와 뜻은 필수입니다."); return; }
+
+  if (id) {
+    const w = state.words.find(x => x.id === id);
+    if (w) Object.assign(w, data);
+    toast("수정되었습니다.");
+  } else {
+    state.words.push({
+      id: cryptoId(),
+      ...data,
+      createdAt: todayStr(),
+      box: 0, reps: 0, lapses: 0,
+      lastReviewed: null,
+      nextReview: todayStr(),
+      history: [],
+      userSentence: "",
+      learningStage: 1,
+    });
+    toast("단어가 추가되었습니다.");
+  }
+  saveState();
+  e.target.reset();
+  document.getElementById('editId').value = '';
+  document.getElementById('cancelEdit').style.display = 'none';
+});
+
+document.getElementById('cancelEdit').addEventListener('click', () => {
+  document.getElementById('wordForm').reset();
+  document.getElementById('editId').value = '';
+  document.getElementById('cancelEdit').style.display = 'none';
+});
+
+/* ============================================================
+   STATS
+============================================================ */
+function renderStats() {
+  const today = todayStr();
+  const totalWords = state.words.length;
+  const dueToday = state.words.filter(w => (w.nextReview || today) <= today).length;
+  const newWords = state.words.filter(w => w.reps === 0 && w.lapses === 0).length;
+  const mastered = state.words.filter(w => w.box >= 5).length;
+  const reviewedToday = (state.log[today] || {}).reviewed || 0;
+  const correctToday = (state.log[today] || {}).correct || 0;
+  const accuracy = reviewedToday > 0 ? Math.round((correctToday / reviewedToday) * 100) : 0;
+
+  let streak = 0;
+  let cursor = today;
+  while (state.log[cursor] && state.log[cursor].reviewed > 0) {
+    streak += 1;
+    cursor = addDays(cursor, -1);
+  }
+
+  // Scientific cohorts
+  const trueMaster = state.words.filter(w => (w.coldStreak || 0) >= 3 && (w.learningStage || 1) >= 5).length;
+  const passive = state.words.filter(w => (w.reps || 0) >= 3 && (w.coldStreak || 0) < 2 && (w.learningStage || 1) <= 2).length;
+  const fragile = state.words.filter(w => (w.lapses || 0) >= 2 && (w.coldStreak || 0) < 2).length;
+  const coldToday = (state.log[today] || {}).cold || 0;
+  const recoveredToday = (state.log[today] || {}).recovered || 0;
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat"><div class="v">${totalWords}</div><div class="l">전체 단어</div></div>
+    <div class="stat"><div class="v">${dueToday}</div><div class="l">오늘 복습 대기</div></div>
+    <div class="stat"><div class="v" style="color:var(--good);">${trueMaster}</div><div class="l">🏆 True Master<br><span style="font-size:10px;">(coldStreak ≥ 3 & Stage ≥ 5)</span></div></div>
+    <div class="stat"><div class="v" style="color:#f59e0b;">${passive}</div><div class="l">⚠️ Passive 위험<br><span style="font-size:10px;">(보면 알지만 못 씀)</span></div></div>
+    <div class="stat"><div class="v" style="color:#a855f7;">${fragile}</div><div class="l">🔁 Fragile<br><span style="font-size:10px;">(자주 까먹음)</span></div></div>
+    <div class="stat"><div class="v" style="color:var(--good);">${coldToday}</div><div class="l">🧊 오늘 Cold Correct<br><span style="font-size:10px;">(진짜 mastery)</span></div></div>
+    <div class="stat"><div class="v" style="color:#a855f7;">${recoveredToday}</div><div class="l">🩹 오늘 Recovered<br><span style="font-size:10px;">(승급 안 됨)</span></div></div>
+    <div class="stat"><div class="v">${reviewedToday}</div><div class="l">오늘 학습 수</div></div>
+    <div class="stat"><div class="v">${accuracy}%</div><div class="l">오늘 표면 정답률</div></div>
+    <div class="stat"><div class="v">${streak}🔥</div><div class="l">연속 학습일</div></div>
+  `;
+
+  document.getElementById('categoryStats').innerHTML = Object.entries(CATEGORIES).map(([key, c]) => {
+    const list = state.words.filter(w => w.category === key);
+    const learned = list.filter(w => w.reps > 0).length;
+    const pct = list.length > 0 ? Math.round((learned / list.length) * 100) : 0;
+    return `
+      <div style="margin-bottom:10px;">
+        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
+          <span>${catChip(key)}</span>
+          <span>${learned} / ${list.length} (${pct}%)</span>
+        </div>
+        <div style="background:#eef0f7; border-radius:6px; height:8px; overflow:hidden;">
+          <div style="background:${c.color}; height:100%; width:${pct}%;"></div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Stage distribution
+  const stageBuckets = Object.values(STAGES).map(s => ({
+    stage: s,
+    count: state.words.filter(w => (w.learningStage || 1) === s.num).length,
+  }));
+  const maxStageC = Math.max(...stageBuckets.map(b => b.count), 1);
+  document.getElementById('stageStats').innerHTML = stageBuckets.map(b => `
+    <div style="display:flex; align-items:center; margin-bottom:6px; font-size:13px;">
+      <div style="width:160px; color:${b.stage.color}; font-weight:600;">${b.stage.short} <span style="color:var(--muted); font-weight:normal;">(S${b.stage.num})</span></div>
+      <div style="flex:1; background:#eef0f7; border-radius:4px; height:18px; overflow:hidden;">
+        <div style="background:${b.stage.color}; height:100%; width:${(b.count/maxStageC)*100}%;"></div>
+      </div>
+      <div style="width:40px; text-align:right;">${b.count}</div>
+    </div>
+  `).join('') + `
+    <div style="margin-top:8px; font-size:11px; color:var(--muted);">
+      💡 Stage 1은 "보면 안다"는 수동 단계, Stage 5는 "직접 문장에 쓴다"는 능동 단계입니다. Production 위주 퀴즈를 풀수록 단어가 오른쪽으로 이동합니다.
+    </div>`;
+
+  const buckets = SRS_INTERVALS.map((d, i) => ({
+    label: d + '일 간격',
+    count: state.words.filter(w => w.box === i && w.reps > 0).length,
+  }));
+  buckets.unshift({ label: '신규/리셋', count: state.words.filter(w => w.reps === 0 || (w.box === 0 && w.lapses > 0)).length });
+  const maxC = Math.max(...buckets.map(b => b.count), 1);
+  document.getElementById('intervalStats').innerHTML = buckets.map(b => `
+    <div style="display:flex; align-items:center; margin-bottom:6px; font-size:13px;">
+      <div style="width:90px; color:var(--muted);">${b.label}</div>
+      <div style="flex:1; background:#eef0f7; border-radius:4px; height:18px; overflow:hidden;">
+        <div style="background:var(--accent); height:100%; width:${(b.count/maxC)*100}%;"></div>
+      </div>
+      <div style="width:40px; text-align:right;">${b.count}</div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   SCIENTIFIC EVALUATION ENGINE
+   - First-attempt mastery only
+   - Cold / Medium / Slow / Fail / Recovered classification
+   - Same-day recovery does NOT promote SRS
+   - Mature words forgive partially on miss
+============================================================ */
+
+// Response-time thresholds (ms) by quiz type
+const COLD_THRESHOLDS = {
+  mc_e2k: 5000,  mc_k2e: 7000,  listen_mc: 6000,
+  type_k2e: 12000, dictation: 12000, fill_blank: 15000,
+};
+const SLOW_THRESHOLDS = {
+  mc_e2k: 15000, mc_k2e: 15000, listen_mc: 15000,
+  type_k2e: 30000, dictation: 30000, fill_blank: 35000,
+};
+
+const EVAL_LABELS = {
+  cold_correct:   { icon: '🧊', label: 'Cold Correct',   short: 'COLD',     color: '#16a34a', tone: 'good',
+                    message: '첫 시도, 빠른 정답. 진짜 spaced retrieval 성공입니다. 다음 간격으로 승급됩니다.' },
+  medium_correct: { icon: '🌤️', label: 'Medium Correct', short: 'MEDIUM',   color: '#2563eb', tone: 'good',
+                    message: '첫 시도 정답이지만 조금 느렸습니다. 한 번 더 같은 간격에서 확인 필요. 승급 보류.' },
+  slow_correct:   { icon: '🐢', label: 'Slow Correct',   short: 'SLOW',     color: '#f59e0b', tone: 'mid',
+                    message: '맞히긴 했지만 오래 걸렸습니다. 아직 회상이 자동화되지 않음. 한 단계 후퇴해서 다시 테스트.' },
+  first_fail:     { icon: '❌', label: 'First Miss',     short: 'MISS',     color: '#dc2626', tone: 'bad',
+                    message: '첫 시도 실패. 내일 첫 시도에서 다시 도전해야 합니다.' },
+  recovered:      { icon: '🩹', label: 'Recovered Today', short: 'RECOVERED', color: '#a855f7', tone: 'mid',
+                    message: '오늘 정답을 본 뒤 맞혔습니다. 이건 "복구 연습"이지 "암기 완료"가 아닙니다. 진짜 증명은 내일 첫 시도에서 합니다. 승급 없음.' },
+  still_failing:  { icon: '🔁', label: 'Still Missing',  short: 'STILL',    color: '#dc2626', tone: 'bad',
+                    message: '아직 안 잡혔습니다. 정답을 다시 보고 내일 첫 시도에서 도전하세요.' },
+  extra_practice: { icon: '➕', label: 'Extra Practice', short: 'EXTRA',    color: '#6b7280', tone: 'neutral',
+                    message: '오늘은 이미 첫 시도 성공으로 SRS 처리됨. 이건 추가 연습이고 SRS에 반영되지 않습니다.' },
+  active_use:     { icon: '🌟', label: 'Active Use Confirmed', short: 'ACTIVE', color: '#16a34a', tone: 'good',
+                    message: '문장 속에서 사용 확인됨. 이 단어는 active vocabulary 후보입니다.' },
+};
+
+// Daily reset: clear today-only flags if last attempt was on a different day.
+function dailyReset() {
+  const today = todayStr();
+  state.words.forEach(w => {
+    if (w.lastAttemptDate && w.lastAttemptDate !== today) {
+      w.failedToday = false;
+      w.recoveredToday = false;
+      w.passedToday = false;
+    }
+  });
+}
+
+// Snapshot key fields so we can undo on fudge.
+function snapshotWord(w) {
+  return JSON.stringify({
+    box: w.box, reps: w.reps, lapses: w.lapses,
+    nextReview: w.nextReview, lastReviewed: w.lastReviewed,
+    lastAttemptDate: w.lastAttemptDate,
+    failedToday: w.failedToday, passedToday: w.passedToday, recoveredToday: w.recoveredToday,
+    coldStreak: w.coldStreak, learningStage: w.learningStage, lastResponseMs: w.lastResponseMs,
+  });
+}
+function restoreWord(w, snap) {
+  Object.assign(w, JSON.parse(snap));
+}
+
+/**
+ * Core evaluation function. Mutates the word's SRS fields per scientific rules.
+ * Returns an eval result object describing what happened.
+ */
+function evaluateAnswer(word, isCorrect, responseTimeMs, quizType) {
+  const today = todayStr();
+  const isFirstToday = (word.lastAttemptDate !== today);
+  const wasFailedToday = (word.lastAttemptDate === today && word.failedToday);
+  const wasPassedToday = (word.lastAttemptDate === today && word.passedToday);
+
+  const coldT = COLD_THRESHOLDS[quizType] || 10000;
+  const slowT = SLOW_THRESHOLDS[quizType] || 25000;
+
+  word.lastReviewed = today;
+  word.lastResponseMs = responseTimeMs;
+  word.history = word.history || [];
+
+  let kind;
+
+  if (isFirstToday) {
+    word.lastAttemptDate = today;
+    word.failedToday = false;
+    word.recoveredToday = false;
+    word.passedToday = false;
+
+    if (isCorrect) {
+      word.passedToday = true;
+      if (responseTimeMs <= coldT) {
+        // ❄️ COLD CORRECT — true spaced retrieval success
+        kind = 'cold_correct';
+        word.coldStreak = (word.coldStreak || 0) + 1;
+        word.reps = (word.reps || 0) + 1;
+        word.box = Math.min((word.box || 0) + 1, SRS_INTERVALS.length - 1);
+        word.nextReview = addDays(today, SRS_INTERVALS[word.box]);
+        // Advance learningStage only on cold correct
+        const stageNum = Object.values(STAGES).find(s => s.quiz === quizType)?.num;
+        if (stageNum && stageNum >= (word.learningStage || 1)) {
+          word.learningStage = Math.min(MAX_STAGE, stageNum + 1);
+        }
+      } else if (responseTimeMs <= slowT) {
+        // 🌤️ MEDIUM CORRECT — held at same interval
+        kind = 'medium_correct';
+        word.reps = (word.reps || 0) + 1;
+        // box stays — re-test at same interval
+        word.nextReview = addDays(today, SRS_INTERVALS[word.box]);
+      } else {
+        // 🐢 SLOW CORRECT — slight regress
+        kind = 'slow_correct';
+        word.reps = (word.reps || 0) + 1;
+        word.box = Math.max(0, (word.box || 0) - 1);
+        word.nextReview = addDays(today, SRS_INTERVALS[word.box]);
+        word.coldStreak = 0;
+      }
+    } else {
+      // ❌ FIRST FAIL TODAY
+      kind = 'first_fail';
+      word.failedToday = true;
+      word.coldStreak = 0;
+      word.lapses = (word.lapses || 0) + 1;
+      // Mature-word forgiveness: if word was at high level, drop only partially
+      if ((word.box || 0) >= 4) {
+        word.box = Math.max(2, word.box - 2); // back to ~4-7 day range
+      } else {
+        word.box = 0;
+      }
+      word.nextReview = addDays(today, Math.max(1, SRS_INTERVALS[word.box] || 1));
+    }
+  } else {
+    // SAME-DAY RETRY — never promotes SRS
+    if (wasFailedToday && isCorrect) {
+      kind = 'recovered';
+      word.recoveredToday = true;
+      // SRS already scheduled for tomorrow from the earlier fail — leave it
+    } else if (wasFailedToday && !isCorrect) {
+      kind = 'still_failing';
+    } else if (wasPassedToday) {
+      kind = 'extra_practice';
+    } else {
+      kind = 'extra_practice';
+    }
+  }
+
+  word.history.push({ date: today, kind, quizType, ms: responseTimeMs });
+  return { kind, ...EVAL_LABELS[kind] };
+}
+
+/* ============================================================
+   QUIZ MODE
+============================================================ */
+const QUIZ_TYPES = [
+  { id: 'smart_seq', icon: '🧠', label: 'Smart Quiz (자동 진행)', desc: '각 단어의 현재 단계(Stage 1~5)에 맞는 퀴즈를 자동 출제 — 가장 추천!', mode: 'smart', featured: true },
+  { id: 'fill_blank',icon: '🧩', label: '예문 빈칸 채우기',       desc: '예문에서 빠진 단어를 직접 입력 — 문맥 속 사용 능력 훈련 (Stage 2)', mode: 'prod' },
+  { id: 'dictation', icon: '📝', label: '받아쓰기 (TTS → 타이핑)', desc: 'TTS로 단어를 듣고 직접 입력 — 발음·철자 동시 훈련 (Stage 3)', mode: 'prod' },
+  { id: 'type_k2e',  icon: '✍️', label: '타이핑 (한→영)',        desc: '한국어 뜻만 보고 영어 직접 입력 — 진짜 어려운 핵심 (Stage 4)', mode: 'prod' },
+  { id: 'sentence',  icon: '🌟', label: '내 문장 만들기',          desc: '단어를 사용해 직접 영어 문장 작성 (self-evaluation) — Active vocabulary 최종 (Stage 5)', mode: 'prod' },
+  { id: 'mc_e2k',    icon: '🔍', label: '객관식 영→한',           desc: '영어 단어를 보고 뜻 4지선다 — 새 단어 진입 (Stage 1)', mode: 'rec' },
+  { id: 'mc_k2e',    icon: '⚡', label: '객관식 한→영',           desc: '한국어 뜻을 보고 영어 단어 4지선다 — 보조 진단용 (stage 진행 안 함)', mode: 'rec' },
+  { id: 'listen_mc', icon: '🎧', label: '듣기 객관식',             desc: 'TTS로 단어를 듣고 뜻 4지선다 — 보조 진단용 (stage 진행 안 함)', mode: 'rec' },
+];
+
+let quiz = null;
+
+function renderQuiz() {
+  if (!quiz) { showQuizSetup(); return; }
+  if (quiz.state === 'running') showQuizQuestion();
+  else if (quiz.state === 'done') showQuizResults();
+}
+
+function exitQuiz() {
+  if (quiz && quiz.state === 'running' && quiz.index > 0) {
+    if (!confirm(`퀴즈를 중간에 종료하시겠습니까?\n지금까지 답한 ${quiz.index}문제는 이미 SRS와 stage에 반영되어 있습니다.`)) return;
+  }
+  quiz = null;
+  renderQuiz();
+}
+
+function showQuizSetup() {
+  const c = document.getElementById('quizContainer');
+  const totalAvail = state.words.length;
+
+  c.innerHTML = `
+    <h3 style="margin-top:0;">🎯 퀴즈 모드</h3>
+    <p style="color:var(--muted); font-size:13px; margin-bottom:14px;">
+      Recognition과 Production을 본격적으로 훈련하세요. 결과는 자동으로 SRS와 각 단어의 학습 단계에 반영됩니다.
+    </p>
+
+    <div style="background:#fffbea; border-left:3px solid #f1c40f; padding:12px 16px; border-radius:8px; margin-bottom:18px; font-size:13px; line-height:1.7;">
+      <b>💡 추천: Smart Quiz 하나만 돌리세요</b><br>
+      각 단어가 어느 단계에 있는지 알아서 매칭해 줍니다. 단계는 부드럽게 올라가요:<br>
+      <b>Stage 1</b> 🔍 인식 → <b>Stage 2</b> 🧩 빈칸 → <b>Stage 3</b> 📝 받아쓰기 → <b>Stage 4</b> ✍️ 타이핑 → <b>Stage 5</b> 🌟 문장<br>
+      직접 타이핑(Stage 4)은 가장 빡세므로 그 전에 빈칸·받아쓰기로 충분히 익숙해진 후 도전합니다.<br>
+      객관식 영→한, 객관식 한→영, 듣기 객관식은 stage 진행에는 영향 없고 보조 진단용입니다.
+    </div>
+
+    <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--muted);">1. 퀴즈 유형 선택</div>
+    <div class="quiz-types" id="quizTypes">
+      ${QUIZ_TYPES.map(t => {
+        const tagLabel = t.mode === 'smart' ? 'SMART' : (t.mode === 'rec' ? 'RECOGNITION' : 'PRODUCTION');
+        const tagClass = t.mode === 'smart' ? 'smart' : t.mode;
+        const featured = t.featured ? 'style="border-color:var(--primary); box-shadow:0 0 0 3px rgba(79,109,255,0.12);"' : '';
+        return `
+          <div class="quiz-type-card" data-type="${t.id}" ${featured}>
+            <div class="qt-title">${t.icon} ${escapeHtml(t.label)}${t.featured ? ' <span style="font-size:10px; color:var(--primary); margin-left:4px;">⭐ 추천</span>' : ''}</div>
+            <div class="qt-desc">${escapeHtml(t.desc)}</div>
+            <div class="qt-tag ${tagClass}">${tagLabel}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+
+    <div class="filter-row" style="margin-top:18px;">
+      <div style="flex:1; min-width:140px;">
+        <label style="font-size:12px; color:var(--muted); font-weight:600; display:block; margin-bottom:4px;">2. 카테고리</label>
+        <select id="quizCat" style="width:100%;">
+          <option value="all">전체 (${totalAvail}단어)</option>
+          ${Object.entries(CATEGORIES).map(([k,c2]) => {
+            const n = state.words.filter(w => w.category === k).length;
+            return `<option value="${k}">${c2.icon} ${c2.label} (${n})</option>`;
+          }).join('')}
+        </select>
+      </div>
+      <div style="flex:1; min-width:140px;">
+        <label style="font-size:12px; color:var(--muted); font-weight:600; display:block; margin-bottom:4px;">3. 문항 수</label>
+        <select id="quizCount" style="width:100%;">
+          <option value="10">10문제 (빠르게)</option>
+          <option value="20" selected>20문제 (추천)</option>
+          <option value="30">30문제</option>
+          <option value="50">50문제 (집중)</option>
+          <option value="0">전체</option>
+        </select>
+      </div>
+      <div style="flex:1; min-width:140px;">
+        <label style="font-size:12px; color:var(--muted); font-weight:600; display:block; margin-bottom:4px;">4. 우선순위</label>
+        <select id="quizPriority" style="width:100%;">
+          <option value="random">랜덤</option>
+          <option value="due">복습 임박순 (추천)</option>
+          <option value="weak">정답률 낮은 단어 우선</option>
+          <option value="new">새 단어 우선</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="quiz-start-btn" id="quizStartBtn" disabled style="margin-top:18px;">유형을 먼저 선택하세요</button>
+  `;
+
+  // bind quiz type cards
+  let selectedType = null;
+  c.querySelectorAll('.quiz-type-card').forEach(card => {
+    card.addEventListener('click', () => {
+      c.querySelectorAll('.quiz-type-card').forEach(x => x.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedType = card.dataset.type;
+      const btn = document.getElementById('quizStartBtn');
+      btn.disabled = false;
+      btn.textContent = '🚀 퀴즈 시작';
+    });
+  });
+
+  document.getElementById('quizStartBtn').addEventListener('click', () => {
+    if (!selectedType) return;
+    startQuiz(selectedType,
+      document.getElementById('quizCat').value,
+      parseInt(document.getElementById('quizCount').value),
+      document.getElementById('quizPriority').value
+    );
+  });
+}
+
+function startQuiz(typeId, cat, count, priority) {
+  const today = todayStr();
+  let pool = state.words.filter(w => cat === 'all' || w.category === cat);
+
+  // for fill_blank, only include words with examples
+  if (typeId === 'fill_blank') {
+    pool = pool.filter(w => (w.examples && w.examples.length > 0) || w.example);
+  }
+
+  // smart_seq + sentence and other typing quizzes don't need 4 distractors;
+  // but MC types do. Apply a minimum-pool check only for MC types.
+  const mcTypes = new Set(['mc_e2k', 'mc_k2e', 'listen_mc']);
+  if (mcTypes.has(typeId) && pool.length < 4) {
+    toast('최소 4개 단어가 필요합니다 (객관식 보기 생성).');
+    return;
+  }
+  if (pool.length < 1) {
+    toast('단어가 없습니다.');
+    return;
+  }
+
+  // sort by priority
+  if (priority === 'due') {
+    pool.sort((a, b) => (a.nextReview || today).localeCompare(b.nextReview || today));
+  } else if (priority === 'weak') {
+    pool.sort((a, b) => (b.lapses || 0) - (a.lapses || 0));
+  } else if (priority === 'new') {
+    pool.sort((a, b) => ((a.reps || 0) + (a.lapses || 0)) - ((b.reps || 0) + (b.lapses || 0)));
+  } else {
+    // random
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+  }
+
+  // for non-random priorities, still shuffle within top picks to avoid same order each time
+  if (priority !== 'random') {
+    const cutoff = Math.min(pool.length, count > 0 ? count * 2 : pool.length);
+    const top = pool.slice(0, cutoff);
+    for (let i = top.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [top[i], top[j]] = [top[j], top[i]];
+    }
+    pool = top.concat(pool.slice(cutoff));
+  }
+
+  const finalCount = count === 0 ? pool.length : Math.min(count, pool.length);
+  const questions = pool.slice(0, finalCount);
+
+  quiz = {
+    typeId,
+    type: QUIZ_TYPES.find(t => t.id === typeId),
+    pool: state.words.filter(w => cat === 'all' || w.category === cat),  // distractor pool
+    questions,
+    index: 0,
+    results: [],
+    state: 'running',
+    startTime: Date.now(),
+    answered: false,
+  };
+  renderQuiz();
+}
+
+function showQuizQuestion() {
+  const c = document.getElementById('quizContainer');
+  const q = quiz.questions[quiz.index];
+  const t = quiz.type;
+  const pct = (quiz.index / quiz.questions.length) * 100;
+
+  // For Smart Quiz: pick the quiz type for this question based on word's current stage.
+  // For non-fill_blank stages without example, fall back to type_k2e.
+  let activeTypeId = t.id;
+  if (t.id === 'smart_seq') {
+    const stage = STAGES[q.learningStage || 1] || STAGES[1];
+    activeTypeId = stage.quiz;
+    // Fallback: fill_blank requires examples — if missing, drop to mc_e2k (gentler than typing)
+    if (activeTypeId === 'fill_blank' && !(q.examples && q.examples.length > 0) && !q.example) {
+      activeTypeId = 'mc_e2k';
+    }
+    // Fallback: mc_e2k needs 4 distractors — if pool too small, use dictation (no distractors needed)
+    if (activeTypeId === 'mc_e2k' && quiz.pool.length < 4) {
+      activeTypeId = 'dictation';
+    }
+  }
+  quiz.activeTypeId = activeTypeId; // remember for grading
+
+  const stageBanner = (t.id === 'smart_seq')
+    ? `<div style="background:${(STAGES[q.learningStage||1]||STAGES[1]).color}15; color:${(STAGES[q.learningStage||1]||STAGES[1]).color}; padding:6px 12px; border-radius:8px; font-size:11px; font-weight:700; text-align:center; margin-bottom:10px;">
+        🧠 Smart: ${STAGES[q.learningStage||1].label} (Stage ${q.learningStage||1}/${MAX_STAGE})
+      </div>` : '';
+
+  // Build distractors for multiple choice
+  let questionContent = '';
+  if (activeTypeId === 'mc_e2k') {
+    const opts = buildChoices(q, quiz.pool, 'meaning');
+    questionContent = `
+      <div class="quiz-prompt-label">이 영어 단어의 뜻은?</div>
+      <div class="quiz-prompt">${escapeHtml(q.word)}
+        <button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button>
+      </div>
+      ${q.ipa ? `<div class="quiz-ipa">${escapeHtml(q.ipa)}</div>` : ''}
+      <div class="quiz-options" id="quizOptions">
+        ${opts.map((o, i) => `<button class="quiz-option" data-idx="${i}" data-correct="${o.correct ? '1' : '0'}">
+          <span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}
+        </button>`).join('')}
+      </div>`;
+  } else if (activeTypeId === 'mc_k2e') {
+    const opts = buildChoices(q, quiz.pool, 'word');
+    questionContent = `
+      <div class="quiz-prompt-label">이 뜻에 해당하는 영어 단어는?</div>
+      <div class="quiz-prompt">${escapeHtml(q.meaning)}</div>
+      <div class="quiz-options" id="quizOptions">
+        ${opts.map((o, i) => `<button class="quiz-option" data-idx="${i}" data-correct="${o.correct ? '1' : '0'}">
+          <span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}
+        </button>`).join('')}
+      </div>`;
+  } else if (activeTypeId === 'listen_mc') {
+    const opts = buildChoices(q, quiz.pool, 'meaning');
+    questionContent = `
+      <div class="quiz-prompt-label">이 단어를 듣고 뜻을 고르세요</div>
+      <div class="quiz-audio-icon" onclick="speak('${escapeJs(q.word)}')">🔊</div>
+      <div style="font-size:12px; color:var(--muted);">아이콘을 누르면 다시 재생</div>
+      <div class="quiz-options" id="quizOptions">
+        ${opts.map((o, i) => `<button class="quiz-option" data-idx="${i}" data-correct="${o.correct ? '1' : '0'}">
+          <span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}
+        </button>`).join('')}
+      </div>`;
+    // auto-play after a brief delay
+    setTimeout(() => speak(q.word), 300);
+  } else if (activeTypeId === 'type_k2e') {
+    questionContent = `
+      <div class="quiz-prompt-label">한국어 뜻을 보고 영어로 입력하세요</div>
+      <div class="quiz-prompt">${escapeHtml(q.meaning)}</div>
+      <input type="text" id="quizTextInput" class="quiz-text-input" placeholder="여기에 영어 단어를 입력..." autocomplete="off" autocapitalize="off" />
+      <button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
+  } else if (activeTypeId === 'dictation') {
+    questionContent = `
+      <div class="quiz-prompt-label">단어를 듣고 영어로 받아쓰세요</div>
+      <div class="quiz-audio-icon" onclick="speak('${escapeJs(q.word)}')">🔊</div>
+      <div style="font-size:12px; color:var(--muted);">아이콘을 눌러 반복 재생</div>
+      <input type="text" id="quizTextInput" class="quiz-text-input" placeholder="들은 단어를 입력..." autocomplete="off" autocapitalize="off" />
+      <button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
+    setTimeout(() => speak(q.word), 300);
+  } else if (activeTypeId === 'fill_blank') {
+    const examples = (q.examples && q.examples.length > 0) ? q.examples : [q.example];
+    const ex = examples[Math.floor(Math.random() * examples.length)];
+    const blanked = blankOut(ex, q.word);
+    quiz.currentBlank = ex;  // remember the original for showing later
+    questionContent = `
+      <div class="quiz-prompt-label">빈 칸에 들어갈 단어를 입력하세요</div>
+      <div class="quiz-prompt smaller">${escapeHtml(blanked)}</div>
+      <div style="font-size:12px; color:var(--muted); margin-top:8px;">힌트: ${escapeHtml(q.meaning)}</div>
+      <input type="text" id="quizTextInput" class="quiz-text-input" placeholder="단어 입력..." autocomplete="off" autocapitalize="off" />
+      <button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
+  } else if (activeTypeId === 'sentence') {
+    const collocHint = (q.collocations && q.collocations.length > 0)
+      ? `<div style="margin-top:10px; font-size:12px; color:var(--muted);">참고 collocation: ${q.collocations.map(c => `<code style="background:#f1f3f9; padding:2px 6px; border-radius:4px; margin:0 2px;">${escapeHtml(c)}</code>`).join(' ')}</div>`
+      : '';
+    questionContent = `
+      <div class="quiz-prompt-label">이 단어를 사용한 영어 문장을 직접 만들어 보세요</div>
+      <div class="quiz-prompt">${escapeHtml(q.word)}
+        <button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button>
+      </div>
+      ${q.ipa ? `<div class="quiz-ipa">${escapeHtml(q.ipa)}</div>` : ''}
+      <div style="font-size:14px; color:var(--text); margin-top:8px;">뜻: ${escapeHtml(q.meaning)}</div>
+      ${collocHint}
+      <textarea id="quizTextInput" class="quiz-text-input" style="min-height:80px; text-align:left; font-size:15px;" placeholder="자신의 상황·연구·일상과 연결해서 영어 문장을 작성해 보세요..."></textarea>
+      <button class="quiz-submit" onclick="submitSentenceAnswer()">제출 (Ctrl+Enter)</button>`;
+  }
+
+  c.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:13px; color:var(--muted); flex-wrap:wrap; gap:6px;">
+      <div>${t.icon} ${escapeHtml(t.label)} · ${catChip(q.category)} ${stageBadge(q.learningStage || 1)}</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span>${quiz.index + 1} / ${quiz.questions.length}</span>
+        <button onclick="exitQuiz()" title="퀴즈 종료" style="background:#f1f3f9; border:1px solid var(--border); border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; color:var(--muted); font-weight:600;">✕ 종료</button>
+      </div>
+    </div>
+    ${stageBanner}
+    <div class="quiz-progress"><div class="bar" style="width:${pct}%;"></div></div>
+    <div class="quiz-question">${questionContent}</div>
+    <div id="quizFeedback"></div>
+    <div id="quizControls"></div>
+  `;
+
+  quiz.answered = false;
+
+  // bind MC option clicks
+  c.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (quiz.answered) return;
+      submitMCAnswer(btn);
+    });
+  });
+
+  // Start response timer for this question
+  quiz.questionStartTime = Date.now();
+
+  // focus text input + Enter key
+  const inp = document.getElementById('quizTextInput');
+  if (inp) {
+    inp.focus();
+    inp.addEventListener('keydown', e => {
+      if (activeTypeId === 'sentence') {
+        // sentence is textarea — use Ctrl/Cmd+Enter to submit
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          if (!quiz.answered) submitSentenceAnswer();
+          else nextQuizQuestion();
+        }
+      } else {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (!quiz.answered) submitTypingAnswer();
+          else nextQuizQuestion();
+        }
+      }
+    });
+  }
+}
+
+function submitSentenceAnswer() {
+  const inp = document.getElementById('quizTextInput');
+  if (!inp) return;
+  const userSentence = inp.value.trim();
+  if (!userSentence) { toast('문장을 입력해 주세요.'); return; }
+  const q = quiz.questions[quiz.index];
+
+  // basic check: does the sentence actually contain the word? (case-insensitive, allow suffix)
+  const escaped = q.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const containsWord = new RegExp('\\b' + escaped + '\\w*', 'i').test(userSentence);
+
+  inp.disabled = true;
+  document.querySelector('.quiz-submit')?.remove();
+
+  // save sentence to word's userSentence
+  const w = state.words.find(x => x.id === q.id);
+  if (w) {
+    w.userSentence = userSentence;
+    saveState();
+  }
+
+  // show feedback with self-eval buttons (since auto-grading sentences is unreliable)
+  quiz.answered = true;
+  const fb = document.getElementById('quizFeedback');
+  const exampleHint = (q.examples && q.examples[0]) ? `<div style="margin-top:8px; color:var(--muted); font-style:italic;">참고 예문: "${escapeHtml(q.examples[0])}"</div>` : '';
+  fb.innerHTML = `
+    <div class="quiz-feedback" style="background:#fffbea; color:var(--text);">
+      <div style="font-weight:600; margin-bottom:6px;">✏️ 내가 만든 문장:</div>
+      <div style="background:white; padding:10px 14px; border-radius:8px; font-style:italic;">"${escapeHtml(userSentence)}"</div>
+      ${!containsWord ? `<div style="margin-top:8px; color:var(--warn); font-size:12px;">⚠️ 문장에 "${escapeHtml(q.word)}"가 포함되지 않은 것 같습니다.</div>` : ''}
+      ${exampleHint}
+      <div style="margin-top:12px; font-size:13px;">이 문장이 자연스럽고 정확하게 단어를 사용했나요?</div>
+    </div>
+  `;
+  document.getElementById('quizControls').innerHTML = `
+    <button class="btn-again" style="padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-weight:600;" onclick="gradeSentence('again')">🔴 다시</button>
+    <button class="btn-hard" style="padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-weight:600;" onclick="gradeSentence('hard')">🟠 어색함</button>
+    <button class="btn-good" style="padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-weight:600;" onclick="gradeSentence('good')">🟢 괜찮음</button>
+    <button class="btn-easy" style="padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-weight:600;" onclick="gradeSentence('easy')">🔵 완벽</button>
+  `;
+}
+
+function gradeSentence(verdict) {
+  const q = quiz.questions[quiz.index];
+  const correct = (verdict === 'good' || verdict === 'easy');
+  const userSentence = document.getElementById('quizTextInput')?.value || '';
+
+  const w = state.words.find(x => x.id === q.id);
+  let evalKind = null;
+  if (w) {
+    const today = todayStr();
+    w.lastReviewed = today;
+    w.lastAttemptDate = today;
+    w.history = w.history || [];
+    w.history.push({ date: today, kind: 'sentence_' + verdict, quizType: 'sentence' });
+
+    if (verdict === 'again') {
+      evalKind = 'first_fail';
+      w.failedToday = true;
+      w.passedToday = false;
+      w.lapses += 1;
+      w.coldStreak = 0;
+      if (w.box >= 4) w.box = Math.max(2, w.box - 2);
+      else w.box = 0;
+      w.nextReview = addDays(today, Math.max(1, SRS_INTERVALS[w.box] || 1));
+    } else if (verdict === 'hard') {
+      evalKind = 'slow_correct';
+      w.passedToday = true;
+      w.reps += 1;
+      w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
+    } else if (verdict === 'good') {
+      evalKind = 'medium_correct';
+      w.passedToday = true;
+      w.reps += 1;
+      w.box = Math.min(w.box + 1, SRS_INTERVALS.length - 1);
+      w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
+      w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 1);
+    } else if (verdict === 'easy') {
+      evalKind = 'active_use';
+      w.passedToday = true;
+      w.reps += 1;
+      w.coldStreak = (w.coldStreak || 0) + 1;
+      w.box = Math.min(w.box + 2, SRS_INTERVALS.length - 1);
+      w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
+      w.learningStage = MAX_STAGE; // Active vocabulary
+    }
+
+    if (!state.log[today]) state.log[today] = { reviewed: 0, correct: 0, cold: 0, recovered: 0, missed: 0 };
+    state.log[today].reviewed += 1;
+    if (correct) state.log[today].correct += 1;
+    if (verdict === 'easy') state.log[today].cold = (state.log[today].cold||0) + 1;
+    if (verdict === 'again') state.log[today].missed = (state.log[today].missed||0) + 1;
+  }
+
+  quiz.results.push({
+    wordId: q.id, word: q.word, meaning: q.meaning,
+    userAnswer: userSentence, correct, sentence: true, evalKind,
+  });
+
+  saveState();
+  setTimeout(() => nextQuizQuestion(), 200);
+}
+
+function buildChoices(target, pool, field) {
+  // target.word/meaning is the correct answer
+  // pool is available words to draw distractors from
+  const distractors = pool
+    .filter(w => w.id !== target.id && w[field] !== target[field])
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3)
+    .map(w => ({ text: w[field], correct: false }));
+  // ensure unique text
+  const uniqMap = new Map();
+  uniqMap.set(target[field], { text: target[field], correct: true });
+  for (const d of distractors) {
+    if (!uniqMap.has(d.text)) uniqMap.set(d.text, d);
+    if (uniqMap.size >= 4) break;
+  }
+  // if not enough unique, draw more from full state
+  if (uniqMap.size < 4) {
+    const extra = state.words
+      .filter(w => !uniqMap.has(w[field]))
+      .sort(() => Math.random() - 0.5);
+    for (const w of extra) {
+      if (uniqMap.size >= 4) break;
+      uniqMap.set(w[field], { text: w[field], correct: false });
+    }
+  }
+  const arr = [...uniqMap.values()].slice(0, 4);
+  // shuffle
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function submitMCAnswer(btn) {
+  const correct = btn.dataset.correct === '1';
+  document.querySelectorAll('.quiz-option').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.correct === '1') b.classList.add('correct');
+    else if (b === btn && !correct) b.classList.add('wrong');
+  });
+  showQuizFeedback(correct, btn.textContent.replace(/^\d+\.\s*/, ''));
+}
+
+function submitTypingAnswer() {
+  const inp = document.getElementById('quizTextInput');
+  if (!inp) return;
+  const userAnswer = inp.value.trim();
+  if (!userAnswer) { toast('답을 입력해주세요.'); return; }
+  const q = quiz.questions[quiz.index];
+  const correctAnswer = q.word;
+  const correct = normalizeText(userAnswer) === normalizeText(correctAnswer);
+  inp.disabled = true;
+  inp.classList.add(correct ? 'correct' : 'wrong');
+  document.querySelector('.quiz-submit')?.remove();
+  showQuizFeedback(correct, userAnswer);
+}
+
+function normalizeText(s) {
+  return String(s).toLowerCase().trim().replace(/\s+/g, ' ').replace(/['']/g, "'");
+}
+
+function blankOut(sentence, word) {
+  // Replace word (case-insensitive, allow plural/conjugation suffix) with _____
+  // Try the exact word first, then with common suffixes
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp('\\b' + escaped + '\\w*', 'i');
+  if (re.test(sentence)) return sentence.replace(re, '_____');
+  // fallback: just split by spaces and look for partial match
+  return sentence.replace(new RegExp(escaped, 'i'), '_____');
+}
+
+function showQuizFeedback(correct, userAnswer) {
+  quiz.answered = true;
+  const q = quiz.questions[quiz.index];
+  const responseTime = Date.now() - (quiz.questionStartTime || Date.now());
+  const activeType = quiz.activeTypeId || quiz.type.id;
+
+  // Scientific evaluation — mutates the word per first-attempt rules.
+  const w = state.words.find(x => x.id === q.id);
+  let evalResult = null;
+  let beforeSnap = null;
+  if (w) {
+    beforeSnap = snapshotWord(w);
+    evalResult = evaluateAnswer(w, correct, responseTime, activeType);
+  }
+
+  // Log daily counters with new categories
+  const today = todayStr();
+  if (!state.log[today]) state.log[today] = { reviewed: 0, correct: 0, cold: 0, recovered: 0, missed: 0 };
+  if (typeof state.log[today].cold !== 'number') state.log[today].cold = 0;
+  if (typeof state.log[today].recovered !== 'number') state.log[today].recovered = 0;
+  if (typeof state.log[today].missed !== 'number') state.log[today].missed = 0;
+  state.log[today].reviewed += 1;
+  if (correct) state.log[today].correct += 1;
+  if (evalResult) {
+    if (evalResult.kind === 'cold_correct') state.log[today].cold += 1;
+    if (evalResult.kind === 'recovered') state.log[today].recovered += 1;
+    if (evalResult.kind === 'first_fail') state.log[today].missed += 1;
+  }
+
+  quiz.results.push({
+    wordId: q.id, word: q.word, meaning: q.meaning, userAnswer, correct,
+    evalKind: evalResult?.kind, responseTime, beforeSnap, activeType,
+  });
+  saveState();
+
+  // Build state badge + scientific message
+  const e = evalResult || EVAL_LABELS.cold_correct;
+  const stateBadge = `<div style="display:inline-block; padding:6px 14px; border-radius:999px; background:${e.color}22; color:${e.color}; font-weight:700; font-size:13px; margin-bottom:8px;">${e.icon} ${e.label} · ${(responseTime/1000).toFixed(1)}s</div>`;
+  const stateMsg = `<div style="font-size:13px; color:var(--text); margin:6px 0 10px; line-height:1.5;">${escapeHtml(e.message)}</div>`;
+
+  const fb = document.getElementById('quizFeedback');
+  const detail = `
+    <div class="answer-detail">
+      <div class="word">${escapeHtml(q.word)}
+        <button class="tts-btn sm" onclick="speak('${escapeJs(q.word)}')">${speakerIcon(10)}</button>
+        ${q.ipa ? `<span style="color:var(--muted); font-weight:normal; margin-left:6px;">${escapeHtml(q.ipa)}</span>` : ''}
+      </div>
+      <div style="margin-top:4px;">${escapeHtml(q.meaning)}</div>
+      ${(q.examples && q.examples[0]) ? `<div style="margin-top:6px; color:var(--muted); font-style:italic;">"${escapeHtml(q.examples[0])}"</div>` : ''}
+    </div>`;
+  fb.innerHTML = `<div class="quiz-feedback ${correct ? 'correct' : 'wrong'}" style="text-align:left;">
+    ${stateBadge}
+    ${!correct ? `<div style="font-size:13px; color:var(--muted); margin-bottom:4px;">입력: <b>${escapeHtml(userAnswer || '(빈칸)')}</b></div>` : ''}
+    ${stateMsg}
+    ${detail}
+  </div>`;
+
+  const controls = document.getElementById('quizControls');
+  const fudgeBtn = (!correct && (activeType === 'type_k2e' || activeType === 'dictation' || activeType === 'fill_blank'))
+    ? `<button class="quiz-fudge" onclick="fudgeAnswer()">😅 사실 맞췄어 (오타였음)</button>` : '';
+  controls.innerHTML = `
+    ${fudgeBtn}
+    <button class="quiz-next" onclick="nextQuizQuestion()">${quiz.index + 1 >= quiz.questions.length ? '🏁 결과 보기' : '다음 →'} (Enter)</button>
+  `;
+}
+
+function fudgeAnswer() {
+  // User claims they actually got it right (typo / plural form).
+  // Strategy: restore the pre-evaluation snapshot, then re-evaluate as correct.
+  const last = quiz.results[quiz.results.length - 1];
+  if (!last || last.correct) return;
+  const w = state.words.find(x => x.id === last.wordId);
+  if (!w || !last.beforeSnap) return;
+
+  // Roll back the failed evaluation
+  restoreWord(w, last.beforeSnap);
+
+  // Re-evaluate as correct with the same response time
+  const newEval = evaluateAnswer(w, true, last.responseTime, last.activeType);
+
+  // Update the result record
+  last.correct = true;
+  last.evalKind = newEval.kind;
+  last.fudged = true;
+
+  // Update daily log
+  const today = todayStr();
+  if (state.log[today]) {
+    state.log[today].correct += 1;
+    state.log[today].missed = Math.max(0, (state.log[today].missed || 0) - 1);
+    if (newEval.kind === 'cold_correct') state.log[today].cold = (state.log[today].cold || 0) + 1;
+  }
+  saveState();
+
+  // Update UI inline
+  const fbEl = document.querySelector('.quiz-feedback');
+  if (fbEl) {
+    fbEl.className = 'quiz-feedback correct';
+    fbEl.style.textAlign = 'left';
+    const badgeHtml = `<div style="display:inline-block; padding:6px 14px; border-radius:999px; background:${newEval.color}22; color:${newEval.color}; font-weight:700; font-size:13px; margin-bottom:8px;">${newEval.icon} ${newEval.label} · (fudged)</div>`;
+    const msgHtml = `<div style="font-size:13px; color:var(--text); margin:6px 0 10px; line-height:1.5;">${escapeHtml(newEval.message)}</div>`;
+    // Replace state badge & message at top
+    fbEl.innerHTML = badgeHtml + msgHtml + (fbEl.querySelector('.answer-detail')?.outerHTML || '');
+  }
+  document.querySelector('.quiz-fudge')?.remove();
+  toast('정답으로 재평가되었습니다.');
+}
+
+function nextQuizQuestion() {
+  quiz.index += 1;
+  if (quiz.index >= quiz.questions.length) {
+    quiz.state = 'done';
+    quiz.endTime = Date.now();
+  }
+  renderQuiz();
+  updateTodayInfo();
+}
+
+function showQuizResults() {
+  const c = document.getElementById('quizContainer');
+  const total = quiz.results.length;
+  const correctCount = quiz.results.filter(r => r.correct).length;
+  const pct = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+  const elapsed = Math.round((quiz.endTime - quiz.startTime) / 1000);
+  const minutes = Math.floor(elapsed / 60);
+  const seconds = elapsed % 60;
+  const avgPerQ = total > 0 ? (elapsed / total).toFixed(1) : 0;
+  const wrongs = quiz.results.filter(r => !r.correct);
+
+  // Scientific breakdown
+  const breakdown = {
+    cold_correct:   quiz.results.filter(r => r.evalKind === 'cold_correct').length,
+    medium_correct: quiz.results.filter(r => r.evalKind === 'medium_correct').length,
+    slow_correct:   quiz.results.filter(r => r.evalKind === 'slow_correct').length,
+    first_fail:     quiz.results.filter(r => r.evalKind === 'first_fail').length,
+    recovered:      quiz.results.filter(r => r.evalKind === 'recovered').length,
+    still_failing:  quiz.results.filter(r => r.evalKind === 'still_failing').length,
+    extra_practice: quiz.results.filter(r => r.evalKind === 'extra_practice').length,
+    active_use:     quiz.results.filter(r => r.evalKind === 'active_use').length,
+  };
+  // True mastery rate: cold correct / total (excluding extra practice + recovered)
+  const meaningfulTotal = total - breakdown.extra_practice;
+  const truePct = meaningfulTotal > 0 ? Math.round((breakdown.cold_correct / meaningfulTotal) * 100) : 0;
+
+  let message = '';
+  if (truePct >= 80) message = '🏆 True mastery rate가 매우 높습니다. 이 단어들은 장기기억에 자리잡았다고 볼 수 있어요.';
+  else if (truePct >= 60) message = '🎉 Cold correct 비율이 좋습니다. Slow/Medium 단어는 한 번 더 다지면 완전합니다.';
+  else if (truePct >= 40) message = '💪 첫 시도 성공이 절반쯤 됩니다. Recovered/Slow가 많으면 아직 passive 단계임을 인정하고 내일 다시 도전하세요.';
+  else if (truePct >= 20) message = '📚 진짜 외운 것보다 "본 적 있는" 단어가 많습니다. SRS가 더 자주 출제할 것입니다.';
+  else message = '🌱 대부분 새 단어 단계입니다. Recognition 한 번씩 가볍게 돌리고 Production은 천천히 시작하세요.';
+
+  c.innerHTML = `
+    <div class="quiz-results">
+      <div class="score">${correctCount} / ${total}</div>
+      <div class="score-label">표면 정답률 ${pct}% · <b style="color:var(--good);">진짜 mastery (Cold Correct) ${truePct}%</b></div>
+      <div style="margin-top:14px; color:var(--text); font-size:14px;">${message}</div>
+
+      <div style="background:#fffbea; border-left:3px solid #f1c40f; padding:10px 14px; border-radius:8px; margin:14px 0; font-size:12px; color:var(--text); line-height:1.6; text-align:left;">
+        💡 <b>과학적 관점:</b> 진짜 spaced retrieval 성공은 "<b>Cold Correct</b>"(첫 시도, 빠르게)뿐입니다.<br>
+        "Recovered"(정답 보고 다시 맞힘)는 복구 연습이지 암기 완료가 아니므로 SRS 승급되지 않았습니다.
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap:8px; margin:14px 0;">
+        ${[
+          ['cold_correct','Cold','#16a34a'],
+          ['medium_correct','Medium','#2563eb'],
+          ['slow_correct','Slow','#f59e0b'],
+          ['recovered','Recovered','#a855f7'],
+          ['first_fail','Miss','#dc2626'],
+        ].map(([k, label, color]) => `
+          <div style="background:${color}15; border-radius:10px; padding:10px 8px; text-align:center;">
+            <div style="font-size:20px; font-weight:700; color:${color};">${breakdown[k] || 0}</div>
+            <div style="font-size:10px; color:${color}; font-weight:600; margin-top:2px;">${label}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="summary">
+        <div class="item">
+          <div class="v">${correctCount}</div>
+          <div class="l">정답 (표면)</div>
+        </div>
+        <div class="item">
+          <div class="v" style="color:var(--danger);">${total - correctCount}</div>
+          <div class="l">오답</div>
+        </div>
+        <div class="item">
+          <div class="v">${minutes > 0 ? minutes + 'm ' : ''}${seconds}s</div>
+          <div class="l">평균 ${avgPerQ}s/문제</div>
+        </div>
+      </div>
+
+      ${wrongs.length > 0 ? `
+        <div class="wrong-list">
+          <h4>❌ 틀린 단어 ${wrongs.length}개 (자동으로 내일 복습 예약됨)</h4>
+          ${wrongs.map(r => `
+            <div class="wrong-item">
+              <div><span class="right">${escapeHtml(r.word)}</span>
+                <button class="tts-btn sm" onclick="speak('${escapeJs(r.word)}')">${speakerIcon(10)}</button>
+                — ${escapeHtml(r.meaning)}
+              </div>
+              <div style="margin-top:4px; font-size:12px;">입력: <span class="your">${escapeHtml(r.userAnswer || '(빈칸)')}</span></div>
+            </div>
+          `).join('')}
+        </div>
+      ` : '<div style="margin-top:20px; color:var(--good); font-size:14px;">🎊 틀린 단어가 없습니다!</div>'}
+
+      <div style="display:flex; gap:10px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        ${wrongs.length > 0 ? `<button class="quiz-next" onclick="retryWrongs()">🔄 틀린 것만 다시</button>` : ''}
+        <button class="quiz-next" onclick="quiz=null; renderQuiz();">🆕 새 퀴즈</button>
+        <button class="quiz-fudge" onclick="document.querySelector('.tab[data-tab=study]').click();">📖 학습 모드로</button>
+      </div>
+    </div>
+  `;
+}
+
+function retryWrongs() {
+  const wrongIds = new Set(quiz.results.filter(r => !r.correct).map(r => r.wordId));
+  const wrongWords = state.words.filter(w => wrongIds.has(w.id));
+  quiz = {
+    typeId: quiz.typeId,
+    type: quiz.type,
+    pool: state.words,
+    questions: wrongWords.sort(() => Math.random() - 0.5),
+    index: 0,
+    results: [],
+    state: 'running',
+    startTime: Date.now(),
+    answered: false,
+  };
+  renderQuiz();
+}
+
+/* ============================================================
+   CLOUD SYNC (Firebase Firestore)
+   - Optional. App works fully without sync (localStorage only).
+   - Last-write-wins per top-level state document.
+   - Real-time listener triggers refresh on remote changes.
+============================================================ */
+const SYNC_CONFIG_KEY = 'engStudy_firebaseConfig';
+const SYNC_ID_KEY = 'engStudy_syncId';
+
+let syncState = {
+  enabled: false,
+  config: null,
+  syncId: null,
+  app: null,
+  db: null,
+  unsubscribe: null,
+  lastSyncedAt: null,
+  status: 'disabled',  // disabled | initializing | online | offline | error
+  error: null,
+  pushTimer: null,
+};
+
+function generateSyncId() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let id = '';
+  for (let i = 0; i < 32; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  return id;
+}
+
+function parseFirebaseConfig(text) {
+  // Try strict JSON
+  try { return JSON.parse(text); } catch (e) {}
+  // Extract { ... } block
+  const match = text.match(/\{[\s\S]*\}/);
+  if (!match) throw new Error('Config 객체({...})를 찾을 수 없습니다');
+  let s = match[0];
+  // Normalize: single quotes → double, unquoted keys → quoted, trailing commas → removed
+  s = s.replace(/'/g, '"');
+  s = s.replace(/([{,]\s*)([a-zA-Z_]\w*)\s*:/g, '$1"$2":');
+  s = s.replace(/,(\s*[}\]])/g, '$1');
+  return JSON.parse(s);
+}
+
+async function initSync() {
+  if (typeof firebase === 'undefined') {
+    syncState.status = 'error';
+    syncState.error = 'Firebase 라이브러리 로드 실패 (오프라인이거나 CDN 차단)';
+    return false;
+  }
+  const configStr = localStorage.getItem(SYNC_CONFIG_KEY);
+  const syncId = localStorage.getItem(SYNC_ID_KEY);
+  if (!configStr || !syncId) {
+    syncState.status = 'disabled';
+    return false;
+  }
+  try {
+    syncState.config = JSON.parse(configStr);
+    syncState.syncId = syncId;
+    syncState.status = 'initializing';
+    if (!firebase.apps.length) {
+      syncState.app = firebase.initializeApp(syncState.config);
+    } else {
+      syncState.app = firebase.apps[0];
+    }
+    syncState.db = firebase.firestore();
+    syncState.enabled = true;
+
+    await pullFromServer();
+
+    // Real-time listener for remote changes
+    syncState.unsubscribe = syncState.db.collection('users').doc(syncId).onSnapshot(
+      { includeMetadataChanges: false },
+      snap => {
+        if (!snap.exists) return;
+        if (snap.metadata.hasPendingWrites) return;  // our own write echoing back
+        const remote = snap.data();
+        if (remote.lastUpdated && (!state.lastUpdated || remote.lastUpdated > state.lastUpdated)) {
+          state = JSON.parse(JSON.stringify(remote));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          syncState.lastSyncedAt = Date.now();
+          renderSyncStatus();
+          updateTodayInfo();
+          // re-render currently active tab if it shows word data
+          const studyVisible = document.getElementById('tab-study').style.display !== 'none';
+          const listVisible = document.getElementById('tab-list').style.display !== 'none';
+          const statsVisible = document.getElementById('tab-stats').style.display !== 'none';
+          if (studyVisible) renderStudy();
+          if (listVisible) renderList();
+          if (statsVisible) renderStats();
+          toast('🔄 다른 디바이스에서 업데이트됨');
+        }
+      },
+      err => {
+        console.error('Sync listener error:', err);
+        syncState.status = 'error';
+        syncState.error = err.message;
+        renderSyncStatus();
+      }
+    );
+
+    syncState.status = 'online';
+    syncState.error = null;
+    renderSyncStatus();
+    return true;
+  } catch (e) {
+    console.error('Sync init failed:', e);
+    syncState.status = 'error';
+    syncState.error = e.message;
+    renderSyncStatus();
+    return false;
+  }
+}
+
+async function pullFromServer() {
+  if (!syncState.enabled || !syncState.db) return;
+  const snap = await syncState.db.collection('users').doc(syncState.syncId).get();
+  if (snap.exists) {
+    const remote = snap.data();
+    if (!state.lastUpdated || (remote.lastUpdated && remote.lastUpdated > state.lastUpdated)) {
+      state = JSON.parse(JSON.stringify(remote));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      toast('☁️ 서버에서 데이터 동기화됨');
+    } else if (state.lastUpdated && (!remote.lastUpdated || state.lastUpdated > remote.lastUpdated)) {
+      await pushToServer();
+    }
+  } else {
+    await pushToServer();
+  }
+  syncState.lastSyncedAt = Date.now();
+}
+
+async function pushToServer() {
+  if (!syncState.enabled || !syncState.db) return;
+  try {
+    state.lastUpdated = Date.now();
+    await syncState.db.collection('users').doc(syncState.syncId).set(state);
+    syncState.lastSyncedAt = Date.now();
+    renderSyncStatus();
+  } catch (e) {
+    console.error('Push failed:', e);
+    syncState.status = 'error';
+    syncState.error = e.message;
+    renderSyncStatus();
+    toast('⚠️ 동기화 실패: ' + e.message);
+  }
+}
+
+function schedulePush() {
+  if (!syncState.enabled) return;
+  clearTimeout(syncState.pushTimer);
+  syncState.pushTimer = setTimeout(pushToServer, 2000);  // debounce 2s
+}
+
+async function enableSyncFromUI() {
+  const configInput = document.getElementById('syncConfigInput').value.trim();
+  const syncId = document.getElementById('syncIdInput').value.trim();
+  if (!configInput || !syncId) { toast('Firebase 설정과 Sync ID 모두 입력해 주세요.'); return; }
+  if (syncId.length < 16) {
+    if (!confirm('Sync ID가 짧으면 다른 사람이 추측해서 데이터에 접근할 수 있습니다.\n그래도 진행하시겠습니까?')) return;
+  }
+  try {
+    const config = parseFirebaseConfig(configInput);
+    if (!config.projectId || !config.apiKey) throw new Error('필수 필드(projectId, apiKey) 누락');
+    localStorage.setItem(SYNC_CONFIG_KEY, JSON.stringify(config));
+    localStorage.setItem(SYNC_ID_KEY, syncId);
+    toast('설정 저장됨. 동기화 초기화 중...');
+    const ok = await initSync();
+    if (ok) toast('✅ 동기화 활성화됨');
+    renderSyncTab();
+  } catch (e) {
+    toast('❌ 설정 실패: ' + e.message);
+  }
+}
+
+function disableSync() {
+  if (!confirm('동기화를 비활성화하시겠습니까?\n로컬 데이터는 유지되지만 다른 디바이스와 더 이상 동기화되지 않습니다.')) return;
+  if (syncState.unsubscribe) syncState.unsubscribe();
+  localStorage.removeItem(SYNC_CONFIG_KEY);
+  localStorage.removeItem(SYNC_ID_KEY);
+  syncState = {
+    enabled: false, config: null, syncId: null, app: null, db: null,
+    unsubscribe: null, lastSyncedAt: null, status: 'disabled', error: null, pushTimer: null,
+  };
+  toast('동기화 비활성화됨');
+  renderSyncTab();
+}
+
+async function syncNow() {
+  if (!syncState.enabled) { toast('먼저 동기화를 활성화해 주세요.'); return; }
+  toast('동기화 중...');
+  try {
+    await pullFromServer();
+    await pushToServer();
+    toast('✅ 동기화 완료');
+    renderSyncStatus();
+  } catch (e) {
+    toast('❌ 실패: ' + e.message);
+  }
+}
+
+function renderSyncStatus() {
+  const el = document.getElementById('syncStatusBox');
+  if (!el) return;
+  let icon, label, color, detail = '';
+  switch (syncState.status) {
+    case 'online':
+      icon = '🟢'; label = '동기화 활성'; color = '#16a34a';
+      if (syncState.lastSyncedAt) {
+        const ago = Math.round((Date.now() - syncState.lastSyncedAt) / 1000);
+        detail = ago < 60 ? `방금 전 동기화됨` : `${Math.round(ago/60)}분 전 동기화됨`;
+      }
+      break;
+    case 'initializing':
+      icon = '🟡'; label = '초기화 중...'; color = '#f59e0b'; break;
+    case 'error':
+      icon = '🔴'; label = '오류'; color = '#dc2626';
+      detail = syncState.error || '';
+      break;
+    default:
+      icon = '⚪'; label = '비활성화됨'; color = '#6b7280'; break;
+  }
+  el.innerHTML = `
+    <div style="background:${color}15; border-left:3px solid ${color}; padding:12px 16px; border-radius:8px; font-size:13px;">
+      <b style="color:${color};">${icon} ${label}</b>
+      ${detail ? `<div style="margin-top:4px; color:var(--muted); font-size:12px;">${escapeHtml(detail)}</div>` : ''}
+      ${syncState.syncId ? `<div style="margin-top:4px; color:var(--muted); font-size:11px;">Sync ID: <code>${escapeHtml(syncState.syncId.slice(0, 8))}...${escapeHtml(syncState.syncId.slice(-4))}</code></div>` : ''}
+    </div>
+  `;
+}
+
+function renderSyncTab() {
+  const c = document.getElementById('syncContainer');
+  if (!c) return;
+  const isEnabled = syncState.enabled;
+  const savedConfig = localStorage.getItem(SYNC_CONFIG_KEY);
+  const savedId = localStorage.getItem(SYNC_ID_KEY);
+
+  c.innerHTML = `
+    <h3 style="margin-top:0;">☁️ 모바일·컴퓨터 자동 동기화</h3>
+    <p style="color:var(--muted); font-size:13px; line-height:1.7;">
+      Firebase Firestore를 이용해 폰·태블릿·컴퓨터 사이에서 학습 데이터를 자동으로 동기화합니다.
+      <b>처음 설정 시</b> 같은 폴더의 <code>동기화_설정_가이드.md</code>를 먼저 읽어 주세요 (30~60분 소요).
+    </p>
+
+    <div id="syncStatusBox" style="margin-bottom:18px;"></div>
+
+    ${isEnabled ? `
+      <div style="background:#f8f9fc; padding:16px; border-radius:10px; margin-bottom:16px;">
+        <h4 style="margin:0 0 8px;">🔧 동기화 컨트롤</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button onclick="syncNow()" style="background:var(--primary); color:white; border:none; padding:10px 18px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600;">🔄 지금 동기화</button>
+          <button onclick="disableSync()" style="background:#fde2e1; color:var(--danger); border:none; padding:10px 18px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600;">⛔ 동기화 비활성화</button>
+        </div>
+        <p style="margin-top:10px; font-size:12px; color:var(--muted); line-height:1.6;">
+          ✅ 자동 동기화: 단어 학습 시마다 ~2초 후 클라우드에 저장됨<br>
+          ✅ 실시간 수신: 다른 디바이스에서 변경되면 즉시 반영됨<br>
+          ✅ 오프라인 작동: 인터넷 없어도 로컬 작동, 다시 온라인 시 자동 동기화
+        </p>
+      </div>
+    ` : `
+      <div style="background:#fffbea; border-left:3px solid #f1c40f; padding:14px 18px; border-radius:8px; margin-bottom:16px; font-size:13px; line-height:1.7;">
+        <b>📖 사전 준비</b>
+        <ol style="margin:6px 0 0 18px; padding:0;">
+          <li>Firebase 콘솔에서 새 프로젝트 만들기</li>
+          <li>Firestore Database 활성화 + 보안 규칙 설정</li>
+          <li>웹 앱 등록해서 <code>firebaseConfig</code> 얻기</li>
+        </ol>
+        자세한 단계는 <code>동기화_설정_가이드.md</code> 참고.
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:4px; font-weight:600;">1. Firebase 설정 (firebaseConfig 객체 통째로 붙여넣기)</label>
+        <textarea id="syncConfigInput" placeholder="const firebaseConfig = {\n  apiKey: &quot;AIzaSy...&quot;,\n  authDomain: &quot;...&quot;,\n  projectId: &quot;...&quot;,\n  ...\n};" style="width:100%; min-height:160px; padding:12px; border:1px solid var(--border); border-radius:8px; font-family:'SF Mono', Monaco, monospace; font-size:12px; background:#fafbff;">${savedConfig ? escapeHtml(savedConfig) : ''}</textarea>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:12px; color:var(--muted); margin-bottom:4px; font-weight:600;">2. Sync ID (디바이스 간 공유하는 비밀 ID, 32자 이상 권장)</label>
+        <div style="display:flex; gap:8px;">
+          <input id="syncIdInput" placeholder="긴 랜덤 문자열" value="${savedId ? escapeHtml(savedId) : ''}" style="flex:1; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-family:'SF Mono', Monaco, monospace; font-size:13px;" />
+          <button onclick="document.getElementById('syncIdInput').value = generateSyncId(); toast('새 Sync ID 생성됨 — 반드시 기록하세요!');" style="background:#eef1ff; color:var(--primary); border:1px solid var(--border); padding:10px 16px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600; white-space:nowrap;">🎲 새로 생성</button>
+        </div>
+        <p style="margin-top:6px; font-size:11px; color:var(--muted);">
+          ⚠️ 이 ID를 잃어버리면 클라우드 데이터에 접근할 수 없습니다. 메모장이나 비밀번호 관리자에 안전하게 보관하세요.<br>
+          ⚠️ 다른 디바이스에서도 <b>완전히 똑같은 ID</b>를 입력해야 같은 데이터가 보입니다.
+        </p>
+      </div>
+
+      <button onclick="enableSyncFromUI()" style="background:var(--primary); color:white; border:none; padding:14px 28px; border-radius:10px; cursor:pointer; font-size:15px; font-weight:700; width:100%;">☁️ 동기화 활성화</button>
+    `}
+  `;
+  renderSyncStatus();
+}
+
+/* ============================================================
+   BACKUP / RESTORE
+============================================================ */
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `english_study_backup_${todayStr()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast("백업 파일이 다운로드되었습니다.");
+});
+
+document.getElementById('importInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const imported = JSON.parse(ev.target.result);
+      if (!imported.words) throw new Error('Invalid format');
+      let added = 0;
+      const existingWords = new Set(state.words.map(w => w.word.toLowerCase()));
+      imported.words.forEach(w => {
+        if (!existingWords.has(w.word.toLowerCase())) {
+          state.words.push({ ...w, id: cryptoId() });
+          added += 1;
+        }
+      });
+      saveState();
+      toast(`${added}개의 단어가 추가되었습니다.`);
+      renderList();
+    } catch (err) {
+      toast("잘못된 파일입니다.");
+    }
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('정말로 모든 데이터를 초기화하시겠습니까?\n학습 기록이 모두 사라집니다.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = seedInitial();
+  saveState();
+  toast("초기화되었습니다.");
+  renderStudy();
+});
+
+/* ============================================================
+   UTILITIES
+============================================================ */
+function escapeHtml(s) {
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escapeJs(s) {
+  return String(s||'').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ');
+}
+
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+function updateTodayInfo() {
+  const today = todayStr();
+  const due = state.words.filter(w => (w.nextReview || today) <= today).length;
+  const todayLog = state.log[today] || { reviewed: 0 };
+  document.getElementById('todayInfo').textContent =
+    `📅 ${today} · 오늘 복습 대기 ${due}개 · 학습 완료 ${todayLog.reviewed}개`;
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+dailyReset();
+populateCategorySelects();
+saveState(); // persist any newly-merged default words & daily resets
+updateTodayInfo();
+renderStudy();
+
+// Auto-initialize cloud sync if previously configured (non-blocking)
+initSync().then(ok => {
+  if (ok) updateTodayInfo();
+}).catch(e => console.error('Sync auto-init failed:', e));
+</script>
+</body>
+</html>
