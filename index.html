@@ -34,19 +34,11 @@
   .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
   .panel { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
     padding: 22px; margin-bottom: 16px; border: 1px solid var(--border); }
-  /* Study card */
   .study-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
     color: var(--muted); font-size: 13px; flex-wrap: wrap; gap: 8px; }
   .chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
     background: var(--primary-soft); color: var(--primary); }
-  .card {
-    background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%);
-    border: 1px solid var(--border); border-radius: 18px;
-    padding: 36px 28px; min-height: 280px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; cursor: pointer; user-select: none;
-    transition: transform 0.15s ease;
-  }
+  .card { background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%); border: 1px solid var(--border); border-radius: 18px; padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer; user-select: none; transition: transform 0.15s ease; }
   .card:hover { transform: translateY(-1px); }
   .card .prompt-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
   .card .prompt-text { font-size: 28px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
@@ -55,17 +47,12 @@
   .card .ipa { color: var(--muted); font-size: 15px; margin-top: 2px; }
   .card .meaning { font-size: 18px; margin-top: 14px; }
   .examples-list { margin-top: 16px; width: 100%; display: flex; flex-direction: column; gap: 6px; }
-  .example-item { padding: 10px 14px; background: var(--primary-soft); border-radius: 10px;
-    color: var(--text); font-size: 14px; line-height: 1.5; text-align: left; display: flex;
-    align-items: flex-start; gap: 8px; }
+  .example-item { padding: 10px 14px; background: var(--primary-soft); border-radius: 10px; color: var(--text); font-size: 14px; line-height: 1.5; text-align: left; display: flex; align-items: flex-start; gap: 8px; }
   .example-item .num { color: var(--primary); font-weight: 700; flex-shrink: 0; }
   .example-item .txt { flex: 1; }
   .card .collocations { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
-  .colloc-tag { background: #f1f3f9; color: var(--text); font-size: 12px; padding: 4px 10px; border-radius: 999px;
-    display: inline-flex; align-items: center; gap: 4px; }
-  .tts-btn { background: white; border: 1px solid var(--border); border-radius: 50%; width: 30px; height: 30px;
-    display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
-    transition: background 0.15s; }
+  .colloc-tag { background: #f1f3f9; color: var(--text); font-size: 12px; padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 4px; }
+  .tts-btn { background: white; border: 1px solid var(--border); border-radius: 50%; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.15s; }
   .tts-btn:hover { background: var(--primary-soft); }
   .tts-btn svg { width: 14px; height: 14px; fill: var(--primary); }
   .tts-btn.lg { width: 36px; height: 36px; margin-left: 8px; }
@@ -73,19 +60,15 @@
   .tts-btn.sm { width: 22px; height: 22px; }
   .tts-btn.sm svg { width: 11px; height: 11px; }
   .actions { display: flex; gap: 10px; margin-top: 18px; }
-  .actions button { flex: 1; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
-    font-weight: 600; font-size: 14px; transition: transform 0.1s; }
+  .actions button { flex: 1; padding: 14px; border-radius: 12px; border: none; cursor: pointer; font-weight: 600; font-size: 14px; transition: transform 0.1s; }
   .actions button:active { transform: scale(0.98); }
   .btn-again { background: #fde2e1; color: var(--danger); }
   .btn-hard { background: #fff1d6; color: var(--warn); }
   .btn-good { background: #d8f4e3; color: var(--good); }
   .btn-easy { background: #d6e3ff; color: var(--primary); }
   .flip-hint { text-align: center; margin-top: 14px; color: var(--muted); font-size: 13px; }
-  /* Filters / category select */
   .filter-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .filter-row select, .filter-row input { padding: 8px 12px; border: 1px solid var(--border);
-    border-radius: 8px; font-size: 13px; background: white; color: var(--text); }
-  /* Word list */
+  .filter-row select, .filter-row input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; background: white; color: var(--text); }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
   th { font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; }
@@ -94,64 +77,43 @@
   .icon-btn { background: none; border: none; cursor: pointer; padding: 4px; color: var(--muted); }
   .icon-btn:hover { color: var(--primary); }
   .icon-btn.del:hover { color: var(--danger); }
-  /* Form */
   form .field { margin-bottom: 12px; }
   form label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
-  form input, form textarea, form select {
-    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
-    font-size: 14px; font-family: inherit; color: var(--text); background: white;
-  }
+  form input, form textarea, form select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--text); background: white; }
   form textarea { resize: vertical; min-height: 60px; }
   form .row { display: flex; gap: 10px; }
   form .row .field { flex: 1; }
-  form .submit { background: var(--primary); color: white; border: none; padding: 12px 20px;
-    border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  form .submit { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
   form .submit:hover { opacity: 0.95; }
-  /* Stats */
   .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
   .stat { background: var(--primary-soft); padding: 16px; border-radius: 12px; text-align: center; }
   .stat .v { font-size: 26px; font-weight: 700; color: var(--primary); }
   .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
-  /* Empty state */
   .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
   .empty h3 { color: var(--text); margin: 8px 0; }
-  .empty button { margin-top: 12px; background: var(--primary); color: white; border: none;
-    padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-  /* Backup */
+  .empty button { margin-top: 12px; background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
   .backup-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .backup-row button, .backup-row label {
-    background: var(--primary-soft); color: var(--primary); border: 1px solid var(--border);
-    padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;
-  }
+  .backup-row button, .backup-row label { background: var(--primary-soft); color: var(--primary); border: 1px solid var(--border); padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; }
   .danger-btn { background: #fde2e1 !important; color: var(--danger) !important; }
-  /* Sentence prompt */
-  .sentence-box { margin-top: 16px; padding: 14px; background: #fffbea; border-radius: 10px;
-    border-left: 3px solid #f1c40f; font-size: 13px; color: var(--text); width: 100%; box-sizing: border-box; }
-  .sentence-box textarea { width: 100%; margin-top: 8px; padding: 8px; border: 1px solid var(--border);
-    border-radius: 6px; font-family: inherit; font-size: 13px; min-height: 50px; }
-  /* Quiz UI */
+  .sentence-box { margin-top: 16px; padding: 14px; background: #fffbea; border-radius: 10px; border-left: 3px solid #f1c40f; font-size: 13px; color: var(--text); width: 100%; box-sizing: border-box; }
+  .sentence-box textarea { width: 100%; margin-top: 8px; padding: 8px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 13px; min-height: 50px; }
   .quiz-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 16px; }
-  .quiz-type-card { background: var(--surface); border: 2px solid var(--border); border-radius: 14px;
-    padding: 16px; cursor: pointer; transition: all 0.15s; }
+  .quiz-type-card { background: var(--surface); border: 2px solid var(--border); border-radius: 14px; padding: 16px; cursor: pointer; transition: all 0.15s; }
   .quiz-type-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
   .quiz-type-card.selected { border-color: var(--primary); background: var(--primary-soft); }
   .quiz-type-card .qt-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
   .quiz-type-card .qt-desc { color: var(--muted); font-size: 12px; line-height: 1.5; }
-  .quiz-type-card .qt-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px;
-    background: #f1f3f9; color: var(--muted); margin-top: 8px; font-weight: 600; }
+  .quiz-type-card .qt-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px; background: #f1f3f9; color: var(--muted); margin-top: 8px; font-weight: 600; }
   .quiz-type-card .qt-tag.prod { background: #fde2e1; color: var(--danger); }
   .quiz-type-card .qt-tag.rec { background: #d6e3ff; color: var(--primary); }
   .quiz-type-card .qt-tag.smart { background: linear-gradient(90deg, #ede9fe, #ddd6fe); color: #6d28d9; }
   .stage-pill { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px; font-weight: 700; margin-left: 4px; vertical-align: middle; }
-  .quiz-start-btn { background: var(--primary); color: white; border: none; padding: 14px 28px;
-    border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; }
+  .quiz-start-btn { background: var(--primary); color: white; border: none; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; }
   .quiz-start-btn:hover { opacity: 0.95; }
   .quiz-start-btn:disabled { background: #ccc; cursor: not-allowed; }
   .quiz-progress { background: #eef0f7; border-radius: 999px; height: 8px; margin-bottom: 16px; overflow: hidden; }
   .quiz-progress .bar { background: var(--primary); height: 100%; transition: width 0.3s; }
-  .quiz-question { background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%);
-    border: 1px solid var(--border); border-radius: 18px; padding: 32px 24px; min-height: 200px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .quiz-question { background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%); border: 1px solid var(--border); border-radius: 18px; padding: 32px 24px; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
   .quiz-prompt-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
   .quiz-prompt { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
   .quiz-prompt.smaller { font-size: 20px; line-height: 1.6; }
@@ -159,30 +121,25 @@
   .quiz-audio-icon { font-size: 60px; margin: 20px 0; cursor: pointer; user-select: none; transition: transform 0.15s; }
   .quiz-audio-icon:hover { transform: scale(1.1); }
   .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-  .quiz-option { background: white; border: 2px solid var(--border); border-radius: 12px;
-    padding: 14px 16px; cursor: pointer; font-size: 14px; text-align: left; transition: all 0.15s; color: var(--text); }
+  .quiz-option { background: white; border: 2px solid var(--border); border-radius: 12px; padding: 14px 16px; cursor: pointer; font-size: 14px; text-align: left; transition: all 0.15s; color: var(--text); }
   .quiz-option:hover { border-color: var(--primary); background: var(--primary-soft); }
   .quiz-option.correct { border-color: var(--good); background: #d8f4e3; color: var(--good); font-weight: 600; }
   .quiz-option.wrong { border-color: var(--danger); background: #fde2e1; color: var(--danger); }
   .quiz-option:disabled { cursor: default; }
   .quiz-option .opt-num { font-weight: 700; color: var(--muted); margin-right: 8px; }
-  .quiz-text-input { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 12px;
-    font-size: 18px; font-family: inherit; text-align: center; margin-top: 20px; color: var(--text); background: white; }
+  .quiz-text-input { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 18px; font-family: inherit; text-align: center; margin-top: 20px; color: var(--text); background: white; }
   .quiz-text-input:focus { outline: none; border-color: var(--primary); }
   .quiz-text-input.correct { border-color: var(--good); background: #d8f4e3; }
   .quiz-text-input.wrong { border-color: var(--danger); background: #fde2e1; }
-  .quiz-submit { background: var(--primary); color: white; border: none; padding: 12px 24px;
-    border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+  .quiz-submit { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 12px; }
   .quiz-feedback { margin-top: 16px; padding: 14px; border-radius: 12px; font-size: 14px; text-align: center; }
   .quiz-feedback.correct { background: #d8f4e3; color: var(--good); }
   .quiz-feedback.wrong { background: #fde2e1; color: var(--danger); }
   .quiz-feedback .answer-detail { margin-top: 8px; padding: 10px; background: rgba(255,255,255,0.6); border-radius: 8px; font-size: 13px; color: var(--text); }
   .quiz-feedback .answer-detail .word { font-weight: 700; }
-  .quiz-controls { display: flex; gap: 10px; margin-top: 14px; justify-content: center; }
-  .quiz-next { background: var(--primary); color: white; border: none; padding: 12px 28px;
-    border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
-  .quiz-fudge { background: #fff1d6; color: var(--warn); border: none; padding: 12px 20px;
-    border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .quiz-controls { display: flex; gap: 10px; margin-top: 14px; justify-content: center; flex-wrap: wrap; }
+  .quiz-next { background: var(--primary); color: white; border: none; padding: 12px 28px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .quiz-fudge { background: #fff1d6; color: var(--warn); border: none; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
   .quiz-fudge:hover { opacity: 0.9; }
   .quiz-results { text-align: center; padding: 20px 0; }
   .quiz-results .score { font-size: 56px; font-weight: 800; color: var(--primary); line-height: 1; }
@@ -193,11 +150,9 @@
   .quiz-results .summary .item .l { font-size: 11px; color: var(--muted); margin-top: 4px; }
   .wrong-list { text-align: left; margin-top: 16px; }
   .wrong-list h4 { color: var(--danger); margin: 0 0 10px 0; }
-  .wrong-item { background: #fff8f7; border-left: 3px solid var(--danger); padding: 10px 14px;
-    border-radius: 6px; margin-bottom: 8px; font-size: 13px; }
+  .wrong-item { background: #fff8f7; border-left: 3px solid var(--danger); padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; font-size: 13px; }
   .wrong-item .your { color: var(--danger); text-decoration: line-through; }
   .wrong-item .right { color: var(--good); font-weight: 600; }
-  /* Article Reader */
   .article-card { background:white; border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:10px; cursor:pointer; transition:all 0.15s; position:relative; }
   .article-card:hover { border-color:var(--primary); transform:translateY(-2px); box-shadow:var(--shadow); }
   .article-card .ar-title { font-weight:700; font-size:16px; margin-bottom:4px; padding-right:34px; line-height:1.4; }
@@ -205,15 +160,14 @@
   .article-card .ar-preview { font-size:13px; color:var(--text); line-height:1.55; opacity:0.85; }
   .article-body { font-size:17px; line-height:1.85; color:var(--text); max-width:680px; margin:0 auto; }
   .article-body p { margin:0 0 18px; }
-  .article-body h2 { line-height:1.3; }
-  .vocab-word { border-bottom:1.5px dotted var(--primary); cursor:pointer; transition:background 0.15s, color 0.15s; padding:0 2px; border-radius:3px; }
+  .vocab-word { border-bottom:1.5px dotted var(--primary); cursor:pointer; transition:background 0.15s; padding:0 2px; border-radius:3px; }
   .vocab-word:hover { background:var(--primary-soft); }
   .vocab-word.saved { border-bottom-color:var(--good); background:rgba(39,174,96,0.10); }
   .vocab-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(20,30,60,0.45); z-index:9999; display:none; align-items:center; justify-content:center; padding:16px; }
   .vocab-overlay.show { display:flex; }
   .vocab-popup { background:white; border-radius:18px; padding:24px; max-width:480px; width:100%; box-shadow:0 12px 50px rgba(0,0,0,0.25); max-height:85vh; overflow-y:auto; }
   .vocab-word-big { font-size:26px; font-weight:700; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .vocab-popup-ipa { color:var(--muted); font-size:14px; margin-top:4px; font-family:'SF Mono', Monaco, Consolas, monospace; }
+  .vocab-popup-ipa { color:var(--muted); font-size:14px; margin-top:4px; font-family:'SF Mono',Monaco,Consolas,monospace; }
   .vocab-popup-meaning { font-size:17px; margin-top:14px; padding:14px; background:var(--primary-soft); border-radius:10px; color:var(--text); font-weight:500; line-height:1.5; }
   .vocab-popup-context { margin-top:14px; }
   .vocab-popup-context .label { font-size:12px; color:var(--muted); font-weight:600; margin-bottom:6px; }
@@ -221,10 +175,7 @@
   .vocab-popup-context .vp-highlight { background:#fff176; padding:1px 4px; border-radius:3px; font-weight:600; }
   .vocab-popup-actions { display:flex; gap:8px; margin-top:18px; }
   .vocab-popup-actions button { flex:1; padding:12px; font-size:13px; border:none; border-radius:8px; cursor:pointer; font-weight:600; }
-  /* Notification */
-  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-    background: var(--text); color: white; padding: 10px 20px; border-radius: 999px;
-    font-size: 13px; opacity: 0; transition: opacity 0.3s; z-index: 1000; }
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--text); color: white; padding: 10px 20px; border-radius: 999px; font-size: 13px; opacity: 0; transition: opacity 0.3s; z-index: 10000; }
   .toast.show { opacity: 0.95; }
   @media (max-width: 600px) {
     .app { padding: 16px 14px 80px; }
@@ -235,8 +186,7 @@
     table { font-size: 12px; }
     th:nth-child(3), td:nth-child(3) { display: none; }
     .article-body { font-size: 16px; }
-    .vocab-popup { padding: 18px; }
-    .vocab-word-big { font-size: 22px; }
+    .quiz-options { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -245,7 +195,7 @@
   <header>
     <div>
       <h1>📘 궁극의 영어 공부 노트</h1>
-      <div class="sub">Spaced Repetition · Active Recall · TTS · Auto-Save</div>
+      <div class="sub">Smart Quiz · 5 Stages · Article Reader · Cold/Medium/Slow Evaluation</div>
     </div>
     <div class="sub" id="todayInfo"></div>
   </header>
@@ -257,10 +207,8 @@
     <button class="tab" data-tab="add">➕ 추가</button>
     <button class="tab" data-tab="stats">📊 통계</button>
     <button class="tab" data-tab="backup">💾 백업</button>
-    <button class="tab" data-tab="sync">☁️ 동기화</button>
     <button class="tab" data-tab="guide">💡 가이드</button>
   </div>
-  <!-- STUDY TAB -->
   <section id="tab-study" class="panel">
     <div class="filter-row">
       <select id="studyCategory"><option value="all">전체 카테고리</option></select>
@@ -277,11 +225,9 @@
     </div>
     <div id="studyArea"></div>
   </section>
-  <!-- QUIZ TAB -->
   <section id="tab-quiz" class="panel" style="display:none;">
     <div id="quizContainer"></div>
   </section>
-  <!-- LIST TAB -->
   <section id="tab-list" class="panel" style="display:none;">
     <div class="filter-row">
       <input id="searchInput" type="text" placeholder="🔍 단어 검색..." />
@@ -293,165 +239,85 @@
         <option value="hardest">정답률 낮은순</option>
       </select>
     </div>
-    <div style="overflow-x: auto;">
+    <div style="overflow-x:auto;">
       <table id="wordTable">
-        <thead>
-          <tr>
-            <th>단어</th>
-            <th>뜻 / 표현</th>
-            <th>예문</th>
-            <th>다음 복습</th>
-            <th></th>
-          </tr>
-        </thead>
+        <thead><tr><th>단어</th><th>뜻 / 표현</th><th>예문</th><th>다음 복습</th><th></th></tr></thead>
         <tbody id="wordTableBody"></tbody>
       </table>
     </div>
   </section>
-  <!-- READER TAB -->
   <section id="tab-reader" class="panel" style="display:none;">
     <div id="readerContainer"></div>
   </section>
-  <!-- ADD TAB -->
   <section id="tab-add" class="panel" style="display:none;">
     <h3 style="margin-top:0;">단어 추가 / 수정</h3>
     <form id="wordForm">
       <input type="hidden" id="editId" />
       <div class="row">
-        <div class="field">
-          <label>영어 단어 *</label>
-          <input id="f_word" required placeholder="예: mitigate" />
-        </div>
-        <div class="field">
-          <label>발음 (IPA, 선택)</label>
-          <input id="f_ipa" placeholder="예: /ˈmɪtɪɡeɪt/" />
-        </div>
+        <div class="field"><label>영어 단어 *</label><input id="f_word" required placeholder="예: mitigate" /></div>
+        <div class="field"><label>발음 (IPA, 선택)</label><input id="f_ipa" placeholder="예: /ˈmɪtɪɡeɪt/" /></div>
       </div>
-      <div class="field">
-        <label>한국어 뜻 *</label>
-        <input id="f_meaning" required placeholder="예: 완화하다, 줄이다" />
-      </div>
-      <div class="field">
-        <label>예문 (영어, 줄바꿈으로 여러 개 입력 가능)</label>
-        <textarea id="f_examples" placeholder="여러 예문은 줄을 바꿔서 입력하세요"></textarea>
-      </div>
-      <div class="field">
-        <label>Collocations (콤마로 구분)</label>
-        <input id="f_collocations" placeholder="예: mitigate crosstalk, mitigate damage" />
-      </div>
+      <div class="field"><label>한국어 뜻 *</label><input id="f_meaning" required placeholder="예: 완화하다, 줄이다" /></div>
+      <div class="field"><label>예문 (줄바꿈으로 여러 개)</label><textarea id="f_examples"></textarea></div>
+      <div class="field"><label>Collocations (콤마 구분)</label><input id="f_collocations" /></div>
       <div class="row">
-        <div class="field">
-          <label>카테고리 *</label>
-          <select id="f_category" required></select>
-        </div>
-        <div class="field">
-          <label>메모 (선택)</label>
-          <input id="f_note" placeholder="자유 메모" />
-        </div>
+        <div class="field"><label>카테고리 *</label><select id="f_category" required></select></div>
+        <div class="field"><label>메모</label><input id="f_note" /></div>
       </div>
       <button type="submit" class="submit">저장</button>
       <button type="button" id="cancelEdit" style="margin-left:8px; background:#eee; color:#555; border:none; padding:12px 20px; border-radius:10px; cursor:pointer; display:none;">취소</button>
     </form>
   </section>
-  <!-- STATS TAB -->
   <section id="tab-stats" class="panel" style="display:none;">
     <h3 style="margin-top:0;">📊 학습 통계</h3>
     <div class="stats-grid" id="statsGrid"></div>
-    <div style="margin-top: 20px;">
-      <h4>카테고리별 진행 상황</h4>
-      <div id="categoryStats"></div>
-    </div>
-    <div style="margin-top: 20px;">
-      <h4>🧠 학습 단계 분포 (Production 진척도)</h4>
-      <div id="stageStats"></div>
-    </div>
-    <div style="margin-top: 20px;">
-      <h4>SRS 분포 (복습 간격별 단어 수)</h4>
-      <div id="intervalStats"></div>
-    </div>
+    <div style="margin-top:20px;"><h4>카테고리별 진행 상황</h4><div id="categoryStats"></div></div>
+    <div style="margin-top:20px;"><h4>🧠 학습 단계 분포 (Stage 1~5)</h4><div id="stageStats"></div></div>
+    <div style="margin-top:20px;"><h4>SRS 분포 (복습 간격별 단어 수)</h4><div id="intervalStats"></div></div>
   </section>
-  <!-- BACKUP TAB -->
   <section id="tab-backup" class="panel" style="display:none;">
     <h3 style="margin-top:0;">💾 백업 / 복원</h3>
-    <p style="color: var(--muted); font-size: 13px;">
-      모든 단어와 학습 진행 상황은 이 브라우저에 자동 저장됩니다.<br>
-      다른 컴퓨터로 옮기거나 안전하게 보관하려면 아래에서 내보내기 하세요.
-    </p>
+    <p style="color:var(--muted); font-size:13px;">모든 데이터는 브라우저에 자동 저장됩니다. 다른 컴퓨터로 옮기려면 내보내기 하세요.</p>
     <div class="backup-row">
       <button id="exportBtn">📤 JSON 내보내기</button>
       <label>📥 JSON 가져오기<input id="importInput" type="file" accept="application/json" style="display:none;"/></label>
       <button id="resetBtn" class="danger-btn">⚠️ 전체 초기화</button>
     </div>
-    <p style="color: var(--muted); font-size: 12px; margin-top: 16px;">
-      ※ 가져오기를 하면 현재 데이터에 새 단어가 병합됩니다 (같은 단어는 덮어쓰지 않음).<br>
-      ※ "전체 초기화"는 모든 데이터를 지우고 기본 단어로 되돌립니다. 되돌릴 수 없습니다.
-    </p>
   </section>
-  <!-- SYNC TAB -->
-  <section id="tab-sync" class="panel" style="display:none;">
-    <div id="syncContainer"></div>
-  </section>
-  <!-- GUIDE TAB -->
   <section id="tab-guide" class="panel" style="display:none;">
-    <h3 style="margin-top:0;">💡 처음이세요? 빠른 시작 가이드</h3>
+    <h3 style="margin-top:0;">💡 가이드</h3>
     <div style="background:#eef1ff; border-left:4px solid var(--primary); padding:16px 20px; border-radius:10px; margin-bottom:20px; font-size:14px; line-height:1.8;">
       <div style="font-size:16px; font-weight:700; color:var(--primary); margin-bottom:8px;">🚀 30초 시작</div>
-      1. 위에서 <b>🎯 퀴즈</b> 탭 클릭<br>
-      2. <b>🧠 Smart Quiz</b> (자동 진행) 선택<br>
-      3. 카테고리 하나 선택 (예: 일상 회화)<br>
-      4. <b>🚀 퀴즈 시작</b> 누르기<br>
-      <br>
-      그게 다입니다. 나머지는 시스템이 알아서 해줍니다.
+      1. 🎯 퀴즈 → 🧠 Smart Quiz 선택 → 카테고리 → 🚀 시작<br>
+      2. Stage 1은 타이핑 영→한 (뜻 직접 입력) — 객관식 X, 확실한 기억 강제<br>
+      3. 정답이 빠르면(Cold Correct) Stage 자동 진행 (1→2→3→4→5)<br>
+      4. 📰 기사 탭에 Claude가 만든 JSON 파일 import → 비행기에서 오프라인 학습
     </div>
-    <div style="background:#fff0f5; border-left:4px solid #c1387c; padding:16px 20px; border-radius:10px; margin-bottom:20px; font-size:14px; line-height:1.8;">
-      <div style="font-size:16px; font-weight:700; color:#c1387c; margin-bottom:8px;">📰 NYT 기사로 공부하는 흐름</div>
-      1. Claude에게 NYT 기사 본문 전체를 보냅니다<br>
-      2. Claude가 그 기사의 어려운 단어 30~60개에 한국어 뜻을 박은 <b>JSON 파일</b>을 만들어 줍니다<br>
-      3. 그 JSON을 다운받아 두고 → <b>📰 기사 탭 → JSON import</b><br>
-      4. 비행기 등 오프라인에서도 단어 클릭하면 popup으로 뜻이 보입니다<br>
-      5. 모르는 단어는 <b>📌 노트북에 저장</b> → SRS 시스템에 자동 추가 (카테고리: 📰 뉴스·시사)
-    </div>
-    <h4 style="margin-top:24px;">📚 이 노트는 뭐 하는 도구인가요?</h4>
-    <p style="line-height:1.7;">
-      영어 단어를 <b>"보면 아는 단계"</b>에서 <b>"실제로 쓸 수 있는 단계"</b>로 끌어올리는 학습 도구입니다.
-      Spaced Repetition System (SRS, 간격 반복)과 5단계 학습 진행을 결합해, 매일 어떤 단어를 어떤 방식으로 복습할지 자동으로 선택해 줍니다.
-    </p>
-    <p style="line-height:1.7;">
-      기본으로 100개 단어가 들어 있고, 직접 추가/수정/삭제 가능합니다. 미국식 발음이 모든 단어/예문에 붙어 있어요.
-    </p>
-    <h4 style="margin-top:24px;">⭐ 가장 중요한 한 가지</h4>
-    <div style="background:#fffbea; border-left:4px solid #f1c40f; padding:14px 18px; border-radius:8px; font-size:13px; line-height:1.7;">
-      <b>"틀린 직후 정답을 보고 맞히는 건 '복구 연습'이지 '외운 것'이 아니다."</b><br><br>
-      그래서 이 앱은 결과를 5가지로 자동 분류합니다:
-      <ul style="margin:8px 0;">
-        <li>🧊 <b>Cold Correct</b> — 첫 시도 빠른 정답 (≈10초 이내) → <b>진짜 외운 거</b>, 단계 올라감</li>
-        <li>🌤️ <b>Medium Correct</b> — 첫 시도 정답이지만 약간 느림 → 같은 간격 유지</li>
-        <li>🐢 <b>Slow Correct</b> — 첫 시도 정답인데 25초 이상 → 한 단계 후퇴</li>
-        <li>❌ <b>First Miss</b> — 첫 시도 실패 → 내일 다시</li>
-        <li>🩹 <b>Recovered</b> — 정답 보고 다시 맞힘 → <b>단계 안 올라감</b>, 내일 첫 시도에서 진짜 증명해야 함</li>
-      </ul>
-    </div>
+    <h4>🪜 5단계 학습 진행</h4>
+    <ol style="line-height:1.9;">
+      <li>✏️ <b>Meaning Typing E→K</b> — 영어 단어 보고 한국어 뜻 직접 입력 (객관식 X)</li>
+      <li>🧩 <b>Fill-in-the-Blank</b> — 예문 빈칸 채우기</li>
+      <li>📝 <b>Dictation</b> — TTS 듣고 영어 입력</li>
+      <li>✍️ <b>Production K→E</b> — 한국어 뜻만 보고 영어 입력 (가장 어려움)</li>
+      <li>🌟 <b>Sentence Production</b> — 내 문장 직접 만들기</li>
+    </ol>
+    <h4>⭐ Cold/Medium/Slow 평가</h4>
+    <p style="font-size:13px; line-height:1.7;">첫 시도 빠른 정답(Cold)만 진짜 mastery로 인정 → Stage 진행. 정답 보고 다시 맞힌 건 Recovered(승급 안 됨). 표면 정답률 90% ≠ 진짜 외운 단어 30%일 수 있음.</p>
   </section>
 </div>
 <div id="toast" class="toast"></div>
 <div id="vocabOverlay" class="vocab-overlay" onclick="if(event.target===this)closeVocabPopup()">
   <div id="vocabPopupBody" class="vocab-popup"></div>
 </div>
-<!-- Firebase SDK (compat) — loaded from CDN. Required for ☁️ 동기화. App works offline if these fail. -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <script>
-/* ============================================================
-   STATE & PERSISTENCE
-============================================================ */
 const STORAGE_KEY = 'engStudyData_v2';
 const SRS_INTERVALS = [1, 2, 4, 7, 14, 30, 60, 120];
 const STAGES = {
   1: { num: 1, label: 'Meaning Typing E→K',  short: '✏️ 뜻 쓰기',  quiz: 'type_e2k',  color: '#94a3b8', desc: '영어 단어를 보고 한국어 뜻 직접 입력 (객관식 X — 확실한 기억 강제)' },
-  2: { num: 2, label: 'Fill-in-the-Blank',   short: '🧩 빈칸',     quiz: 'fill_blank',color: '#7c3aed', desc: '예문 속 빈칸에 단어 채우기' },
-  3: { num: 3, label: 'Dictation',           short: '📝 받아쓰기', quiz: 'dictation', color: '#0891b2', desc: 'TTS 듣고 영어 직접 입력' },
-  4: { num: 4, label: 'Production K→E',      short: '✍️ 쓰기',     quiz: 'type_k2e',  color: '#4f6dff', desc: '한국어 뜻만 보고 영어 직접 입력' },
-  5: { num: 5, label: 'Sentence Production', short: '🌟 문장',     quiz: 'sentence',  color: '#16a34a', desc: '단어를 사용해 내 문장 직접 만들기' },
+  2: { num: 2, label: 'Fill-in-the-Blank',   short: '🧩 빈칸',     quiz: 'fill_blank',color: '#7c3aed', desc: '예문 속 빈칸에 단어 채우기 (문맥 힌트 있음)' },
+  3: { num: 3, label: 'Dictation',           short: '📝 받아쓰기', quiz: 'dictation', color: '#0891b2', desc: 'TTS 듣고 영어 직접 입력 (발음+철자)' },
+  4: { num: 4, label: 'Production K→E',      short: '✍️ 쓰기',     quiz: 'type_k2e',  color: '#4f6dff', desc: '한국어 뜻만 보고 영어 직접 입력 (가장 어려움)' },
+  5: { num: 5, label: 'Sentence Production', short: '🌟 문장',     quiz: 'sentence',  color: '#16a34a', desc: '단어를 사용해 내 문장 직접 만들기 (Active vocabulary)' },
 };
 const MAX_STAGE = 5;
 function stageBadge(stage) {
@@ -472,57 +338,155 @@ const CATEGORIES = {
   phrasal:      { label: '구동사',         icon: '🔗', bg: '#dde2f5', color: '#1a237e' },
 };
 const DEFAULT_WORDS = [
-  { word: "crackdown", ipa: "/ˈkrækdaʊn/", meaning: "단속, 강력한 단속", category: "news",
-    examples: ["The government announced a nationwide crackdown on tax evasion.", "There's been a crackdown on illegal parking in the downtown area."],
-    collocations: ["a crackdown on", "nationwide crackdown", "launch a crackdown"] },
-  { word: "backlash", ipa: "/ˈbæklæʃ/", meaning: "반발, 역풍", category: "news",
-    examples: ["The CEO's comments sparked a huge backlash on social media.", "The new policy faced backlash from both employees and customers."],
-    collocations: ["spark a backlash", "face backlash", "public backlash"] },
-  { word: "loophole", ipa: "/ˈluːphoʊl/", meaning: "(법의) 허점, 빠져나갈 구멍", category: "news",
-    examples: ["Wealthy individuals often exploit tax loopholes to pay less.", "The lawyer found a loophole in the contract."],
-    collocations: ["tax loophole", "legal loophole", "close a loophole"] },
-  { word: "watchdog", ipa: "/ˈwɑːtʃdɔːɡ/", meaning: "감시 기구, 감시자", category: "news",
-    examples: ["The consumer watchdog issued a warning about the product.", "Press freedom watchdogs criticized the new law."],
-    collocations: ["consumer watchdog", "watchdog over", "industry watchdog"] },
-  { word: "whistleblower", ipa: "/ˈwɪslˌbloʊər/", meaning: "내부 고발자", category: "news",
-    examples: ["The whistleblower exposed years of corporate fraud.", "Whistleblowers are legally protected in most countries."],
-    collocations: ["protect whistleblowers", "become a whistleblower", "whistleblower protection"] },
-  { word: "scrutiny", ipa: "/ˈskruːtəni/", meaning: "면밀한 검토, 정밀 조사", category: "news",
-    examples: ["The company's finances came under intense scrutiny.", "His past is being subjected to public scrutiny."],
-    collocations: ["under scrutiny", "close scrutiny", "public scrutiny"] },
-  { word: "overhaul", ipa: "/ˈoʊvərhɔːl/", meaning: "전면 개편, 정비", category: "news",
-    examples: ["The entire education system needs an overhaul.", "They're planning to overhaul the customer service department."],
-    collocations: ["complete overhaul", "need an overhaul", "major overhaul"] },
-  { word: "rollout", ipa: "/ˈroʊlaʊt/", meaning: "출시, 단계적 도입", category: "news",
-    examples: ["The rollout of the new software has been delayed.", "The vaccine rollout was slower than expected."],
-    collocations: ["gradual rollout", "vaccine rollout", "phased rollout"] },
-  { word: "fallout", ipa: "/ˈfɔːlaʊt/", meaning: "후폭풍, 여파", category: "news",
-    examples: ["The political fallout from the scandal was severe.", "Companies are still dealing with the fallout of the pandemic."],
-    collocations: ["fallout from", "political fallout", "deal with the fallout"] },
-  { word: "leverage", ipa: "/ˈlevərɪdʒ/", meaning: "활용하다, (영향력을 위한) 지렛대", category: "news",
-    examples: ["She leveraged her experience to land the job.", "Small companies can leverage social media for marketing."],
-    collocations: ["leverage experience", "use as leverage", "leverage technology"] },
-  { word: "mitigate", ipa: "/ˈmɪtɪɡeɪt/", meaning: "완화하다, 줄이다", category: "formal",
-    examples: ["We need to mitigate the risks before launching.", "The company took steps to mitigate the damage."],
-    collocations: ["mitigate the risks", "mitigate damage", "mitigate stress"] },
-  { word: "exacerbate", ipa: "/ɪɡˈzæsərbeɪt/", meaning: "악화시키다", category: "formal",
-    examples: ["The drought has exacerbated food shortages.", "His comments only exacerbated the situation."],
-    collocations: ["exacerbate the situation", "exacerbate problems", "only exacerbate"] },
-  { word: "alleviate", ipa: "/əˈliːvieɪt/", meaning: "완화하다, 경감시키다", category: "formal",
-    examples: ["The medicine helped alleviate the pain.", "The new policy aims to alleviate poverty."],
-    collocations: ["alleviate pain", "alleviate poverty", "alleviate anxiety"] },
-  { word: "undermine", ipa: "/ˌʌndərˈmaɪn/", meaning: "약화시키다, 깎아내리다", category: "formal",
-    examples: ["His behavior undermines the entire team.", "The scandal undermined public trust."],
-    collocations: ["undermine trust", "undermine the team", "undermine confidence"] },
-  { word: "bolster", ipa: "/ˈboʊlstər/", meaning: "강화하다, 북돋우다", category: "formal",
-    examples: ["The new evidence bolsters her case.", "The company bolstered its security measures."],
-    collocations: ["bolster confidence", "bolster the case", "bolster security"] },
-  { word: "foster", ipa: "/ˈfɔːstər/", meaning: "조성하다, 육성하다", category: "formal",
-    examples: ["The program fosters creativity in children.", "We need to foster a culture of trust."],
-    collocations: ["foster creativity", "foster a culture", "foster growth"] },
-  { word: "bandwidth", ipa: "/ˈbændwɪdθ/", meaning: "처리 능력, 여력 (정신적·시간적)", category: "work",
-    examples: ["I don't have the bandwidth to take on another project this week.", "Do you have the bandwidth to help me with this?"],
-    collocations: ["have the bandwidth", "mental bandwidth", "limited bandwidth"] },
+  { word: "crackdown", ipa: "/ˈkrækdaʊn/", meaning: "단속, 강력한 단속", category: "news", examples: ["The government announced a nationwide crackdown on tax evasion.","There's been a crackdown on illegal parking."], collocations: ["a crackdown on","launch a crackdown"] },
+  { word: "backlash", ipa: "/ˈbæklæʃ/", meaning: "반발, 역풍", category: "news", examples: ["The CEO's comments sparked a huge backlash on social media."], collocations: ["spark a backlash","face backlash"] },
+  { word: "loophole", ipa: "/ˈluːphoʊl/", meaning: "(법의) 허점, 빠져나갈 구멍", category: "news", examples: ["Wealthy individuals often exploit tax loopholes."], collocations: ["tax loophole","close a loophole"] },
+  { word: "watchdog", ipa: "/ˈwɑːtʃdɔːɡ/", meaning: "감시 기구, 감시자", category: "news", examples: ["The consumer watchdog issued a warning about the product."], collocations: ["consumer watchdog","industry watchdog"] },
+  { word: "whistleblower", ipa: "/ˈwɪslˌbloʊər/", meaning: "내부 고발자", category: "news", examples: ["The whistleblower exposed years of corporate fraud."], collocations: ["protect whistleblowers"] },
+  { word: "scrutiny", ipa: "/ˈskruːtəni/", meaning: "면밀한 검토, 정밀 조사", category: "news", examples: ["The company's finances came under intense scrutiny."], collocations: ["under scrutiny","close scrutiny"] },
+  { word: "overhaul", ipa: "/ˈoʊvərhɔːl/", meaning: "전면 개편, 정비", category: "news", examples: ["The entire education system needs an overhaul."], collocations: ["complete overhaul","major overhaul"] },
+  { word: "rollout", ipa: "/ˈroʊlaʊt/", meaning: "출시, 단계적 도입", category: "news", examples: ["The rollout of the new software has been delayed."], collocations: ["gradual rollout","phased rollout"] },
+  { word: "fallout", ipa: "/ˈfɔːlaʊt/", meaning: "후폭풍, 여파", category: "news", examples: ["The political fallout from the scandal was severe."], collocations: ["fallout from","political fallout"] },
+  { word: "leverage", ipa: "/ˈlevərɪdʒ/", meaning: "활용하다, 지렛대", category: "news", examples: ["She leveraged her experience to land the job."], collocations: ["leverage experience","leverage technology"] },
+  { word: "streamline", ipa: "/ˈstriːmlaɪn/", meaning: "간소화하다, 능률화하다", category: "work", examples: ["We need to streamline the approval process."], collocations: ["streamline the process","streamline operations"] },
+  { word: "bandwidth", ipa: "/ˈbændwɪdθ/", meaning: "처리 능력, 여력 (정신적·시간적)", category: "work", examples: ["I don't have the bandwidth to take on another project."], collocations: ["have the bandwidth","mental bandwidth"] },
+  { word: "circle back", ipa: "/ˈsɜːrkl bæk/", meaning: "다시 논의하다, 다시 연락하다", category: "work", examples: ["Let's circle back on this next Monday."], collocations: ["circle back on","circle back with"] },
+  { word: "touch base", ipa: "/tʌtʃ beɪs/", meaning: "가볍게 연락하다, 안부를 묻다", category: "work", examples: ["I just wanted to touch base about tomorrow's meeting."], collocations: ["touch base with","touch base about"] },
+  { word: "align", ipa: "/əˈlaɪn/", meaning: "의견·방향을 일치시키다", category: "work", examples: ["We need to align on the project goals."], collocations: ["align on","align with"] },
+  { word: "takeaway", ipa: "/ˈteɪkəweɪ/", meaning: "핵심 요점, 시사점", category: "work", examples: ["The main takeaway from the meeting was that we need more data."], collocations: ["key takeaway","main takeaway"] },
+  { word: "caveat", ipa: "/ˈkæviæt/", meaning: "주의 사항, 단서", category: "work", examples: ["The deal sounds great, but there's one major caveat."], collocations: ["one caveat","with a caveat"] },
+  { word: "pushback", ipa: "/ˈpʊʃbæk/", meaning: "반발, 반대", category: "work", examples: ["The proposal got a lot of pushback from senior management."], collocations: ["get pushback","face pushback"] },
+  { word: "ramp up", ipa: "/ræmp ʌp/", meaning: "늘리다, 강화하다", category: "work", examples: ["We're ramping up production to meet demand."], collocations: ["ramp up production","ramp up efforts"] },
+  { word: "wind down", ipa: "/waɪnd daʊn/", meaning: "마무리하다, 휴식을 취하다", category: "work", examples: ["The project is winding down after two years."], collocations: ["wind down with","winding down"] },
+  { word: "squeamish", ipa: "/ˈskwiːmɪʃ/", meaning: "비위가 약한, 까다로운", category: "conversation", examples: ["I'm too squeamish to watch horror movies."], collocations: ["squeamish about","too squeamish"] },
+  { word: "clingy", ipa: "/ˈklɪŋi/", meaning: "매달리는, 떨어지지 않으려는", category: "conversation", examples: ["My ex was way too clingy."], collocations: ["too clingy","get clingy"] },
+  { word: "needy", ipa: "/ˈniːdi/", meaning: "애정·관심을 갈구하는", category: "conversation", examples: ["I don't want to seem needy."], collocations: ["seem needy","emotionally needy"] },
+  { word: "petty", ipa: "/ˈpeti/", meaning: "사소한, 옹졸한", category: "conversation", examples: ["Stop being so petty about who paid for lunch."], collocations: ["petty argument","be petty"] },
+  { word: "shady", ipa: "/ˈʃeɪdi/", meaning: "수상한, 미덥지 않은", category: "conversation", examples: ["That guy seems pretty shady to me."], collocations: ["shady deal","shady vibes"] },
+  { word: "sketchy", ipa: "/ˈsketʃi/", meaning: "수상쩍은, 위험해 보이는", category: "conversation", examples: ["The neighborhood gets a little sketchy at night."], collocations: ["sketchy neighborhood","sound sketchy"] },
+  { word: "cheesy", ipa: "/ˈtʃiːzi/", meaning: "유치한, 느끼한", category: "conversation", examples: ["The movie was so cheesy I couldn't stop laughing."], collocations: ["cheesy movie","cheesy line"] },
+  { word: "corny", ipa: "/ˈkɔːrni/", meaning: "진부한, 닭살 돋는", category: "conversation", examples: ["Dad jokes are always corny."], collocations: ["corny joke","be corny"] },
+  { word: "cringe", ipa: "/krɪndʒ/", meaning: "오글거리다, 움찔하다", category: "conversation", examples: ["His attempt to flirt was pure cringe."], collocations: ["pure cringe","make me cringe"] },
+  { word: "bummer", ipa: "/ˈbʌmər/", meaning: "실망스러운 일", category: "conversation", examples: ["That's such a bummer about your trip getting canceled."], collocations: ["such a bummer","total bummer"] },
+  { word: "overwhelmed", ipa: "/ˌoʊvərˈwelmd/", meaning: "압도된, 벅찬", category: "emotion", examples: ["I'm completely overwhelmed with work right now."], collocations: ["feel overwhelmed","overwhelmed by"] },
+  { word: "underwhelmed", ipa: "/ˌʌndərˈwelmd/", meaning: "기대 이하로 실망한", category: "emotion", examples: ["Honestly, I was underwhelmed by the movie."], collocations: ["underwhelmed by","feel underwhelmed"] },
+  { word: "resent", ipa: "/rɪˈzent/", meaning: "분개하다, 원망하다", category: "emotion", examples: ["I resent the way he talks to me."], collocations: ["resent the way","resent having to"] },
+  { word: "dread", ipa: "/dred/", meaning: "몹시 두려워하다", category: "emotion", examples: ["I dread Monday mornings."], collocations: ["dread Mondays","dread the thought of"] },
+  { word: "bummed", ipa: "/bʌmd/", meaning: "실망한, 풀이 죽은", category: "emotion", examples: ["I was so bummed when the concert got canceled."], collocations: ["bummed about","so bummed"] },
+  { word: "fed up", ipa: "/fed ʌp/", meaning: "진절머리 난, 신물 난", category: "emotion", examples: ["I'm fed up with his excuses."], collocations: ["fed up with","get fed up"] },
+  { word: "hung up on", ipa: "/hʌŋ ʌp ɑːn/", meaning: "~에 집착하는, ~을 못 잊는", category: "emotion", examples: ["Why are you so hung up on what he said?"], collocations: ["hung up on","still hung up on"] },
+  { word: "freaked out", ipa: "/friːkt aʊt/", meaning: "깜짝 놀란, 패닉 상태인", category: "emotion", examples: ["I freaked out when I saw the spider."], collocations: ["freak out when","don't freak out"] },
+  { word: "chill", ipa: "/tʃɪl/", meaning: "진정하다, 편안한", category: "emotion", examples: ["Just chill — everything's going to be fine."], collocations: ["just chill","chill out"] },
+  { word: "vent", ipa: "/vent/", meaning: "푸념하다, 감정을 토로하다", category: "emotion", examples: ["I just need to vent for a minute."], collocations: ["need to vent","vent to someone"] },
+  { word: "flaky", ipa: "/ˈfleɪki/", meaning: "약속을 잘 안 지키는, 변덕스러운", category: "relationship", examples: ["He's so flaky — he cancels plans last minute."], collocations: ["so flaky","too flaky"] },
+  { word: "passive-aggressive", ipa: "/ˈpæsɪv əˈɡresɪv/", meaning: "수동 공격적인", category: "relationship", examples: ["Her passive-aggressive comments drive me crazy."], collocations: ["passive-aggressive comment","be passive-aggressive"] },
+  { word: "condescending", ipa: "/ˌkɑːndɪˈsendɪŋ/", meaning: "잘난 척하는, 깔보는", category: "relationship", examples: ["I hate the way he talks to me — it's so condescending."], collocations: ["condescending tone","so condescending"] },
+  { word: "patronizing", ipa: "/ˈpeɪtrənaɪzɪŋ/", meaning: "가르치려 드는, 거만한", category: "relationship", examples: ["Stop being so patronizing."], collocations: ["patronizing attitude","be patronizing"] },
+  { word: "nosy", ipa: "/ˈnoʊzi/", meaning: "참견하기 좋아하는", category: "relationship", examples: ["My neighbor is so nosy."], collocations: ["nosy neighbor","don't be nosy"] },
+  { word: "pushy", ipa: "/ˈpʊʃi/", meaning: "강요하는, 밀어붙이는", category: "relationship", examples: ["The salesperson was way too pushy."], collocations: ["too pushy","pushy salesperson"] },
+  { word: "judgmental", ipa: "/dʒʌdʒˈmentl/", meaning: "비판적인, 함부로 재단하는", category: "relationship", examples: ["Try not to be so judgmental."], collocations: ["judgmental look","super judgmental"] },
+  { word: "wholesome", ipa: "/ˈhoʊlsəm/", meaning: "건전한, 마음이 따뜻해지는", category: "relationship", examples: ["Their relationship is so wholesome."], collocations: ["wholesome content","so wholesome"] },
+  { word: "savage", ipa: "/ˈsævɪdʒ/", meaning: "가차없는, 신랄한", category: "relationship", examples: ["Her comeback was absolutely savage."], collocations: ["savage comeback","absolutely savage"] },
+  { word: "assume", ipa: "/əˈsuːm/", meaning: "추정하다, 가정하다", category: "opinion", examples: ["Don't assume you know what I'm thinking."], collocations: ["assume the worst","don't assume"] },
+  { word: "acknowledge", ipa: "/əkˈnɑːlɪdʒ/", meaning: "인정하다, 받아들이다", category: "opinion", examples: ["He refused to acknowledge his mistake."], collocations: ["acknowledge a mistake","acknowledge that"] },
+  { word: "address", ipa: "/əˈdres/", meaning: "다루다, (문제를) 해결하다", category: "opinion", examples: ["We need to address this problem."], collocations: ["address the problem","address the issue"] },
+  { word: "dismiss", ipa: "/dɪsˈmɪs/", meaning: "일축하다, 묵살하다", category: "opinion", examples: ["He dismissed my concerns as paranoia."], collocations: ["dismiss concerns","easily dismiss"] },
+  { word: "endorse", ipa: "/ɪnˈdɔːrs/", meaning: "지지하다, 보증하다", category: "opinion", examples: ["The athlete endorses several major brands."], collocations: ["endorse a candidate","officially endorse"] },
+  { word: "advocate", ipa: "/ˈædvəkeɪt/", meaning: "옹호하다, 지지자", category: "opinion", examples: ["She advocates for stronger animal protection laws."], collocations: ["advocate for","strong advocate"] },
+  { word: "downplay", ipa: "/ˈdaʊnpleɪ/", meaning: "축소하다, 대수롭지 않게 여기다", category: "opinion", examples: ["He tried to downplay the seriousness."], collocations: ["downplay the situation","downplay risks"] },
+  { word: "highlight", ipa: "/ˈhaɪlaɪt/", meaning: "강조하다, 부각시키다", category: "opinion", examples: ["The report highlights several key issues."], collocations: ["highlight the issue","the highlight of"] },
+  { word: "underscore", ipa: "/ˌʌndərˈskɔːr/", meaning: "강조하다, 두드러지게 하다", category: "opinion", examples: ["The incident underscores the need for better safety."], collocations: ["underscore the need","underscore the importance"] },
+  { word: "reiterate", ipa: "/riˈɪtəreɪt/", meaning: "거듭 말하다, 반복하다", category: "opinion", examples: ["Let me reiterate my point."], collocations: ["reiterate the point","reiterate that"] },
+  { word: "navigate", ipa: "/ˈnævɪɡeɪt/", meaning: "헤쳐 나가다, 능숙히 다루다", category: "action", examples: ["It's hard to navigate office politics as a new employee."], collocations: ["navigate office politics","navigate a conversation"] },
+  { word: "tackle", ipa: "/ˈtækl/", meaning: "(문제를) 다루다, 씨름하다", category: "action", examples: ["Let's tackle this problem one step at a time."], collocations: ["tackle the problem","tackle head-on"] },
+  { word: "juggle", ipa: "/ˈdʒʌɡl/", meaning: "동시에 처리하다", category: "action", examples: ["She juggles three jobs and a family."], collocations: ["juggle responsibilities","juggle work and life"] },
+  { word: "prioritize", ipa: "/praɪˈɔːrətaɪz/", meaning: "우선순위를 두다", category: "action", examples: ["You need to prioritize your health."], collocations: ["prioritize health","prioritize tasks"] },
+  { word: "procrastinate", ipa: "/proʊˈkræstɪneɪt/", meaning: "미루다, 꾸물거리다", category: "action", examples: ["I always procrastinate on my taxes."], collocations: ["procrastinate on","stop procrastinating"] },
+  { word: "linger", ipa: "/ˈlɪŋɡər/", meaning: "오래 머무르다, 남다", category: "action", examples: ["The smell of coffee lingered in the kitchen."], collocations: ["linger in the air","doubts linger"] },
+  { word: "hover", ipa: "/ˈhʌvər/", meaning: "맴돌다, 과보호하다", category: "action", examples: ["Stop hovering — I can do this myself."], collocations: ["hover over","stop hovering"] },
+  { word: "brace", ipa: "/breɪs/", meaning: "대비하다, 마음의 준비를 하다", category: "action", examples: ["Brace yourself — the news isn't good."], collocations: ["brace yourself","brace for impact"] },
+  { word: "cope", ipa: "/koʊp/", meaning: "대처하다, 견뎌내다", category: "action", examples: ["I don't know how she copes with so much stress."], collocations: ["cope with stress","cope with loss"] },
+  { word: "bail", ipa: "/beɪl/", meaning: "(약속을) 빠지다, 도중에 그만두다", category: "action", examples: ["He bailed on us at the last minute."], collocations: ["bail on","sorry to bail"] },
+  { word: "arguably", ipa: "/ˈɑːrɡjuəbli/", meaning: "거의 틀림없이, 아마", category: "nuance", examples: ["He's arguably the best player on the team."], collocations: ["arguably the best","arguably one of"] },
+  { word: "presumably", ipa: "/prɪˈzuːməbli/", meaning: "아마, 추측건대", category: "nuance", examples: ["He's late, presumably stuck in traffic."], collocations: ["presumably because","presumably you"] },
+  { word: "supposedly", ipa: "/səˈpoʊzɪdli/", meaning: "듣기로는, 아마", category: "nuance", examples: ["He's supposedly the best surgeon in the city."], collocations: ["supposedly the best","supposedly amazing"] },
+  { word: "allegedly", ipa: "/əˈledʒɪdli/", meaning: "주장에 따르면, 의혹상", category: "nuance", examples: ["He allegedly stole money from the company."], collocations: ["allegedly stole","allegedly involved"] },
+  { word: "virtually", ipa: "/ˈvɜːrtʃuəli/", meaning: "사실상, 거의", category: "nuance", examples: ["The two products are virtually identical."], collocations: ["virtually identical","virtually impossible"] },
+  { word: "inherently", ipa: "/ɪnˈhɪrəntli/", meaning: "본질적으로, 본래", category: "nuance", examples: ["The job is inherently dangerous."], collocations: ["inherently dangerous","inherently biased"] },
+  { word: "ultimately", ipa: "/ˈʌltɪmətli/", meaning: "결국, 궁극적으로", category: "nuance", examples: ["Ultimately, it's your decision."], collocations: ["ultimately your decision","ultimately responsible"] },
+  { word: "subsequently", ipa: "/ˈsʌbsɪkwəntli/", meaning: "그 후에, 그 뒤에", category: "nuance", examples: ["He was fired and subsequently sued the company."], collocations: ["subsequently sued","subsequently learned"] },
+  { word: "admittedly", ipa: "/ədˈmɪtɪdli/", meaning: "인정하건대, 솔직히 말하면", category: "nuance", examples: ["Admittedly, I wasn't paying close attention."], collocations: ["admittedly difficult"] },
+  { word: "frankly", ipa: "/ˈfræŋkli/", meaning: "솔직히, 까놓고 말하면", category: "nuance", examples: ["Frankly, I don't care what he thinks."], collocations: ["frankly I","to be frank"] },
+  { word: "creepy", ipa: "/ˈkriːpi/", meaning: "소름끼치는, 으스스한", category: "media", examples: ["That guy at the bar was such a creep."], collocations: ["creepy vibes","really creepy"] },
+  { word: "jerk", ipa: "/dʒɜːrk/", meaning: "못된 놈, 재수 없는 사람", category: "media", examples: ["Don't be a jerk — apologize to her."], collocations: ["don't be a jerk","real jerk"] },
+  { word: "cringe-worthy", ipa: "/ˈkrɪndʒwɜːrði/", meaning: "오글거리는, 보기 민망한", category: "media", examples: ["His speech was absolutely cringe-worthy."], collocations: ["cringe-worthy moment"] },
+  { word: "broke", ipa: "/broʊk/", meaning: "빈털터리인, 돈이 없는", category: "media", examples: ["I'm broke until payday."], collocations: ["flat broke","totally broke"] },
+  { word: "swamped", ipa: "/swɑːmpt/", meaning: "일이 산더미인, 정신없이 바쁜", category: "media", examples: ["I'm swamped with emails today."], collocations: ["swamped with","totally swamped"] },
+  { word: "stoked", ipa: "/stoʊkt/", meaning: "신난, 들뜬", category: "media", examples: ["I'm so stoked about the concert tomorrow!"], collocations: ["stoked about","so stoked"] },
+  { word: "hyped", ipa: "/haɪpt/", meaning: "들떠 있는, 기대 가득한", category: "media", examples: ["Everyone's hyped about the new season."], collocations: ["hyped for","super hyped"] },
+  { word: "clueless", ipa: "/ˈkluːləs/", meaning: "아무것도 모르는, 무지한", category: "media", examples: ["He's completely clueless about how relationships work."], collocations: ["completely clueless","totally clueless"] },
+  { word: "oblivious", ipa: "/əˈblɪviəs/", meaning: "알아채지 못하는, 무관심한", category: "media", examples: ["He was oblivious to her feelings."], collocations: ["oblivious to","blissfully oblivious"] },
+  { word: "fluke", ipa: "/fluːk/", meaning: "요행, 우연한 행운", category: "media", examples: ["Winning the lottery was a complete fluke."], collocations: ["complete fluke","pure fluke"] },
+  { word: "mitigate", ipa: "/ˈmɪtɪɡeɪt/", meaning: "완화하다, 줄이다", category: "formal", examples: ["We need to mitigate the risks before launching."], collocations: ["mitigate the risks","mitigate damage"] },
+  { word: "exacerbate", ipa: "/ɪɡˈzæsərbeɪt/", meaning: "악화시키다", category: "formal", examples: ["The drought has exacerbated food shortages."], collocations: ["exacerbate the situation","only exacerbate"] },
+  { word: "alleviate", ipa: "/əˈliːvieɪt/", meaning: "완화하다, 경감시키다", category: "formal", examples: ["The medicine helped alleviate the pain."], collocations: ["alleviate pain","alleviate poverty"] },
+  { word: "undermine", ipa: "/ˌʌndərˈmaɪn/", meaning: "약화시키다, 깎아내리다", category: "formal", examples: ["His behavior undermines the entire team."], collocations: ["undermine trust","undermine confidence"] },
+  { word: "bolster", ipa: "/ˈboʊlstər/", meaning: "강화하다, 북돋우다", category: "formal", examples: ["The new evidence bolsters her case."], collocations: ["bolster confidence","bolster the case"] },
+  { word: "hinder", ipa: "/ˈhɪndər/", meaning: "방해하다, 저해하다", category: "formal", examples: ["Bad weather hindered the rescue efforts."], collocations: ["hinder progress","hinder efforts"] },
+  { word: "foster", ipa: "/ˈfɔːstər/", meaning: "조성하다, 육성하다", category: "formal", examples: ["The program fosters creativity in children."], collocations: ["foster creativity","foster a culture"] },
+  { word: "compelling", ipa: "/kəmˈpelɪŋ/", meaning: "설득력 있는, 강렬한", category: "formal", examples: ["She made a compelling argument."], collocations: ["compelling argument","compelling evidence"] },
+  { word: "daunting", ipa: "/ˈdɔːntɪŋ/", meaning: "벅찬, 기죽이는", category: "formal", examples: ["Starting a business can be daunting."], collocations: ["daunting task","daunting challenge"] },
+  { word: "nuanced", ipa: "/ˈnuːɑːnst/", meaning: "미묘한, 섬세하게 차이를 살린", category: "formal", examples: ["The issue is more nuanced than people realize."], collocations: ["nuanced answer","more nuanced"] },
+  { word: "get along (with)", ipa: "/ɡet əˈlɔːŋ/", meaning: "잘 지내다", category: "phrasal", examples: ["I get along well with my coworkers."], collocations: ["get along well with","don't get along"] },
+  { word: "get over", ipa: "/ɡet ˈoʊvər/", meaning: "(힘든 일을) 극복하다, 잊다", category: "phrasal", examples: ["It took me months to get over the breakup."], collocations: ["get over a breakup","get over it"] },
+  { word: "get away with", ipa: "/ɡet əˈweɪ wɪð/", meaning: "(잘못을) 하고도 무사히 넘어가다", category: "phrasal", examples: ["He cheated on the test and got away with it."], collocations: ["get away with lying","can't get away with"] },
+  { word: "get back to", ipa: "/ɡet bæk tə/", meaning: "(나중에) 다시 연락하다", category: "phrasal", examples: ["I'll get back to you by Friday."], collocations: ["get back to you","never got back to"] },
+  { word: "get rid of", ipa: "/ɡet rɪd əv/", meaning: "없애다, 처분하다", category: "phrasal", examples: ["I need to get rid of these old clothes."], collocations: ["get rid of clothes","get rid of someone"] },
+  { word: "put up with", ipa: "/pʊt ʌp wɪð/", meaning: "참다, 견디다", category: "phrasal", examples: ["I can't put up with his attitude anymore."], collocations: ["put up with attitude","can't put up with"] },
+  { word: "put off", ipa: "/pʊt ɔːf/", meaning: "미루다, 연기하다", category: "phrasal", examples: ["Don't put off your homework until the last minute."], collocations: ["put off homework","keep putting off"] },
+  { word: "put on", ipa: "/pʊt ɑːn/", meaning: "(옷·살을) 입다, 찌다 / 켜다", category: "phrasal", examples: ["Put on a jacket — it's cold outside."], collocations: ["put on a jacket","put on weight"] },
+  { word: "put down", ipa: "/pʊt daʊn/", meaning: "내려놓다 / 깎아내리다", category: "phrasal", examples: ["Put down the phone and listen to me."], collocations: ["put down the phone","put someone down"] },
+  { word: "put together", ipa: "/pʊt təˈɡeðər/", meaning: "조립하다, 정리하다", category: "phrasal", examples: ["It took me hours to put this IKEA shelf together."], collocations: ["put together a presentation","put together a summary"] },
+  { word: "take after", ipa: "/teɪk ˈæftər/", meaning: "(가족 중 누구를) 닮다", category: "phrasal", examples: ["She really takes after her mother."], collocations: ["take after one's mother","take after in looks"] },
+  { word: "take over", ipa: "/teɪk ˈoʊvər/", meaning: "(자리·역할을) 인계받다, 장악하다", category: "phrasal", examples: ["She took over the company after her father retired."], collocations: ["take over the company","take over for someone"] },
+  { word: "take off", ipa: "/teɪk ɔːf/", meaning: "(옷을) 벗다 / 이륙하다 / 인기 끌다", category: "phrasal", examples: ["Take off your shoes before coming in."], collocations: ["take off shoes","the plane takes off"] },
+  { word: "take up", ipa: "/teɪk ʌp/", meaning: "(취미를) 시작하다 / 차지하다", category: "phrasal", examples: ["I took up yoga during the pandemic."], collocations: ["take up yoga","take up space"] },
+  { word: "take in", ipa: "/teɪk ɪn/", meaning: "이해하다, 받아들이다", category: "phrasal", examples: ["There's a lot of information to take in."], collocations: ["take in information","take it all in"] },
+  { word: "come up with", ipa: "/kʌm ʌp wɪð/", meaning: "(아이디어를) 생각해내다", category: "phrasal", examples: ["How did you come up with that idea?"], collocations: ["come up with an idea","come up with a solution"] },
+  { word: "come across", ipa: "/kʌm əˈkrɔːs/", meaning: "~한 인상을 주다 / 우연히 발견하다", category: "phrasal", examples: ["He comes across as arrogant."], collocations: ["come across as arrogant","come across an old photo"] },
+  { word: "come down with", ipa: "/kʌm daʊn wɪð/", meaning: "(병에) 걸리다", category: "phrasal", examples: ["I think I'm coming down with a cold."], collocations: ["come down with a cold","come down with the flu"] },
+  { word: "come up", ipa: "/kʌm ʌp/", meaning: "(예상치 못한 일이) 생기다", category: "phrasal", examples: ["Something came up — I can't make it tonight."], collocations: ["something came up","if anything comes up"] },
+  { word: "come over", ipa: "/kʌm ˈoʊvər/", meaning: "(집에) 들르다", category: "phrasal", examples: ["Do you want to come over for dinner?"], collocations: ["come over for dinner","come over whenever"] },
+  { word: "go through", ipa: "/ɡoʊ θruː/", meaning: "(힘든 일을) 겪다 / 자세히 살펴보다", category: "phrasal", examples: ["She's going through a tough time right now."], collocations: ["go through a tough time","go through the report"] },
+  { word: "go off", ipa: "/ɡoʊ ɔːf/", meaning: "(알람·총이) 울리다 / 상하다", category: "phrasal", examples: ["My alarm went off at 5 AM."], collocations: ["alarm goes off","milk goes off"] },
+  { word: "go on", ipa: "/ɡoʊ ɑːn/", meaning: "계속하다 / 일어나다", category: "phrasal", examples: ["Please, go on — I'm listening."], collocations: ["go on talking","what's going on"] },
+  { word: "go for", ipa: "/ɡoʊ fɔːr/", meaning: "선택하다, 시도하다", category: "phrasal", examples: ["I'll go for the chicken sandwich."], collocations: ["go for the chicken","go for it"] },
+  { word: "go back on", ipa: "/ɡoʊ bæk ɑːn/", meaning: "(약속을) 어기다", category: "phrasal", examples: ["He went back on his promise."], collocations: ["go back on a promise","go back on one's word"] },
+  { word: "look forward to", ipa: "/lʊk ˈfɔːrwərd tə/", meaning: "기대하다 (뒤에 ~ing)", category: "phrasal", examples: ["I'm looking forward to the weekend."], collocations: ["look forward to the weekend","look forward to seeing"] },
+  { word: "look up to", ipa: "/lʊk ʌp tə/", meaning: "존경하다", category: "phrasal", examples: ["I've always looked up to my older brother."], collocations: ["look up to one's brother","everyone looks up to"] },
+  { word: "look down on", ipa: "/lʊk daʊn ɑːn/", meaning: "깔보다, 무시하다", category: "phrasal", examples: ["Don't look down on people who have less than you."], collocations: ["look down on people","look down on someone"] },
+  { word: "look into", ipa: "/lʊk ˈɪntu/", meaning: "조사하다, 알아보다", category: "phrasal", examples: ["I'll look into the problem and get back to you."], collocations: ["look into a problem","look into a case"] },
+  { word: "look out (for)", ipa: "/lʊk aʊt/", meaning: "조심하다 / 챙기다", category: "phrasal", examples: ["Look out! There's a car coming!"], collocations: ["look out for danger","look out for someone"] },
+  { word: "break up (with)", ipa: "/breɪk ʌp wɪð/", meaning: "헤어지다", category: "phrasal", examples: ["They broke up after 5 years together."], collocations: ["break up after years","break up with someone"] },
+  { word: "break down", ipa: "/breɪk daʊn/", meaning: "고장 나다 / 무너지다", category: "phrasal", examples: ["My car broke down on the highway."], collocations: ["car broke down","break down in tears"] },
+  { word: "break out", ipa: "/breɪk aʊt/", meaning: "(전쟁·질병이) 발생하다 / 탈출하다", category: "phrasal", examples: ["War broke out in 1939."], collocations: ["war broke out","fire broke out"] },
+  { word: "break into", ipa: "/breɪk ˈɪntu/", meaning: "침입하다 / 진출하다", category: "phrasal", examples: ["Someone broke into our apartment."], collocations: ["break into an apartment","break into the industry"] },
+  { word: "break in", ipa: "/breɪk ɪn/", meaning: "길들이다 (신발·신참)", category: "phrasal", examples: ["I need to break these shoes in."], collocations: ["break in shoes","break in a new employee"] },
+  { word: "run out of", ipa: "/rʌn aʊt əv/", meaning: "다 떨어지다", category: "phrasal", examples: ["We're running out of milk."], collocations: ["run out of milk","run out of patience"] },
+  { word: "run into", ipa: "/rʌn ˈɪntu/", meaning: "우연히 마주치다", category: "phrasal", examples: ["I ran into my ex at the coffee shop."], collocations: ["run into an ex","run into problems"] },
+  { word: "run by", ipa: "/rʌn baɪ/", meaning: "(의견을) 검토해달라고 보여주다", category: "phrasal", examples: ["Let me run this idea by you."], collocations: ["run an idea by","run it by the boss"] },
+  { word: "run over", ipa: "/rʌn ˈoʊvər/", meaning: "차로 치다 / 시간을 넘기다", category: "phrasal", examples: ["A car almost ran me over."], collocations: ["run someone over","meeting ran over"] },
+  { word: "run through", ipa: "/rʌn θruː/", meaning: "빠르게 훑어보다, 리허설하다", category: "phrasal", examples: ["Let's run through the presentation."], collocations: ["run through the presentation","run through the script"] },
+  { word: "figure out", ipa: "/ˈfɪɡjər aʊt/", meaning: "알아내다, 파악하다", category: "phrasal", examples: ["I can't figure out how this works."], collocations: ["figure out how","figure out the answer"] },
+  { word: "work out", ipa: "/wɜːrk aʊt/", meaning: "운동하다 / 잘 풀리다", category: "phrasal", examples: ["I work out three times a week."], collocations: ["work out three times a week","everything will work out"] },
+  { word: "hang out", ipa: "/hæŋ aʊt/", meaning: "시간을 보내다, 놀다", category: "phrasal", examples: ["We hung out at the mall all day."], collocations: ["hang out at the mall","hang out with friends"] },
+  { word: "show up", ipa: "/ʃoʊ ʌp/", meaning: "나타나다", category: "phrasal", examples: ["He didn't show up to the meeting."], collocations: ["show up to a meeting","show up late"] },
+  { word: "catch up (with)", ipa: "/kætʃ ʌp wɪð/", meaning: "따라잡다 / 안부 얘기하다", category: "phrasal", examples: ["Let's grab coffee and catch up sometime."], collocations: ["catch up sometime","catch up on sleep"] },
+  { word: "bring up", ipa: "/brɪŋ ʌp/", meaning: "(화제를) 꺼내다 / 양육하다", category: "phrasal", examples: ["Don't bring up politics at dinner."], collocations: ["bring up politics","bring up a point"] },
+  { word: "turn down", ipa: "/tɜːrn daʊn/", meaning: "거절하다 / 낮추다", category: "phrasal", examples: ["She turned down the job offer."], collocations: ["turn down a job offer","turn down the music"] },
+  { word: "turn out", ipa: "/tɜːrn aʊt/", meaning: "(결과적으로) 밝혀지다", category: "phrasal", examples: ["It turned out he was lying."], collocations: ["turn out to be lying","turn out great"] },
+  { word: "give up", ipa: "/ɡɪv ʌp/", meaning: "포기하다", category: "phrasal", examples: ["Don't give up — you're almost there!"], collocations: ["don't give up","give up on someone"] },
+  { word: "hold on", ipa: "/hoʊld ɑːn/", meaning: "기다리다 / 꽉 잡다", category: "phrasal", examples: ["Hold on a second — let me check."], collocations: ["hold on a second","just hold on"] },
 ];
 let state = loadState();
 function loadState() {
@@ -533,20 +497,11 @@ function loadState() {
       const today = todayStr();
       DEFAULT_WORDS.forEach(dw => {
         if (!existing.has(dw.word.toLowerCase())) {
-          s.words.push({
-            id: cryptoId(), ...dw,
-            note: "", createdAt: today,
-            box: 0, reps: 0, lapses: 0,
-            lastReviewed: null, nextReview: today,
-            history: [], userSentence: "",
-            learningStage: 1,
-          });
+          s.words.push({ id: cryptoId(), ...dw, note: "", createdAt: today, box: 0, reps: 0, lapses: 0, lastReviewed: null, nextReview: today, history: [], userSentence: "", learningStage: 1, lastAttemptDate: null, failedToday: false, recoveredToday: false, passedToday: false, coldStreak: 0, lastResponseMs: 0 });
         }
       });
       s.words.forEach(w => {
-        if (typeof w.learningStage !== 'number') {
-          w.learningStage = Math.min(MAX_STAGE, Math.max(1, Math.floor((w.reps || 0) / 2) + 1));
-        }
+        if (typeof w.learningStage !== 'number') w.learningStage = Math.min(MAX_STAGE, Math.max(1, Math.floor((w.reps || 0) / 2) + 1));
         if (w.learningStage > MAX_STAGE) w.learningStage = MAX_STAGE;
         if (w.learningStage < 1) w.learningStage = 1;
         if (typeof w.coldStreak !== 'number') w.coldStreak = 0;
@@ -565,301 +520,118 @@ function loadState() {
 function seedInitial() {
   const today = todayStr();
   return {
-    words: DEFAULT_WORDS.map(w => ({
-      id: cryptoId(),
-      ...w,
-      collocations: w.collocations || [],
-      examples: w.examples || [],
-      note: "",
-      createdAt: today,
-      box: 0,
-      reps: 0,
-      lapses: 0,
-      lastReviewed: null,
-      nextReview: today,
-      history: [],
-      userSentence: "",
-      learningStage: 1,
-      lastAttemptDate: null,
-      failedToday: false,
-      recoveredToday: false,
-      passedToday: false,
-      coldStreak: 0,
-      lastResponseMs: 0,
-    })),
-    settings: { newPerDay: 10, dailyGoal: 30 },
-    log: {},
-    articles: [],
+    words: DEFAULT_WORDS.map(w => ({ id: cryptoId(), ...w, collocations: w.collocations || [], examples: w.examples || [], note: "", createdAt: today, box: 0, reps: 0, lapses: 0, lastReviewed: null, nextReview: today, history: [], userSentence: "", learningStage: 1, lastAttemptDate: null, failedToday: false, recoveredToday: false, passedToday: false, coldStreak: 0, lastResponseMs: 0 })),
+    settings: { newPerDay: 10, dailyGoal: 30 }, log: {}, articles: [],
   };
 }
-function cryptoId() {
-  return Math.random().toString(36).slice(2, 11);
-}
-function saveState() {
-  state.lastUpdated = Date.now();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  if (typeof syncState !== 'undefined' && syncState.enabled) schedulePush();
-}
-/* ============================================================
-   DATE HELPERS
-============================================================ */
+function cryptoId() { return Math.random().toString(36).slice(2, 11); }
+function saveState() { state.lastUpdated = Date.now(); localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 function todayStr() { return new Date().toISOString().slice(0, 10); }
-function addDays(dateStr, days) {
-  const d = new Date(dateStr); d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
-}
-function daysUntil(dateStr) {
-  const today = new Date(todayStr());
-  const target = new Date(dateStr);
-  return Math.ceil((target - today) / (1000 * 60 * 60 * 24));
-}
-/* ============================================================
-   CATEGORY HELPERS
-============================================================ */
-function catLabel(key) {
-  const c = CATEGORIES[key];
-  return c ? `${c.icon} ${c.label}` : key;
-}
-function catChip(key) {
-  const c = CATEGORIES[key];
-  if (!c) return `<span class="chip">${escapeHtml(key)}</span>`;
-  return `<span class="chip" style="background:${c.bg};color:${c.color};">${c.icon} ${escapeHtml(c.label)}</span>`;
-}
+function addDays(dateStr, days) { const d = new Date(dateStr); d.setDate(d.getDate() + days); return d.toISOString().slice(0, 10); }
+function daysUntil(dateStr) { const today = new Date(todayStr()); const target = new Date(dateStr); return Math.ceil((target - today) / (1000 * 60 * 60 * 24)); }
+function catChip(key) { const c = CATEGORIES[key]; if (!c) return `<span class="chip">${escapeHtml(key)}</span>`; return `<span class="chip" style="background:${c.bg};color:${c.color};">${c.icon} ${escapeHtml(c.label)}</span>`; }
 function populateCategorySelects() {
-  const selects = [
-    { id: 'studyCategory', includeAll: true },
-    { id: 'filterCategory', includeAll: true },
-    { id: 'f_category', includeAll: false },
-  ];
-  selects.forEach(({ id, includeAll }) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const opts = includeAll ? `<option value="all">전체${id==='studyCategory'?' 카테고리':''}</option>` : '';
-    el.innerHTML = opts + Object.entries(CATEGORIES).map(([k, c]) =>
-      `<option value="${k}">${c.icon} ${c.label}</option>`
-    ).join('');
+  [['studyCategory',true],['filterCategory',true],['f_category',false]].forEach(([id,inc]) => {
+    const el = document.getElementById(id); if (!el) return;
+    const opts = inc ? `<option value="all">전체${id==='studyCategory'?' 카테고리':''}</option>` : '';
+    el.innerHTML = opts + Object.entries(CATEGORIES).map(([k,c]) => `<option value="${k}">${c.icon} ${c.label}</option>`).join('');
   });
 }
-/* ============================================================
-   TABS
-============================================================ */
 document.querySelectorAll('.tab').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const tabName = btn.dataset.tab;
-    ['study','quiz','list','reader','add','stats','backup','sync','guide'].forEach(t => {
-      const el = document.getElementById('tab-' + t);
-      if (el) el.style.display = (t === tabName) ? 'block' : 'none';
+    ['study','quiz','list','reader','add','stats','backup','guide'].forEach(t => {
+      const el = document.getElementById('tab-' + t); if (el) el.style.display = (t === tabName) ? 'block' : 'none';
     });
     if (tabName === 'list') renderList();
     if (tabName === 'stats') renderStats();
     if (tabName === 'study') renderStudy();
     if (tabName === 'quiz') renderQuiz();
-    if (tabName === 'sync') renderSyncTab();
     if (tabName === 'reader') renderReader();
   });
 });
-/* ============================================================
-   STUDY MODE
-============================================================ */
-let currentQueue = [];
-let currentIdx = 0;
-let currentFlipped = false;
+let currentQueue = [], currentIdx = 0, currentFlipped = false;
 function buildQueue() {
   const cat = document.getElementById('studyCategory').value;
   const mode = document.getElementById('studyMode').value;
   const today = todayStr();
   let pool = state.words.filter(w => cat === 'all' || w.category === cat);
-  if (mode === 'due') {
-    pool = pool.filter(w => !w.nextReview || w.nextReview <= today);
-  } else if (mode === 'new') {
-    pool = pool.filter(w => w.reps === 0 && w.lapses === 0);
-  } else if (mode === 'hard') {
-    pool = pool.filter(w => w.lapses >= 2);
-  }
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
+  if (mode === 'due') pool = pool.filter(w => !w.nextReview || w.nextReview <= today);
+  else if (mode === 'new') pool = pool.filter(w => w.reps === 0 && w.lapses === 0);
+  else if (mode === 'hard') pool = pool.filter(w => w.lapses >= 2);
+  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
   return pool;
 }
-function renderStudy() {
-  currentQueue = buildQueue();
-  currentIdx = 0;
-  currentFlipped = false;
-  showCard();
-}
+function renderStudy() { currentQueue = buildQueue(); currentIdx = 0; currentFlipped = false; showCard(); }
 function showCard() {
-  const area = document.getElementById('studyArea');
-  if (!area) return;
-  if (currentQueue.length === 0) {
-    area.innerHTML = `
-      <div class="empty">
-        <div style="font-size: 48px;">🎉</div>
-        <h3>오늘 복습할 단어가 없습니다!</h3>
-        <p>새 단어를 추가하거나 다른 모드로 학습해 보세요.</p>
-      </div>`;
-    return;
-  }
-  if (currentIdx >= currentQueue.length) {
-    const reviewed = currentQueue.length;
-    area.innerHTML = `
-      <div class="empty">
-        <div style="font-size: 48px;">✅</div>
-        <h3>이번 세션 완료!</h3>
-        <p>${reviewed}개의 단어를 복습했습니다.</p>
-        <button onclick="renderStudy()">한 번 더 학습</button>
-      </div>`;
-    return;
-  }
+  const area = document.getElementById('studyArea'); if (!area) return;
+  if (currentQueue.length === 0) { area.innerHTML = `<div class="empty"><div style="font-size:48px;">🎉</div><h3>오늘 복습할 단어가 없습니다!</h3></div>`; return; }
+  if (currentIdx >= currentQueue.length) { area.innerHTML = `<div class="empty"><div style="font-size:48px;">✅</div><h3>이번 세션 완료!</h3><p>${currentQueue.length}개 복습 완료</p><button onclick="renderStudy()">한 번 더 학습</button></div>`; return; }
   const w = currentQueue[currentIdx];
-  const direction = document.getElementById('studyDirection').value;
-  const promptSide = direction === 'k2e'
-    ? `<div class="prompt-label">한국어 → 영어</div>
-       <div class="prompt-text">${escapeHtml(w.meaning)}</div>
-       <div class="hint">영어로 말해보고 카드를 클릭하세요</div>`
-    : `<div class="prompt-label">영어 → 한국어</div>
-       <div class="prompt-text">${escapeHtml(w.word)} <button class="tts-btn lg" onclick="event.stopPropagation();speak('${escapeJs(w.word)}')" title="발음 듣기">${speakerIcon()}</button></div>
-       <div class="hint">뜻을 떠올리고 카드를 클릭하세요</div>`;
-  const examples = (w.examples && w.examples.length > 0) ? w.examples : (w.example ? [w.example] : []);
+  const dir = document.getElementById('studyDirection').value;
+  const promptSide = dir === 'k2e'
+    ? `<div class="prompt-label">한국어 → 영어</div><div class="prompt-text">${escapeHtml(w.meaning)}</div><div class="hint">영어로 말해보고 카드 클릭</div>`
+    : `<div class="prompt-label">영어 → 한국어</div><div class="prompt-text">${escapeHtml(w.word)} <button class="tts-btn lg" onclick="event.stopPropagation();speak('${escapeJs(w.word)}')">${speakerIcon()}</button></div><div class="hint">뜻을 떠올리고 카드 클릭</div>`;
+  const examples = (w.examples && w.examples.length > 0) ? w.examples : [];
   const answerSide = `
     <div class="prompt-label">정답</div>
-    <div class="prompt-text">${escapeHtml(w.word)}
-      <button class="tts-btn lg" onclick="event.stopPropagation();speak('${escapeJs(w.word)}')" title="단어 발음">${speakerIcon()}</button>
-    </div>
+    <div class="prompt-text">${escapeHtml(w.word)} <button class="tts-btn lg" onclick="event.stopPropagation();speak('${escapeJs(w.word)}')">${speakerIcon()}</button></div>
     ${w.ipa ? `<div class="ipa">${escapeHtml(w.ipa)}</div>` : ''}
     <div class="meaning">${escapeHtml(w.meaning)}</div>
-    ${examples.length > 0 ? `
-      <div class="examples-list">
-        ${examples.map((ex, i) => `
-          <div class="example-item">
-            <div class="num">${i+1}.</div>
-            <div class="txt">${escapeHtml(ex)}</div>
-            <button class="tts-btn" onclick="event.stopPropagation();speak('${escapeJs(ex)}')" title="예문 발음">${speakerIcon()}</button>
-          </div>
-        `).join('')}
-      </div>` : ''}
-    ${w.collocations && w.collocations.length > 0 ? `
-      <div class="collocations">
-        ${w.collocations.map(c => `<span class="colloc-tag">${escapeHtml(c)}<button class="tts-btn sm" onclick="event.stopPropagation();speak('${escapeJs(c)}')">${speakerIcon(10)}</button></span>`).join('')}
-      </div>` : ''}
+    ${examples.length > 0 ? `<div class="examples-list">${examples.map((ex,i) => `<div class="example-item"><div class="num">${i+1}.</div><div class="txt">${escapeHtml(ex)}</div><button class="tts-btn" onclick="event.stopPropagation();speak('${escapeJs(ex)}')">${speakerIcon()}</button></div>`).join('')}</div>` : ''}
+    ${(w.collocations||[]).length > 0 ? `<div class="collocations">${w.collocations.map(c => `<span class="colloc-tag">${escapeHtml(c)}<button class="tts-btn sm" onclick="event.stopPropagation();speak('${escapeJs(c)}')">${speakerIcon(10)}</button></span>`).join('')}</div>` : ''}
   `;
   area.innerHTML = `
-    <div class="study-meta">
-      <div>${catChip(w.category)}</div>
-      <div>${currentIdx + 1} / ${currentQueue.length} · reps ${w.reps} · lapses ${w.lapses}</div>
-    </div>
-    <div class="card ${currentFlipped ? 'flipped' : ''}" id="studyCard">
-      ${currentFlipped ? answerSide : promptSide}
-    </div>
-    ${currentFlipped ? `
-      <div class="actions">
-        <button class="btn-again" onclick="rate('again')">🔴 다시</button>
-        <button class="btn-hard" onclick="rate('hard')">🟠 어려움</button>
-        <button class="btn-good" onclick="rate('good')">🟢 좋음</button>
-        <button class="btn-easy" onclick="rate('easy')">🔵 쉬움</button>
-      </div>` : `
-      <div class="flip-hint">카드를 클릭하면 정답이 나옵니다 (또는 Space 키)</div>
-    `}
+    <div class="study-meta"><div>${catChip(w.category)} ${stageBadge(w.learningStage||1)}</div><div>${currentIdx + 1} / ${currentQueue.length} · reps ${w.reps} · lapses ${w.lapses}</div></div>
+    <div class="card ${currentFlipped ? 'flipped' : ''}" id="studyCard">${currentFlipped ? answerSide : promptSide}</div>
+    ${currentFlipped ? `<div class="actions"><button class="btn-again" onclick="rate('again')">🔴 다시</button><button class="btn-hard" onclick="rate('hard')">🟠 어려움</button><button class="btn-good" onclick="rate('good')">🟢 좋음</button><button class="btn-easy" onclick="rate('easy')">🔵 쉬움</button></div>` : `<div class="flip-hint">카드 클릭 또는 Space 키</div>`}
   `;
-  document.getElementById('studyCard').addEventListener('click', () => {
-    if (!currentFlipped) { currentFlipped = true; showCard(); }
-  });
+  document.getElementById('studyCard').addEventListener('click', () => { if (!currentFlipped) { currentFlipped = true; showCard(); } });
 }
 function rate(result) {
-  const w = currentQueue[currentIdx];
-  const today = todayStr();
-  w.lastReviewed = today;
-  w.history.push({ date: today, result });
-  if (result === 'again') {
-    w.lapses += 1;
-    w.box = 0;
-    w.nextReview = addDays(today, 1);
-  } else if (result === 'hard') {
-    w.box = Math.max(0, w.box);
-    w.reps += 1;
-    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
-  } else if (result === 'good') {
-    w.reps += 1;
-    w.box = Math.min(w.box + 1, SRS_INTERVALS.length - 1);
-    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
-    w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 1);
-  } else if (result === 'easy') {
-    w.reps += 1;
-    w.box = Math.min(w.box + 2, SRS_INTERVALS.length - 1);
-    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
-    w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 2);
-  }
-  if (!state.log[today]) state.log[today] = { reviewed: 0, correct: 0 };
+  const w = currentQueue[currentIdx]; const today = todayStr();
+  w.lastReviewed = today; w.history.push({ date: today, result });
+  if (result === 'again') { w.lapses += 1; w.box = 0; w.nextReview = addDays(today, 1); }
+  else if (result === 'hard') { w.reps += 1; w.nextReview = addDays(today, SRS_INTERVALS[w.box]); }
+  else if (result === 'good') { w.reps += 1; w.box = Math.min(w.box + 1, SRS_INTERVALS.length - 1); w.nextReview = addDays(today, SRS_INTERVALS[w.box]); w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 1); }
+  else if (result === 'easy') { w.reps += 1; w.box = Math.min(w.box + 2, SRS_INTERVALS.length - 1); w.nextReview = addDays(today, SRS_INTERVALS[w.box]); w.learningStage = Math.min(MAX_STAGE, (w.learningStage || 1) + 2); }
+  if (!state.log[today]) state.log[today] = { reviewed: 0, correct: 0, cold: 0, recovered: 0, missed: 0 };
   state.log[today].reviewed += 1;
   if (result !== 'again') state.log[today].correct += 1;
-  const masterIdx = state.words.findIndex(x => x.id === w.id);
-  if (masterIdx >= 0) state.words[masterIdx] = w;
-  saveState();
-  currentIdx += 1;
-  currentFlipped = false;
-  showCard();
-  updateTodayInfo();
+  const idx = state.words.findIndex(x => x.id === w.id); if (idx >= 0) state.words[idx] = w;
+  saveState(); currentIdx += 1; currentFlipped = false; showCard(); updateTodayInfo();
 }
 document.addEventListener('keydown', e => {
   if (document.getElementById('tab-study').style.display === 'none') return;
   if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
-  if (e.code === 'Space') {
-    e.preventDefault();
-    if (!currentFlipped) { currentFlipped = true; showCard(); }
-  } else if (currentFlipped) {
-    if (e.key === '1') rate('again');
-    else if (e.key === '2') rate('hard');
-    else if (e.key === '3') rate('good');
-    else if (e.key === '4') rate('easy');
+  if (e.code === 'Space') { e.preventDefault(); if (!currentFlipped) { currentFlipped = true; showCard(); } }
+  else if (currentFlipped) {
+    if (e.key === '1') rate('again'); else if (e.key === '2') rate('hard');
+    else if (e.key === '3') rate('good'); else if (e.key === '4') rate('easy');
   }
 });
-/* ============================================================
-   TTS (American English)
-============================================================ */
 let voices = [];
-function loadVoices() {
-  voices = speechSynthesis.getVoices();
-}
-if (typeof speechSynthesis !== 'undefined') {
-  speechSynthesis.onvoiceschanged = loadVoices;
-  loadVoices();
-}
+function loadVoices() { voices = speechSynthesis.getVoices(); }
+if (typeof speechSynthesis !== 'undefined') { speechSynthesis.onvoiceschanged = loadVoices; loadVoices(); }
 function speak(text) {
-  if (!('speechSynthesis' in window)) {
-    toast("이 브라우저는 TTS를 지원하지 않습니다.");
-    return;
-  }
+  if (!('speechSynthesis' in window)) { toast("이 브라우저는 TTS 지원 안함"); return; }
   speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'en-US';
-  utter.rate = 0.95;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.95;
   const usVoice = voices.find(v => v.lang === 'en-US' && (v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('English')));
-  if (usVoice) utter.voice = usVoice;
-  else {
-    const anyUs = voices.find(v => v.lang === 'en-US');
-    if (anyUs) utter.voice = anyUs;
-  }
-  speechSynthesis.speak(utter);
+  if (usVoice) u.voice = usVoice; else { const any = voices.find(v => v.lang === 'en-US'); if (any) u.voice = any; }
+  speechSynthesis.speak(u);
 }
-function speakerIcon(size = 14) {
-  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>`;
-}
-/* ============================================================
-   WORD LIST
-============================================================ */
+function speakerIcon(size = 14) { return `<svg viewBox="0 0 24 24" width="${size}" height="${size}"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>`; }
 function renderList() {
-  const search = document.getElementById('searchInput').value.toLowerCase().trim();
+  const s = document.getElementById('searchInput').value.toLowerCase().trim();
   const cat = document.getElementById('filterCategory').value;
   const sort = document.getElementById('sortBy').value;
   let list = state.words.filter(w => {
     if (cat !== 'all' && w.category !== cat) return false;
-    if (search) {
-      const examples = (w.examples || []).join(' ');
-      const hay = (w.word + ' ' + w.meaning + ' ' + examples + ' ' + (w.collocations||[]).join(' ')).toLowerCase();
-      if (!hay.includes(search)) return false;
-    }
+    if (s) { const hay = (w.word + ' ' + w.meaning + ' ' + (w.examples||[]).join(' ') + ' ' + (w.collocations||[]).join(' ')).toLowerCase(); if (!hay.includes(s)) return false; }
     return true;
   });
   if (sort === 'recent') list.sort((a,b) => (b.createdAt||'').localeCompare(a.createdAt||''));
@@ -867,36 +639,20 @@ function renderList() {
   else if (sort === 'due') list.sort((a,b) => (a.nextReview||'').localeCompare(b.nextReview||''));
   else if (sort === 'hardest') list.sort((a,b) => (b.lapses||0) - (a.lapses||0));
   const body = document.getElementById('wordTableBody');
-  if (list.length === 0) {
-    body.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:30px;">검색 결과 없음</td></tr>`;
-    return;
-  }
+  if (list.length === 0) { body.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px;">검색 결과 없음</td></tr>`; return; }
   const today = todayStr();
   body.innerHTML = list.map(w => {
     const days = daysUntil(w.nextReview || today);
-    let dueText;
-    if (days <= 0) dueText = `<span style="color:var(--danger); font-weight:600;">오늘 복습</span>`;
-    else if (days === 1) dueText = `<span style="color:var(--warn);">내일</span>`;
-    else dueText = `${days}일 후`;
-    const firstExample = (w.examples && w.examples[0]) || w.example || '';
-    return `
-      <tr>
-        <td>
-          <span class="word">${escapeHtml(w.word)}</span>
-          <button class="tts-btn sm" style="margin-left:4px;vertical-align:middle;" onclick="speak('${escapeJs(w.word)}')">${speakerIcon(11)}</button>
-          <div style="margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">${catChip(w.category)} ${stageBadge(w.learningStage || 1)}</div>
-        </td>
-        <td>
-          <div>${escapeHtml(w.meaning)}</div>
-          ${(w.collocations||[]).length>0 ? `<div class="ex">${w.collocations.map(c=>escapeHtml(c)).join(' · ')}</div>` : ''}
-        </td>
-        <td><div class="ex">${escapeHtml(firstExample)}</div></td>
-        <td>${dueText}<div class="ex">reps ${w.reps} · lapses ${w.lapses}</div></td>
-        <td>
-          <button class="icon-btn" onclick="editWord('${w.id}')" title="수정">✏️</button>
-          <button class="icon-btn del" onclick="deleteWord('${w.id}')" title="삭제">🗑️</button>
-        </td>
-      </tr>`;
+    let due; if (days <= 0) due = `<span style="color:var(--danger);font-weight:600;">오늘 복습</span>`; else if (days === 1) due = `<span style="color:var(--warn);">내일</span>`; else due = `${days}일 후`;
+    const ex = (w.examples && w.examples[0]) || '';
+    return `<tr>
+      <td><span class="word">${escapeHtml(w.word)}</span> <button class="tts-btn sm" style="margin-left:4px;vertical-align:middle;" onclick="speak('${escapeJs(w.word)}')">${speakerIcon(11)}</button>
+        <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;">${catChip(w.category)} ${stageBadge(w.learningStage||1)}</div></td>
+      <td><div>${escapeHtml(w.meaning)}</div>${(w.collocations||[]).length>0?`<div class="ex">${w.collocations.map(c=>escapeHtml(c)).join(' · ')}</div>`:''}</td>
+      <td><div class="ex">${escapeHtml(ex)}</div></td>
+      <td>${due}<div class="ex">reps ${w.reps} · lapses ${w.lapses}</div></td>
+      <td><button class="icon-btn" onclick="editWord('${w.id}')">✏️</button> <button class="icon-btn del" onclick="deleteWord('${w.id}')">🗑️</button></td>
+    </tr>`;
   }).join('');
 }
 document.getElementById('searchInput').addEventListener('input', renderList);
@@ -906,30 +662,19 @@ document.getElementById('studyCategory').addEventListener('change', renderStudy)
 document.getElementById('studyMode').addEventListener('change', renderStudy);
 document.getElementById('studyDirection').addEventListener('change', renderStudy);
 function editWord(id) {
-  const w = state.words.find(x => x.id === id);
-  if (!w) return;
+  const w = state.words.find(x => x.id === id); if (!w) return;
   document.querySelector('.tab[data-tab="add"]').click();
   document.getElementById('editId').value = id;
   document.getElementById('f_word').value = w.word;
   document.getElementById('f_ipa').value = w.ipa || '';
   document.getElementById('f_meaning').value = w.meaning;
-  const ex = (w.examples && w.examples.length>0) ? w.examples.join('\n') : (w.example || '');
-  document.getElementById('f_examples').value = ex;
+  document.getElementById('f_examples').value = (w.examples && w.examples.length>0) ? w.examples.join('\n') : '';
   document.getElementById('f_collocations').value = (w.collocations || []).join(', ');
   document.getElementById('f_category').value = w.category;
   document.getElementById('f_note').value = w.note || '';
   document.getElementById('cancelEdit').style.display = 'inline-block';
 }
-function deleteWord(id) {
-  if (!confirm('이 단어를 삭제하시겠습니까?')) return;
-  state.words = state.words.filter(w => w.id !== id);
-  saveState();
-  renderList();
-  toast("삭제되었습니다.");
-}
-/* ============================================================
-   ADD / EDIT FORM
-============================================================ */
+function deleteWord(id) { if (!confirm('이 단어를 삭제하시겠습니까?')) return; state.words = state.words.filter(w => w.id !== id); saveState(); renderList(); toast("삭제됨"); }
 document.getElementById('wordForm').addEventListener('submit', e => {
   e.preventDefault();
   const id = document.getElementById('editId').value;
@@ -937,285 +682,137 @@ document.getElementById('wordForm').addEventListener('submit', e => {
     word: document.getElementById('f_word').value.trim(),
     ipa: document.getElementById('f_ipa').value.trim(),
     meaning: document.getElementById('f_meaning').value.trim(),
-    examples: document.getElementById('f_examples').value.split('\n').map(s => s.trim()).filter(Boolean),
-    collocations: document.getElementById('f_collocations').value.split(',').map(s => s.trim()).filter(Boolean),
+    examples: document.getElementById('f_examples').value.split('\n').map(s=>s.trim()).filter(Boolean),
+    collocations: document.getElementById('f_collocations').value.split(',').map(s=>s.trim()).filter(Boolean),
     category: document.getElementById('f_category').value,
     note: document.getElementById('f_note').value.trim(),
   };
-  if (!data.word || !data.meaning) { toast("단어와 뜻은 필수입니다."); return; }
-  if (id) {
-    const w = state.words.find(x => x.id === id);
-    if (w) Object.assign(w, data);
-    toast("수정되었습니다.");
-  } else {
-    state.words.push({
-      id: cryptoId(),
-      ...data,
-      createdAt: todayStr(),
-      box: 0, reps: 0, lapses: 0,
-      lastReviewed: null,
-      nextReview: todayStr(),
-      history: [],
-      userSentence: "",
-      learningStage: 1,
-    });
-    toast("단어가 추가되었습니다.");
-  }
-  saveState();
-  e.target.reset();
-  document.getElementById('editId').value = '';
-  document.getElementById('cancelEdit').style.display = 'none';
+  if (!data.word || !data.meaning) { toast("단어와 뜻은 필수"); return; }
+  if (id) { const w = state.words.find(x=>x.id===id); if (w) Object.assign(w, data); toast("수정됨"); }
+  else { state.words.push({ id: cryptoId(), ...data, createdAt: todayStr(), box: 0, reps: 0, lapses: 0, lastReviewed: null, nextReview: todayStr(), history: [], userSentence: "", learningStage: 1, lastAttemptDate: null, failedToday: false, recoveredToday: false, passedToday: false, coldStreak: 0, lastResponseMs: 0 }); toast("추가됨"); }
+  saveState(); e.target.reset(); document.getElementById('editId').value=''; document.getElementById('cancelEdit').style.display='none';
 });
-document.getElementById('cancelEdit').addEventListener('click', () => {
-  document.getElementById('wordForm').reset();
-  document.getElementById('editId').value = '';
-  document.getElementById('cancelEdit').style.display = 'none';
-});
-/* ============================================================
-   STATS
-============================================================ */
+document.getElementById('cancelEdit').addEventListener('click', () => { document.getElementById('wordForm').reset(); document.getElementById('editId').value=''; document.getElementById('cancelEdit').style.display='none'; });
 function renderStats() {
   const today = todayStr();
-  const totalWords = state.words.length;
-  const dueToday = state.words.filter(w => (w.nextReview || today) <= today).length;
-  const newWords = state.words.filter(w => w.reps === 0 && w.lapses === 0).length;
-  const mastered = state.words.filter(w => w.box >= 5).length;
-  const reviewedToday = (state.log[today] || {}).reviewed || 0;
-  const correctToday = (state.log[today] || {}).correct || 0;
-  const accuracy = reviewedToday > 0 ? Math.round((correctToday / reviewedToday) * 100) : 0;
-  let streak = 0;
-  let cursor = today;
-  while (state.log[cursor] && state.log[cursor].reviewed > 0) {
-    streak += 1;
-    cursor = addDays(cursor, -1);
-  }
-  const articlesCount = (state.articles || []).length;
+  const total = state.words.length;
+  const due = state.words.filter(w => (w.nextReview||today) <= today).length;
+  const trueMaster = state.words.filter(w => (w.coldStreak||0) >= 3 && (w.learningStage||1) >= 5).length;
+  const passive = state.words.filter(w => (w.reps||0) >= 3 && (w.coldStreak||0) < 2 && (w.learningStage||1) <= 2).length;
+  const fragile = state.words.filter(w => (w.lapses||0) >= 2 && (w.coldStreak||0) < 2).length;
+  const log = state.log[today] || {};
+  const reviewed = log.reviewed || 0;
+  const correct = log.correct || 0;
+  const cold = log.cold || 0;
+  const recovered = log.recovered || 0;
+  const acc = reviewed > 0 ? Math.round((correct/reviewed)*100) : 0;
+  let streak = 0, cur = today;
+  while (state.log[cur] && state.log[cur].reviewed > 0) { streak++; cur = addDays(cur, -1); }
+  const articles = (state.articles||[]).length;
   document.getElementById('statsGrid').innerHTML = `
-    <div class="stat"><div class="v">${totalWords}</div><div class="l">전체 단어</div></div>
-    <div class="stat"><div class="v">${dueToday}</div><div class="l">오늘 복습 대기</div></div>
-    <div class="stat"><div class="v" style="color:var(--good);">${mastered}</div><div class="l">🏆 마스터</div></div>
-    <div class="stat"><div class="v">${reviewedToday}</div><div class="l">오늘 학습 수</div></div>
-    <div class="stat"><div class="v">${accuracy}%</div><div class="l">오늘 정답률</div></div>
+    <div class="stat"><div class="v">${total}</div><div class="l">전체 단어</div></div>
+    <div class="stat"><div class="v">${due}</div><div class="l">오늘 복습 대기</div></div>
+    <div class="stat"><div class="v" style="color:var(--good);">${trueMaster}</div><div class="l">🏆 True Master<br><span style="font-size:10px;">(coldStreak≥3 & S≥5)</span></div></div>
+    <div class="stat"><div class="v" style="color:#f59e0b;">${passive}</div><div class="l">⚠️ Passive 위험<br><span style="font-size:10px;">(보면 알지만 못 씀)</span></div></div>
+    <div class="stat"><div class="v" style="color:#a855f7;">${fragile}</div><div class="l">🔁 Fragile</div></div>
+    <div class="stat"><div class="v" style="color:var(--good);">${cold}</div><div class="l">🧊 오늘 Cold Correct</div></div>
+    <div class="stat"><div class="v" style="color:#a855f7;">${recovered}</div><div class="l">🩹 오늘 Recovered</div></div>
+    <div class="stat"><div class="v">${reviewed}</div><div class="l">오늘 학습 수</div></div>
+    <div class="stat"><div class="v">${acc}%</div><div class="l">오늘 표면 정답률</div></div>
     <div class="stat"><div class="v">${streak}🔥</div><div class="l">연속 학습일</div></div>
-    <div class="stat"><div class="v">${articlesCount}</div><div class="l">📰 가져온 기사</div></div>
+    <div class="stat"><div class="v">${articles}</div><div class="l">📰 가져온 기사</div></div>
   `;
-  document.getElementById('categoryStats').innerHTML = Object.entries(CATEGORIES).map(([key, c]) => {
-    const list = state.words.filter(w => w.category === key);
+  document.getElementById('categoryStats').innerHTML = Object.entries(CATEGORIES).map(([k,c]) => {
+    const list = state.words.filter(w => w.category === k);
     const learned = list.filter(w => w.reps > 0).length;
-    const pct = list.length > 0 ? Math.round((learned / list.length) * 100) : 0;
-    return `
-      <div style="margin-bottom:10px;">
-        <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
-          <span>${catChip(key)}</span>
-          <span>${learned} / ${list.length} (${pct}%)</span>
-        </div>
-        <div style="background:#eef0f7; border-radius:6px; height:8px; overflow:hidden;">
-          <div style="background:${c.color}; height:100%; width:${pct}%;"></div>
-        </div>
-      </div>`;
+    const pct = list.length > 0 ? Math.round((learned/list.length)*100) : 0;
+    return `<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>${catChip(k)}</span><span>${learned}/${list.length} (${pct}%)</span></div><div style="background:#eef0f7;border-radius:6px;height:8px;overflow:hidden;"><div style="background:${c.color};height:100%;width:${pct}%;"></div></div></div>`;
   }).join('');
-  const stageBuckets = Object.values(STAGES).map(s => ({
-    stage: s,
-    count: state.words.filter(w => (w.learningStage || 1) === s.num).length,
-  }));
-  const maxStageC = Math.max(...stageBuckets.map(b => b.count), 1);
-  document.getElementById('stageStats').innerHTML = stageBuckets.map(b => `
-    <div style="display:flex; align-items:center; margin-bottom:6px; font-size:13px;">
-      <div style="width:160px; color:${b.stage.color}; font-weight:600;">${b.stage.short} <span style="color:var(--muted); font-weight:normal;">(S${b.stage.num})</span></div>
-      <div style="flex:1; background:#eef0f7; border-radius:4px; height:18px; overflow:hidden;">
-        <div style="background:${b.stage.color}; height:100%; width:${(b.count/maxStageC)*100}%;"></div>
-      </div>
-      <div style="width:40px; text-align:right;">${b.count}</div>
-    </div>
-  `).join('');
-  const buckets = SRS_INTERVALS.map((d, i) => ({
-    label: d + '일 간격',
-    count: state.words.filter(w => w.box === i && w.reps > 0).length,
-  }));
+  const stageBuckets = Object.values(STAGES).map(s => ({ stage: s, count: state.words.filter(w => (w.learningStage||1) === s.num).length }));
+  const maxStage = Math.max(...stageBuckets.map(b => b.count), 1);
+  document.getElementById('stageStats').innerHTML = stageBuckets.map(b => `<div style="display:flex;align-items:center;margin-bottom:6px;font-size:13px;"><div style="width:160px;color:${b.stage.color};font-weight:600;">${b.stage.short} (S${b.stage.num})</div><div style="flex:1;background:#eef0f7;border-radius:4px;height:18px;overflow:hidden;"><div style="background:${b.stage.color};height:100%;width:${(b.count/maxStage)*100}%;"></div></div><div style="width:40px;text-align:right;">${b.count}</div></div>`).join('');
+  const buckets = SRS_INTERVALS.map((d,i) => ({ label: d+'일 간격', count: state.words.filter(w => w.box === i && w.reps > 0).length }));
   buckets.unshift({ label: '신규/리셋', count: state.words.filter(w => w.reps === 0 || (w.box === 0 && w.lapses > 0)).length });
   const maxC = Math.max(...buckets.map(b => b.count), 1);
-  document.getElementById('intervalStats').innerHTML = buckets.map(b => `
-    <div style="display:flex; align-items:center; margin-bottom:6px; font-size:13px;">
-      <div style="width:90px; color:var(--muted);">${b.label}</div>
-      <div style="flex:1; background:#eef0f7; border-radius:4px; height:18px; overflow:hidden;">
-        <div style="background:var(--accent); height:100%; width:${(b.count/maxC)*100}%;"></div>
-      </div>
-      <div style="width:40px; text-align:right;">${b.count}</div>
-    </div>
-  `).join('');
+  document.getElementById('intervalStats').innerHTML = buckets.map(b => `<div style="display:flex;align-items:center;margin-bottom:6px;font-size:13px;"><div style="width:90px;color:var(--muted);">${b.label}</div><div style="flex:1;background:#eef0f7;border-radius:4px;height:18px;overflow:hidden;"><div style="background:var(--accent);height:100%;width:${(b.count/maxC)*100}%;"></div></div><div style="width:40px;text-align:right;">${b.count}</div></div>`).join('');
 }
-/* ============================================================
-   QUIZ MODE (simplified — focuses on the most-used flow)
-============================================================ */
-let quiz = null;
-function renderQuiz() {
-  const c = document.getElementById('quizContainer');
-  if (!quiz) {
-    c.innerHTML = `
-      <h3 style="margin-top:0;">🎯 퀴즈 모드</h3>
-      <p style="color:var(--muted); font-size:13px;">단어장에서 카드를 뽑아 객관식·타이핑 퀴즈를 출제합니다.</p>
-      <div class="filter-row" style="margin-top:14px;">
-        <select id="quizCat">
-          <option value="all">전체 카테고리</option>
-          ${Object.entries(CATEGORIES).map(([k,c2]) => {
-            const n = state.words.filter(w => w.category === k).length;
-            return `<option value="${k}">${c2.icon} ${c2.label} (${n})</option>`;
-          }).join('')}
-        </select>
-        <select id="quizCount">
-          <option value="10">10문제</option>
-          <option value="20" selected>20문제</option>
-          <option value="30">30문제</option>
-        </select>
-        <select id="quizType">
-          <option value="type_e2k">✏️ 타이핑 영→한 (Stage 1 · 추천)</option>
-          <option value="type_k2e">✍️ 타이핑 한→영 (어려움)</option>
-          <option value="mc_e2k">🔍 객관식 영→한 (보조)</option>
-          <option value="mc_k2e">⚡ 객관식 한→영 (보조)</option>
-        </select>
-      </div>
-      <button class="quiz-start-btn" id="quizStartBtn" style="margin-top:14px;">🚀 퀴즈 시작</button>
-    `;
-    document.getElementById('quizStartBtn').addEventListener('click', () => {
-      startQuiz(
-        document.getElementById('quizType').value,
-        document.getElementById('quizCat').value,
-        parseInt(document.getElementById('quizCount').value)
-      );
-    });
-  } else if (quiz.state === 'running') {
-    showQuizQuestion();
-  } else if (quiz.state === 'done') {
-    showQuizResults();
-  }
-}
-function startQuiz(typeId, cat, count) {
-  let pool = state.words.filter(w => cat === 'all' || w.category === cat);
-  if (pool.length < 4) { toast('최소 4개 단어가 필요합니다.'); return; }
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  const questions = pool.slice(0, Math.min(count, pool.length));
-  quiz = {
-    typeId, pool: state.words, questions,
-    index: 0, results: [], state: 'running', startTime: Date.now(), answered: false,
-  };
-  renderQuiz();
-}
-function showQuizQuestion() {
-  const c = document.getElementById('quizContainer');
-  const q = quiz.questions[quiz.index];
-  const t = quiz.typeId;
-  const pct = (quiz.index / quiz.questions.length) * 100;
-  let content = '';
-  if (t === 'mc_e2k' || t === 'mc_k2e') {
-    const field = t === 'mc_e2k' ? 'meaning' : 'word';
-    const promptText = t === 'mc_e2k' ? q.word : q.meaning;
-    const opts = buildChoices(q, quiz.pool, field);
-    content = `
-      <div class="quiz-prompt-label">${t === 'mc_e2k' ? '이 영어 단어의 뜻은?' : '이 뜻에 해당하는 영어 단어는?'}</div>
-      <div class="quiz-prompt">${escapeHtml(promptText)}
-        ${t === 'mc_e2k' ? `<button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button>` : ''}
-      </div>
-      <div class="quiz-options">
-        ${opts.map((o, i) => `<button class="quiz-option" data-correct="${o.correct ? '1' : '0'}">
-          <span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}
-        </button>`).join('')}
-      </div>`;
-  } else if (t === 'type_k2e') {
-    content = `
-      <div class="quiz-prompt-label">한국어 뜻을 보고 영어로 입력하세요</div>
-      <div class="quiz-prompt">${escapeHtml(q.meaning)}</div>
-      <input type="text" id="quizTextInput" class="quiz-text-input" placeholder="영어 단어 입력..." autocomplete="off" />
-      <button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
-  } else if (t === 'type_e2k') {
-    content = `
-      <div class="quiz-prompt-label">이 단어의 한국어 뜻을 직접 입력하세요</div>
-      <div class="quiz-prompt">${escapeHtml(q.word)}
-        <button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button>
-      </div>
-      ${q.ipa ? `<div class="quiz-ipa">${escapeHtml(q.ipa)}</div>` : ''}
-      <input type="text" id="quizTextInput" class="quiz-text-input" placeholder="한국어 뜻 입력... (콤마로 여러 개 OK)" autocomplete="off" />
-      <button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>
-      <div style="margin-top:8px; font-size:11px; color:var(--muted);">💡 콤마/슬래시로 묶인 여러 뜻 중 하나만 맞아도 통과. 표현이 비슷하면 통과 (예: "완화하다" ≈ "완화함" ≈ "완화시키다").</div>`;
-  }
-  c.innerHTML = `
-    <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px; color:var(--muted);">
-      <div>${catChip(q.category)}</div>
-      <div>${quiz.index + 1} / ${quiz.questions.length} <button onclick="quiz=null;renderQuiz();" style="background:#f1f3f9; border:1px solid var(--border); border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; margin-left:8px;">✕ 종료</button></div>
-    </div>
-    <div class="quiz-progress"><div class="bar" style="width:${pct}%;"></div></div>
-    <div class="quiz-question">${content}</div>
-    <div id="quizFeedback"></div>
-    <div id="quizControls"></div>
-  `;
-  quiz.answered = false;
-  c.querySelectorAll('.quiz-option').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (quiz.answered) return;
-      const correct = btn.dataset.correct === '1';
-      document.querySelectorAll('.quiz-option').forEach(b => {
-        b.disabled = true;
-        if (b.dataset.correct === '1') b.classList.add('correct');
-        else if (b === btn && !correct) b.classList.add('wrong');
-      });
-      showQuizFeedback(correct, btn.textContent.replace(/^\d+\.\s*/, ''));
-    });
+const COLD_THRESHOLDS = { type_e2k: 10000, type_k2e: 12000, dictation: 12000, fill_blank: 15000, mc_e2k: 5000, mc_k2e: 7000, listen_mc: 6000, sentence: 60000 };
+const SLOW_THRESHOLDS = { type_e2k: 25000, type_k2e: 30000, dictation: 30000, fill_blank: 35000, mc_e2k: 15000, mc_k2e: 15000, listen_mc: 15000, sentence: 180000 };
+const EVAL_LABELS = {
+  cold_correct: { icon:'🧊', label:'Cold Correct', color:'#16a34a', message:'첫 시도, 빠른 정답. 진짜 spaced retrieval 성공입니다. 다음 간격으로 승급.' },
+  medium_correct: { icon:'🌤️', label:'Medium Correct', color:'#2563eb', message:'첫 시도 정답이지만 약간 느림. 같은 간격에서 한 번 더. 승급 보류.' },
+  slow_correct: { icon:'🐢', label:'Slow Correct', color:'#f59e0b', message:'맞히긴 했지만 너무 오래 걸림. 한 단계 후퇴.' },
+  first_fail: { icon:'❌', label:'First Miss', color:'#dc2626', message:'첫 시도 실패. 내일 다시 도전.' },
+  recovered: { icon:'🩹', label:'Recovered Today', color:'#a855f7', message:'정답 보고 다시 맞힘 = 복구 연습. 승급 없음. 내일 첫 시도에서 진짜 증명.' },
+  still_failing: { icon:'🔁', label:'Still Missing', color:'#dc2626', message:'아직 안 잡힘. 정답 다시 보고 내일 도전.' },
+  extra_practice: { icon:'➕', label:'Extra Practice', color:'#6b7280', message:'이미 오늘 SRS 처리됨. 추가 연습은 SRS에 반영 안 됨.' },
+  active_use: { icon:'🌟', label:'Active Use', color:'#16a34a', message:'문장 속에서 사용 확인됨. Active vocabulary 후보.' },
+};
+function dailyReset() {
+  const today = todayStr();
+  state.words.forEach(w => {
+    if (w.lastAttemptDate && w.lastAttemptDate !== today) {
+      w.failedToday = false; w.recoveredToday = false; w.passedToday = false;
+    }
   });
-  const inp = document.getElementById('quizTextInput');
-  if (inp) {
-    inp.focus();
-    inp.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (!quiz.answered) submitTypingAnswer();
-        else nextQuizQuestion();
+}
+function snapshotWord(w) { return JSON.stringify({ box:w.box, reps:w.reps, lapses:w.lapses, nextReview:w.nextReview, lastReviewed:w.lastReviewed, lastAttemptDate:w.lastAttemptDate, failedToday:w.failedToday, passedToday:w.passedToday, recoveredToday:w.recoveredToday, coldStreak:w.coldStreak, learningStage:w.learningStage, lastResponseMs:w.lastResponseMs }); }
+function restoreWord(w, snap) { Object.assign(w, JSON.parse(snap)); }
+function evaluateAnswer(word, isCorrect, ms, quizType) {
+  const today = todayStr();
+  const isFirstToday = (word.lastAttemptDate !== today);
+  const wasFailedToday = (word.lastAttemptDate === today && word.failedToday);
+  const wasPassedToday = (word.lastAttemptDate === today && word.passedToday);
+  const coldT = COLD_THRESHOLDS[quizType] || 10000;
+  const slowT = SLOW_THRESHOLDS[quizType] || 25000;
+  word.lastReviewed = today; word.lastResponseMs = ms; word.history = word.history || [];
+  let kind;
+  if (isFirstToday) {
+    word.lastAttemptDate = today;
+    word.failedToday = false; word.recoveredToday = false; word.passedToday = false;
+    if (isCorrect) {
+      word.passedToday = true;
+      if (ms <= coldT) {
+        kind = 'cold_correct';
+        word.coldStreak = (word.coldStreak || 0) + 1;
+        word.reps = (word.reps || 0) + 1;
+        word.box = Math.min((word.box || 0) + 1, SRS_INTERVALS.length - 1);
+        word.nextReview = addDays(today, SRS_INTERVALS[word.box]);
+        const stageNum = Object.values(STAGES).find(s => s.quiz === quizType)?.num;
+        if (stageNum && stageNum >= (word.learningStage || 1)) {
+          word.learningStage = Math.min(MAX_STAGE, stageNum + 1);
+        }
+      } else if (ms <= slowT) {
+        kind = 'medium_correct';
+        word.reps = (word.reps || 0) + 1;
+        word.nextReview = addDays(today, SRS_INTERVALS[word.box]);
+      } else {
+        kind = 'slow_correct';
+        word.reps = (word.reps || 0) + 1;
+        word.box = Math.max(0, (word.box || 0) - 1);
+        word.nextReview = addDays(today, SRS_INTERVALS[word.box]);
+        word.coldStreak = 0;
       }
-    });
-  }
-}
-function buildChoices(target, pool, field) {
-  const distractors = pool
-    .filter(w => w.id !== target.id && w[field] !== target[field])
-    .sort(() => Math.random() - 0.5).slice(0, 3)
-    .map(w => ({ text: w[field], correct: false }));
-  const arr = [{ text: target[field], correct: true }, ...distractors];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-function submitTypingAnswer() {
-  const inp = document.getElementById('quizTextInput');
-  if (!inp) return;
-  const ua = inp.value.trim();
-  if (!ua) { toast('답을 입력해주세요.'); return; }
-  const q = quiz.questions[quiz.index];
-  let correct;
-  if (quiz.typeId === 'type_e2k') {
-    correct = checkKoreanMeaning(ua, q.meaning);
+    } else {
+      kind = 'first_fail';
+      word.failedToday = true; word.coldStreak = 0; word.lapses = (word.lapses || 0) + 1;
+      if ((word.box || 0) >= 4) word.box = Math.max(2, word.box - 2); else word.box = 0;
+      word.nextReview = addDays(today, Math.max(1, SRS_INTERVALS[word.box] || 1));
+    }
   } else {
-    correct = normalizeText(ua) === normalizeText(q.word);
+    if (wasFailedToday && isCorrect) { kind = 'recovered'; word.recoveredToday = true; }
+    else if (wasFailedToday && !isCorrect) kind = 'still_failing';
+    else kind = 'extra_practice';
   }
-  inp.disabled = true;
-  inp.classList.add(correct ? 'correct' : 'wrong');
-  document.querySelector('.quiz-submit')?.remove();
-  showQuizFeedback(correct, ua);
+  word.history.push({ date: today, kind, quizType, ms });
+  return { kind, ...EVAL_LABELS[kind] };
 }
-function normalizeText(s) { return String(s).toLowerCase().trim().replace(/\s+/g, ' '); }
-// Lenient Korean meaning matcher.
-// Accepts user input if it matches (or contains / is contained by) any of the
-// comma/slash/semicolon-separated meaning tokens after stripping parens & punctuation.
 function checkKoreanMeaning(userInput, storedMeaning) {
   const norm = s => String(s).replace(/[\s.,!?·∙\-:;()\[\]'"~`]/g, '').toLowerCase();
   const u = norm(userInput);
   if (!u) return false;
-  // Expand parens into the token list (so things like "(여기서) 미미한, 크지 않은" cover all words)
   const expanded = String(storedMeaning).replace(/[()]/g, ',').replace(/[·∙/]/g, ',');
   const tokens = expanded.split(/[,;]/).map(t => norm(t)).filter(Boolean);
-  // Also include the whole normalized meaning as one token for safety
   const whole = norm(storedMeaning);
   if (whole && !tokens.includes(whole)) tokens.push(whole);
   return tokens.some(t => {
@@ -1223,14 +820,9 @@ function checkKoreanMeaning(userInput, storedMeaning) {
     if (t === u) return true;
     if (t.length >= 2 && u.includes(t)) return true;
     if (u.length >= 2 && t.includes(u)) return true;
-    // Korean stem heuristics
     if (t.length >= 2 && u.length >= 2) {
-      // (a) Same 2-char prefix + similar length — "완화시키다" ≈ "완화하다", "옹호하다" ≈ "옹호자"
-      if (t.slice(0, 2) === u.slice(0, 2) && Math.abs(t.length - u.length) <= 3) {
-        return true;
-      }
-      // (b) Same 1-char prefix + nearly all chars of shorter word overlap — "흔하다" ≈ "흔한"
-      if (t[0] === u[0] && Math.abs(t.length - u.length) <= 2) {
+      if (t.slice(0,2) === u.slice(0,2) && Math.abs(t.length-u.length) <= 3) return true;
+      if (t[0] === u[0] && Math.abs(t.length-u.length) <= 2) {
         const tset = new Set(t.split(''));
         const shared = u.split('').filter(c => tset.has(c)).length;
         const minLen = Math.min(t.length, u.length);
@@ -1240,107 +832,319 @@ function checkKoreanMeaning(userInput, storedMeaning) {
     return false;
   });
 }
+const QUIZ_TYPES = [
+  { id:'smart_seq', icon:'🧠', label:'Smart Quiz (자동 진행)', desc:'각 단어의 현재 단계(Stage 1~5)에 맞는 퀴즈를 자동 출제 — 가장 추천!', mode:'smart', featured:true },
+  { id:'type_e2k', icon:'✏️', label:'타이핑 영→한 (Stage 1)', desc:'영어 단어를 보고 한국어 뜻 직접 입력 — 객관식 X, 확실한 기억 강제 (Stage 1)', mode:'prod' },
+  { id:'fill_blank', icon:'🧩', label:'예문 빈칸 채우기', desc:'예문에서 빠진 단어를 직접 입력 — 문맥 속 사용 (Stage 2)', mode:'prod' },
+  { id:'dictation', icon:'📝', label:'받아쓰기 (TTS → 타이핑)', desc:'TTS로 단어를 듣고 직접 입력 (Stage 3)', mode:'prod' },
+  { id:'type_k2e', icon:'✍️', label:'타이핑 한→영 (Stage 4)', desc:'한국어 뜻만 보고 영어 직접 입력 (Stage 4)', mode:'prod' },
+  { id:'sentence', icon:'🌟', label:'내 문장 만들기 (Stage 5)', desc:'단어를 사용해 직접 영어 문장 작성 (Stage 5)', mode:'prod' },
+  { id:'mc_e2k', icon:'🔍', label:'객관식 영→한', desc:'영어 단어를 보고 뜻 4지선다 — 보조 진단 (stage 진행 안 함)', mode:'rec' },
+  { id:'mc_k2e', icon:'⚡', label:'객관식 한→영', desc:'한국어 뜻을 보고 영어 4지선다 — 보조 진단', mode:'rec' },
+  { id:'listen_mc', icon:'🎧', label:'듣기 객관식', desc:'TTS로 듣고 뜻 4지선다 — 보조 진단', mode:'rec' },
+];
+let quiz = null;
+function renderQuiz() {
+  if (!quiz) { showQuizSetup(); return; }
+  if (quiz.state === 'running') showQuizQuestion();
+  else if (quiz.state === 'done') showQuizResults();
+}
+function exitQuiz() {
+  if (quiz && quiz.state === 'running' && quiz.index > 0) {
+    if (!confirm(`퀴즈 중간 종료? 지금까지 답한 ${quiz.index}문제는 이미 SRS에 반영되어 있습니다.`)) return;
+  }
+  quiz = null; renderQuiz();
+}
+function showQuizSetup() {
+  const c = document.getElementById('quizContainer');
+  c.innerHTML = `
+    <h3 style="margin-top:0;">🎯 퀴즈 모드</h3>
+    <div style="background:#fffbea; border-left:3px solid #f1c40f; padding:12px 16px; border-radius:8px; margin-bottom:18px; font-size:13px; line-height:1.7;">
+      <b>💡 추천: Smart Quiz 하나만 돌리세요</b><br>
+      Stage 1 ✏️ 뜻 쓰기 (타이핑 영→한) → Stage 2 🧩 빈칸 → Stage 3 📝 받아쓰기 → Stage 4 ✍️ K→E → Stage 5 🌟 문장<br>
+      Cold Correct (첫 시도 빠른 정답)만 Stage 진행. 객관식은 stage 진행 안 함.
+    </div>
+    <div style="margin-bottom:8px; font-size:13px; font-weight:600; color:var(--muted);">1. 퀴즈 유형</div>
+    <div class="quiz-types" id="quizTypes">
+      ${QUIZ_TYPES.map(t => {
+        const tag = t.mode === 'smart' ? 'SMART' : (t.mode === 'rec' ? 'RECOGNITION' : 'PRODUCTION');
+        const tc = t.mode === 'smart' ? 'smart' : t.mode;
+        const fe = t.featured ? 'style="border-color:var(--primary); box-shadow:0 0 0 3px rgba(79,109,255,0.12);"' : '';
+        return `<div class="quiz-type-card" data-type="${t.id}" ${fe}><div class="qt-title">${t.icon} ${escapeHtml(t.label)}${t.featured ? ' <span style="font-size:10px;color:var(--primary);">⭐</span>' : ''}</div><div class="qt-desc">${escapeHtml(t.desc)}</div><div class="qt-tag ${tc}">${tag}</div></div>`;
+      }).join('')}
+    </div>
+    <div class="filter-row" style="margin-top:18px;">
+      <div style="flex:1;min-width:140px;"><label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">2. 카테고리</label><select id="quizCat" style="width:100%;"><option value="all">전체</option>${Object.entries(CATEGORIES).map(([k,c2])=>{const n=state.words.filter(w=>w.category===k).length;return `<option value="${k}">${c2.icon} ${c2.label} (${n})</option>`;}).join('')}</select></div>
+      <div style="flex:1;min-width:140px;"><label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">3. 문항 수</label><select id="quizCount" style="width:100%;"><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="50">50</option></select></div>
+      <div style="flex:1;min-width:140px;"><label style="font-size:12px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px;">4. 우선순위</label><select id="quizPriority" style="width:100%;"><option value="due">복습 임박순 (추천)</option><option value="random">랜덤</option><option value="weak">정답률 낮은 단어 우선</option><option value="new">새 단어 우선</option></select></div>
+    </div>
+    <button class="quiz-start-btn" id="quizStartBtn" disabled style="margin-top:18px;">유형을 먼저 선택하세요</button>
+  `;
+  let selected = null;
+  c.querySelectorAll('.quiz-type-card').forEach(card => {
+    card.addEventListener('click', () => {
+      c.querySelectorAll('.quiz-type-card').forEach(x => x.classList.remove('selected'));
+      card.classList.add('selected');
+      selected = card.dataset.type;
+      const btn = document.getElementById('quizStartBtn');
+      btn.disabled = false; btn.textContent = '🚀 퀴즈 시작';
+    });
+  });
+  document.getElementById('quizStartBtn').addEventListener('click', () => {
+    if (!selected) return;
+    startQuiz(selected, document.getElementById('quizCat').value, parseInt(document.getElementById('quizCount').value), document.getElementById('quizPriority').value);
+  });
+}
+function startQuiz(typeId, cat, count, priority) {
+  const today = todayStr();
+  let pool = state.words.filter(w => cat === 'all' || w.category === cat);
+  if (typeId === 'fill_blank') pool = pool.filter(w => (w.examples && w.examples.length > 0));
+  const mcTypes = new Set(['mc_e2k','mc_k2e','listen_mc']);
+  if (mcTypes.has(typeId) && pool.length < 4) { toast('객관식은 최소 4개 단어 필요'); return; }
+  if (pool.length < 1) { toast('단어 없음'); return; }
+  if (priority === 'due') pool.sort((a,b) => (a.nextReview||today).localeCompare(b.nextReview||today));
+  else if (priority === 'weak') pool.sort((a,b) => (b.lapses||0) - (a.lapses||0));
+  else if (priority === 'new') pool.sort((a,b) => ((a.reps||0)+(a.lapses||0)) - ((b.reps||0)+(b.lapses||0)));
+  else { for (let i=pool.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [pool[i],pool[j]]=[pool[j],pool[i]]; } }
+  if (priority !== 'random') {
+    const cutoff = Math.min(pool.length, count > 0 ? count * 2 : pool.length);
+    const top = pool.slice(0, cutoff);
+    for (let i=top.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [top[i],top[j]]=[top[j],top[i]]; }
+    pool = top.concat(pool.slice(cutoff));
+  }
+  const questions = pool.slice(0, Math.min(count, pool.length));
+  quiz = { typeId, type: QUIZ_TYPES.find(t=>t.id===typeId), pool: state.words.filter(w=>cat==='all'||w.category===cat), questions, index: 0, results: [], state: 'running', startTime: Date.now(), answered: false };
+  renderQuiz();
+}
+function showQuizQuestion() {
+  const c = document.getElementById('quizContainer');
+  const q = quiz.questions[quiz.index];
+  const t = quiz.type;
+  const pct = (quiz.index / quiz.questions.length) * 100;
+  let activeType = t.id;
+  if (t.id === 'smart_seq') {
+    const stage = STAGES[q.learningStage || 1] || STAGES[1];
+    activeType = stage.quiz;
+    if (activeType === 'fill_blank' && !(q.examples && q.examples.length > 0)) activeType = 'type_e2k';
+  }
+  quiz.activeType = activeType;
+  const stageBanner = (t.id === 'smart_seq') ? `<div style="background:${(STAGES[q.learningStage||1]||STAGES[1]).color}15;color:${(STAGES[q.learningStage||1]||STAGES[1]).color};padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-align:center;margin-bottom:10px;">🧠 Smart: ${STAGES[q.learningStage||1].label} (Stage ${q.learningStage||1}/${MAX_STAGE})</div>` : '';
+  let content = '';
+  if (activeType === 'mc_e2k') {
+    const opts = buildChoices(q, quiz.pool, 'meaning');
+    content = `<div class="quiz-prompt-label">이 영어 단어의 뜻은?</div><div class="quiz-prompt">${escapeHtml(q.word)} <button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button></div>${q.ipa?`<div class="quiz-ipa">${escapeHtml(q.ipa)}</div>`:''}<div class="quiz-options">${opts.map((o,i)=>`<button class="quiz-option" data-correct="${o.correct?'1':'0'}"><span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}</button>`).join('')}</div>`;
+  } else if (activeType === 'mc_k2e') {
+    const opts = buildChoices(q, quiz.pool, 'word');
+    content = `<div class="quiz-prompt-label">이 뜻에 해당하는 영어 단어는?</div><div class="quiz-prompt">${escapeHtml(q.meaning)}</div><div class="quiz-options">${opts.map((o,i)=>`<button class="quiz-option" data-correct="${o.correct?'1':'0'}"><span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}</button>`).join('')}</div>`;
+  } else if (activeType === 'listen_mc') {
+    const opts = buildChoices(q, quiz.pool, 'meaning');
+    content = `<div class="quiz-prompt-label">단어를 듣고 뜻을 고르세요</div><div class="quiz-audio-icon" onclick="speak('${escapeJs(q.word)}')">🔊</div><div class="quiz-options">${opts.map((o,i)=>`<button class="quiz-option" data-correct="${o.correct?'1':'0'}"><span class="opt-num">${i+1}.</span>${escapeHtml(o.text)}</button>`).join('')}</div>`;
+    setTimeout(()=>speak(q.word), 300);
+  } else if (activeType === 'type_e2k') {
+    content = `<div class="quiz-prompt-label">이 단어의 한국어 뜻을 직접 입력하세요</div><div class="quiz-prompt">${escapeHtml(q.word)} <button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button></div>${q.ipa?`<div class="quiz-ipa">${escapeHtml(q.ipa)}</div>`:''}<input type="text" id="quizTextInput" class="quiz-text-input" placeholder="한국어 뜻 입력... (콤마로 여러 개 OK)" autocomplete="off" /><button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button><div style="margin-top:8px;font-size:11px;color:var(--muted);">💡 콤마/슬래시 뜻 중 하나만 맞아도 통과. 어간 비슷하면 OK (완화하다 ≈ 완화시키다).</div>`;
+  } else if (activeType === 'type_k2e') {
+    content = `<div class="quiz-prompt-label">한국어 뜻 → 영어 입력</div><div class="quiz-prompt">${escapeHtml(q.meaning)}</div><input type="text" id="quizTextInput" class="quiz-text-input" placeholder="영어 단어 입력..." autocomplete="off" autocapitalize="off" /><button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
+  } else if (activeType === 'dictation') {
+    content = `<div class="quiz-prompt-label">단어를 듣고 영어로 받아쓰세요</div><div class="quiz-audio-icon" onclick="speak('${escapeJs(q.word)}')">🔊</div><input type="text" id="quizTextInput" class="quiz-text-input" placeholder="들은 단어 입력..." autocomplete="off" autocapitalize="off" /><button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
+    setTimeout(()=>speak(q.word), 300);
+  } else if (activeType === 'fill_blank') {
+    const examples = (q.examples && q.examples.length > 0) ? q.examples : [];
+    const ex = examples[Math.floor(Math.random()*examples.length)];
+    const blanked = blankOut(ex, q.word);
+    content = `<div class="quiz-prompt-label">빈 칸에 들어갈 단어를 입력</div><div class="quiz-prompt smaller">${escapeHtml(blanked)}</div><div style="font-size:12px;color:var(--muted);margin-top:8px;">힌트: ${escapeHtml(q.meaning)}</div><input type="text" id="quizTextInput" class="quiz-text-input" placeholder="단어 입력..." autocomplete="off" autocapitalize="off" /><button class="quiz-submit" onclick="submitTypingAnswer()">제출 (Enter)</button>`;
+  } else if (activeType === 'sentence') {
+    const ch = (q.collocations && q.collocations.length > 0) ? `<div style="margin-top:10px;font-size:12px;color:var(--muted);">참고 collocation: ${q.collocations.map(c=>`<code style="background:#f1f3f9;padding:2px 6px;border-radius:4px;margin:0 2px;">${escapeHtml(c)}</code>`).join(' ')}</div>` : '';
+    content = `<div class="quiz-prompt-label">이 단어로 영어 문장을 만들어 보세요</div><div class="quiz-prompt">${escapeHtml(q.word)} <button class="tts-btn lg" onclick="speak('${escapeJs(q.word)}')">${speakerIcon()}</button></div>${q.ipa?`<div class="quiz-ipa">${escapeHtml(q.ipa)}</div>`:''}<div style="font-size:14px;margin-top:8px;">뜻: ${escapeHtml(q.meaning)}</div>${ch}<textarea id="quizTextInput" class="quiz-text-input" style="min-height:80px;text-align:left;font-size:15px;" placeholder="자신의 상황에서 사용한 영어 문장..."></textarea><button class="quiz-submit" onclick="submitSentenceAnswer()">제출 (Ctrl+Enter)</button>`;
+  }
+  c.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:var(--muted);flex-wrap:wrap;gap:6px;">
+      <div>${t.icon} ${escapeHtml(t.label)} · ${catChip(q.category)} ${stageBadge(q.learningStage||1)}</div>
+      <div style="display:flex;align-items:center;gap:8px;"><span>${quiz.index+1} / ${quiz.questions.length}</span><button onclick="exitQuiz()" style="background:#f1f3f9;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-weight:600;">✕ 종료</button></div>
+    </div>
+    ${stageBanner}
+    <div class="quiz-progress"><div class="bar" style="width:${pct}%;"></div></div>
+    <div class="quiz-question">${content}</div>
+    <div id="quizFeedback"></div>
+    <div id="quizControls"></div>
+  `;
+  quiz.answered = false;
+  c.querySelectorAll('.quiz-option').forEach(btn => btn.addEventListener('click', () => { if (quiz.answered) return; submitMCAnswer(btn); }));
+  quiz.questionStartTime = Date.now();
+  const inp = document.getElementById('quizTextInput');
+  if (inp) {
+    inp.focus();
+    inp.addEventListener('keydown', e => {
+      if (activeType === 'sentence') {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); if (!quiz.answered) submitSentenceAnswer(); else nextQuizQuestion(); }
+      } else {
+        if (e.key === 'Enter') { e.preventDefault(); if (!quiz.answered) submitTypingAnswer(); else nextQuizQuestion(); }
+      }
+    });
+  }
+}
+function buildChoices(target, pool, field) {
+  const distractors = pool.filter(w => w.id !== target.id && w[field] !== target[field]).sort(()=>Math.random()-0.5).slice(0,3).map(w=>({text: w[field], correct:false}));
+  const uniq = new Map(); uniq.set(target[field], { text: target[field], correct: true });
+  for (const d of distractors) { if (!uniq.has(d.text)) uniq.set(d.text, d); if (uniq.size >= 4) break; }
+  if (uniq.size < 4) { const extra = state.words.filter(w => !uniq.has(w[field])).sort(()=>Math.random()-0.5); for (const w of extra) { if (uniq.size >= 4) break; uniq.set(w[field], { text: w[field], correct: false }); } }
+  const arr = [...uniq.values()].slice(0,4);
+  for (let i=arr.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+  return arr;
+}
+function submitMCAnswer(btn) {
+  const correct = btn.dataset.correct === '1';
+  document.querySelectorAll('.quiz-option').forEach(b => { b.disabled = true; if (b.dataset.correct === '1') b.classList.add('correct'); else if (b === btn && !correct) b.classList.add('wrong'); });
+  showQuizFeedback(correct, btn.textContent.replace(/^\d+\.\s*/, ''));
+}
+function submitTypingAnswer() {
+  const inp = document.getElementById('quizTextInput'); if (!inp) return;
+  const ua = inp.value.trim(); if (!ua) { toast('답 입력 필요'); return; }
+  const q = quiz.questions[quiz.index];
+  let correct;
+  if (quiz.activeType === 'type_e2k') correct = checkKoreanMeaning(ua, q.meaning);
+  else correct = normalizeText(ua) === normalizeText(q.word);
+  inp.disabled = true; inp.classList.add(correct ? 'correct' : 'wrong');
+  document.querySelector('.quiz-submit')?.remove();
+  showQuizFeedback(correct, ua);
+}
+function submitSentenceAnswer() {
+  const inp = document.getElementById('quizTextInput'); if (!inp) return;
+  const us = inp.value.trim(); if (!us) { toast('문장 입력 필요'); return; }
+  const q = quiz.questions[quiz.index];
+  const escaped = q.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const contains = new RegExp('\\b'+escaped+'\\w*', 'i').test(us);
+  inp.disabled = true; document.querySelector('.quiz-submit')?.remove();
+  const w = state.words.find(x=>x.id===q.id); if (w) { w.userSentence = us; saveState(); }
+  quiz.answered = true;
+  document.getElementById('quizFeedback').innerHTML = `<div class="quiz-feedback" style="background:#fffbea;color:var(--text);"><div style="font-weight:600;margin-bottom:6px;">✏️ 내가 만든 문장:</div><div style="background:white;padding:10px 14px;border-radius:8px;font-style:italic;">"${escapeHtml(us)}"</div>${!contains?`<div style="margin-top:8px;color:var(--warn);font-size:12px;">⚠️ "${escapeHtml(q.word)}"가 포함 안 됨</div>`:''}<div style="margin-top:12px;font-size:13px;">자연스러운 사용이었나요?</div></div>`;
+  document.getElementById('quizControls').innerHTML = `<button class="btn-again" style="padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;" onclick="gradeSentence('again')">🔴 다시</button><button class="btn-hard" style="padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;" onclick="gradeSentence('hard')">🟠 어색</button><button class="btn-good" style="padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;" onclick="gradeSentence('good')">🟢 괜찮음</button><button class="btn-easy" style="padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;" onclick="gradeSentence('easy')">🔵 완벽</button>`;
+}
+function gradeSentence(verdict) {
+  const q = quiz.questions[quiz.index];
+  const correct = verdict === 'good' || verdict === 'easy';
+  const us = document.getElementById('quizTextInput')?.value || '';
+  const w = state.words.find(x=>x.id===q.id);
+  if (w) {
+    const today = todayStr();
+    w.lastReviewed = today; w.lastAttemptDate = today; w.history = w.history || [];
+    w.history.push({ date:today, kind:'sentence_'+verdict, quizType:'sentence' });
+    if (verdict === 'again') { w.failedToday = true; w.lapses += 1; w.coldStreak = 0; if (w.box >= 4) w.box = Math.max(2, w.box-2); else w.box = 0; w.nextReview = addDays(today, Math.max(1, SRS_INTERVALS[w.box]||1)); }
+    else if (verdict === 'hard') { w.passedToday = true; w.reps += 1; w.nextReview = addDays(today, SRS_INTERVALS[w.box]); }
+    else if (verdict === 'good') { w.passedToday = true; w.reps += 1; w.box = Math.min(w.box+1, SRS_INTERVALS.length-1); w.nextReview = addDays(today, SRS_INTERVALS[w.box]); w.learningStage = Math.min(MAX_STAGE, (w.learningStage||1)+1); }
+    else if (verdict === 'easy') { w.passedToday = true; w.reps += 1; w.coldStreak = (w.coldStreak||0)+1; w.box = Math.min(w.box+2, SRS_INTERVALS.length-1); w.nextReview = addDays(today, SRS_INTERVALS[w.box]); w.learningStage = MAX_STAGE; }
+    if (!state.log[today]) state.log[today] = { reviewed:0, correct:0, cold:0, recovered:0, missed:0 };
+    state.log[today].reviewed += 1; if (correct) state.log[today].correct += 1;
+    if (verdict === 'easy') state.log[today].cold = (state.log[today].cold||0)+1;
+    if (verdict === 'again') state.log[today].missed = (state.log[today].missed||0)+1;
+  }
+  quiz.results.push({ wordId: q.id, word: q.word, meaning: q.meaning, userAnswer: us, correct, sentence: true });
+  saveState();
+  setTimeout(() => nextQuizQuestion(), 200);
+}
+function normalizeText(s) { return String(s).toLowerCase().trim().replace(/\s+/g,' ').replace(/['']/g,"'"); }
+function blankOut(s, w) {
+  const e = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp('\\b'+e+'\\w*', 'i');
+  if (re.test(s)) return s.replace(re, '_____');
+  return s.replace(new RegExp(e, 'i'), '_____');
+}
 function showQuizFeedback(correct, ua) {
   quiz.answered = true;
   const q = quiz.questions[quiz.index];
-  const w = state.words.find(x => x.id === q.id);
-  if (w) {
-    const today = todayStr();
-    w.lastReviewed = today;
-    w.history = w.history || [];
-    w.history.push({ date: today, result: correct ? 'good' : 'again' });
-    if (correct) {
-      w.reps += 1;
-      w.box = Math.min(w.box + 1, SRS_INTERVALS.length - 1);
-      w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
-    } else {
-      w.lapses += 1;
-      w.box = 0;
-      w.nextReview = addDays(today, 1);
-    }
-    if (!state.log[today]) state.log[today] = { reviewed: 0, correct: 0 };
-    state.log[today].reviewed += 1;
-    if (correct) state.log[today].correct += 1;
-    saveState();
+  const ms = Date.now() - (quiz.questionStartTime || Date.now());
+  const activeType = quiz.activeType || quiz.type.id;
+  const w = state.words.find(x=>x.id===q.id);
+  let evalResult = null, beforeSnap = null;
+  if (w) { beforeSnap = snapshotWord(w); evalResult = evaluateAnswer(w, correct, ms, activeType); }
+  const today = todayStr();
+  if (!state.log[today]) state.log[today] = { reviewed:0, correct:0, cold:0, recovered:0, missed:0 };
+  state.log[today].reviewed += 1;
+  if (correct) state.log[today].correct += 1;
+  if (evalResult) {
+    if (evalResult.kind === 'cold_correct') state.log[today].cold = (state.log[today].cold||0)+1;
+    if (evalResult.kind === 'recovered') state.log[today].recovered = (state.log[today].recovered||0)+1;
+    if (evalResult.kind === 'first_fail') state.log[today].missed = (state.log[today].missed||0)+1;
   }
-  quiz.results.push({ wordId: q.id, word: q.word, meaning: q.meaning, userAnswer: ua, correct });
-  document.getElementById('quizFeedback').innerHTML = `
-    <div class="quiz-feedback ${correct ? 'correct' : 'wrong'}">
-      ${correct ? '✅ 정답!' : `❌ 오답 (입력: ${escapeHtml(ua)})`}
-      <div class="answer-detail">
-        <div class="word">${escapeHtml(q.word)} <button class="tts-btn sm" onclick="speak('${escapeJs(q.word)}')">${speakerIcon(10)}</button></div>
-        <div>${escapeHtml(q.meaning)}</div>
-      </div>
-    </div>`;
-  const fudgeBtn = (!correct && (quiz.typeId === 'type_e2k' || quiz.typeId === 'type_k2e'))
-    ? `<button class="quiz-fudge" onclick="fudgeAnswer()">😅 사실 맞췄어 (오타/표현 차이)</button>`
-    : '';
-  document.getElementById('quizControls').innerHTML = `
-    ${fudgeBtn}
-    <button class="quiz-next" onclick="nextQuizQuestion()">${quiz.index + 1 >= quiz.questions.length ? '🏁 결과 보기' : '다음 →'}</button>
-  `;
+  quiz.results.push({ wordId: q.id, word: q.word, meaning: q.meaning, userAnswer: ua, correct, evalKind: evalResult?.kind, responseTime: ms, beforeSnap, activeType });
+  saveState();
+  const e = evalResult || EVAL_LABELS.cold_correct;
+  const badge = `<div style="display:inline-block;padding:6px 14px;border-radius:999px;background:${e.color}22;color:${e.color};font-weight:700;font-size:13px;margin-bottom:8px;">${e.icon} ${e.label} · ${(ms/1000).toFixed(1)}s</div>`;
+  const msg = `<div style="font-size:13px;color:var(--text);margin:6px 0 10px;line-height:1.5;">${escapeHtml(e.message)}</div>`;
+  const detail = `<div class="answer-detail"><div class="word">${escapeHtml(q.word)} <button class="tts-btn sm" onclick="speak('${escapeJs(q.word)}')">${speakerIcon(10)}</button>${q.ipa?` <span style="color:var(--muted);font-weight:normal;margin-left:6px;">${escapeHtml(q.ipa)}</span>`:''}</div><div style="margin-top:4px;">${escapeHtml(q.meaning)}</div>${(q.examples && q.examples[0])?`<div style="margin-top:6px;color:var(--muted);font-style:italic;">"${escapeHtml(q.examples[0])}"</div>`:''}</div>`;
+  document.getElementById('quizFeedback').innerHTML = `<div class="quiz-feedback ${correct?'correct':'wrong'}" style="text-align:left;">${badge}${!correct?`<div style="font-size:13px;color:var(--muted);margin-bottom:4px;">입력: <b>${escapeHtml(ua||'(빈칸)')}</b></div>`:''}${msg}${detail}</div>`;
+  const fudgeBtn = (!correct && (activeType === 'type_e2k' || activeType === 'type_k2e' || activeType === 'dictation' || activeType === 'fill_blank')) ? `<button class="quiz-fudge" onclick="fudgeAnswer()">😅 사실 맞췄어 (오타였음)</button>` : '';
+  document.getElementById('quizControls').innerHTML = `${fudgeBtn}<button class="quiz-next" onclick="nextQuizQuestion()">${quiz.index+1 >= quiz.questions.length ? '🏁 결과 보기' : '다음 →'} (Enter)</button>`;
 }
 function fudgeAnswer() {
-  const last = quiz.results[quiz.results.length - 1];
-  if (!last || last.correct) return;
-  const w = state.words.find(x => x.id === last.wordId);
-  if (w) {
-    const today = todayStr();
-    // Roll back the lapse and treat as a correct answer
-    w.lapses = Math.max(0, (w.lapses || 0) - 1);
-    w.reps = (w.reps || 0) + 1;
-    w.box = Math.min((w.box || 0) + 1, SRS_INTERVALS.length - 1);
-    w.nextReview = addDays(today, SRS_INTERVALS[w.box]);
-    if (state.log[today]) state.log[today].correct = (state.log[today].correct || 0) + 1;
-    saveState();
-  }
-  last.correct = true;
-  last.fudged = true;
+  const last = quiz.results[quiz.results.length-1]; if (!last || last.correct) return;
+  const w = state.words.find(x=>x.id===last.wordId); if (!w || !last.beforeSnap) return;
+  restoreWord(w, last.beforeSnap);
+  const newEval = evaluateAnswer(w, true, last.responseTime, last.activeType);
+  last.correct = true; last.evalKind = newEval.kind; last.fudged = true;
+  const today = todayStr();
+  if (state.log[today]) { state.log[today].correct += 1; state.log[today].missed = Math.max(0, (state.log[today].missed||0)-1); if (newEval.kind === 'cold_correct') state.log[today].cold = (state.log[today].cold||0)+1; }
+  saveState();
   const fb = document.querySelector('.quiz-feedback');
-  if (fb) {
-    fb.className = 'quiz-feedback correct';
-    fb.innerHTML = `✅ 정답 처리됨 (수동 보정)
-      <div class="answer-detail">
-        <div class="word">${escapeHtml(last.word)} <button class="tts-btn sm" onclick="speak('${escapeJs(last.word)}')">${speakerIcon(10)}</button></div>
-        <div>${escapeHtml(last.meaning)}</div>
-      </div>`;
+  if (fb) { fb.className = 'quiz-feedback correct'; fb.style.textAlign = 'left';
+    const badge = `<div style="display:inline-block;padding:6px 14px;border-radius:999px;background:${newEval.color}22;color:${newEval.color};font-weight:700;font-size:13px;margin-bottom:8px;">${newEval.icon} ${newEval.label} · (fudged)</div>`;
+    const msg = `<div style="font-size:13px;color:var(--text);margin:6px 0 10px;line-height:1.5;">${escapeHtml(newEval.message)}</div>`;
+    fb.innerHTML = badge + msg + (fb.querySelector('.answer-detail')?.outerHTML || '');
   }
   document.querySelector('.quiz-fudge')?.remove();
-  toast('정답으로 재평가되었습니다.');
+  toast('정답으로 재평가됨');
 }
 function nextQuizQuestion() {
   quiz.index += 1;
   if (quiz.index >= quiz.questions.length) { quiz.state = 'done'; quiz.endTime = Date.now(); }
-  renderQuiz();
-  updateTodayInfo();
+  renderQuiz(); updateTodayInfo();
 }
 function showQuizResults() {
+  const c = document.getElementById('quizContainer');
   const total = quiz.results.length;
-  const correct = quiz.results.filter(r => r.correct).length;
-  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-  document.getElementById('quizContainer').innerHTML = `
+  const correct = quiz.results.filter(r=>r.correct).length;
+  const pct = total > 0 ? Math.round((correct/total)*100) : 0;
+  const elapsed = Math.round((quiz.endTime - quiz.startTime)/1000);
+  const min = Math.floor(elapsed/60), sec = elapsed%60;
+  const wrongs = quiz.results.filter(r=>!r.correct);
+  const br = {
+    cold: quiz.results.filter(r=>r.evalKind==='cold_correct').length,
+    med: quiz.results.filter(r=>r.evalKind==='medium_correct').length,
+    slow: quiz.results.filter(r=>r.evalKind==='slow_correct').length,
+    fail: quiz.results.filter(r=>r.evalKind==='first_fail').length,
+    rec: quiz.results.filter(r=>r.evalKind==='recovered').length,
+    extra: quiz.results.filter(r=>r.evalKind==='extra_practice').length,
+  };
+  const meaningfulTotal = total - br.extra;
+  const truePct = meaningfulTotal > 0 ? Math.round((br.cold/meaningfulTotal)*100) : 0;
+  let msg = '';
+  if (truePct >= 80) msg = '🏆 진짜 mastery rate가 높습니다.';
+  else if (truePct >= 60) msg = '🎉 Cold correct 좋아요.';
+  else if (truePct >= 40) msg = '💪 절반쯤 첫 시도 성공. 한 번 더 다지면 됩니다.';
+  else if (truePct >= 20) msg = '📚 진짜 외운 것보다 본 적 있는 단어가 많음.';
+  else msg = '🌱 새 단어 단계. Recognition부터 천천히.';
+  c.innerHTML = `
     <div class="quiz-results">
       <div class="score">${correct} / ${total}</div>
-      <div class="score-label">정답률 ${pct}%</div>
-      <button class="quiz-next" onclick="quiz=null;renderQuiz();" style="margin-top:20px;">🆕 새 퀴즈</button>
+      <div class="score-label">표면 정답률 ${pct}% · <b style="color:var(--good);">진짜 mastery (Cold) ${truePct}%</b></div>
+      <div style="margin-top:14px;font-size:14px;">${msg}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:14px 0;">
+        ${[['cold','Cold','#16a34a',br.cold],['med','Medium','#2563eb',br.med],['slow','Slow','#f59e0b',br.slow],['rec','Recovered','#a855f7',br.rec],['fail','Miss','#dc2626',br.fail]].map(([k,l,co,n])=>`<div style="background:${co}15;border-radius:10px;padding:10px 8px;text-align:center;"><div style="font-size:20px;font-weight:700;color:${co};">${n}</div><div style="font-size:10px;color:${co};font-weight:600;margin-top:2px;">${l}</div></div>`).join('')}
+      </div>
+      <div class="summary"><div class="item"><div class="v">${correct}</div><div class="l">정답</div></div><div class="item"><div class="v" style="color:var(--danger);">${total-correct}</div><div class="l">오답</div></div><div class="item"><div class="v">${min>0?min+'m ':''}${sec}s</div><div class="l">소요</div></div></div>
+      ${wrongs.length > 0 ? `<div class="wrong-list"><h4>❌ 틀린 단어 ${wrongs.length}개 (내일 복습 예약됨)</h4>${wrongs.map(r=>`<div class="wrong-item"><div><span class="right">${escapeHtml(r.word)}</span> <button class="tts-btn sm" onclick="speak('${escapeJs(r.word)}')">${speakerIcon(10)}</button> — ${escapeHtml(r.meaning)}</div><div style="margin-top:4px;font-size:12px;">입력: <span class="your">${escapeHtml(r.userAnswer||'(빈칸)')}</span></div></div>`).join('')}</div>` : '<div style="margin-top:20px;color:var(--good);font-size:14px;">🎊 틀린 단어 없음!</div>'}
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;">
+        ${wrongs.length > 0 ? `<button class="quiz-next" onclick="retryWrongs()">🔄 틀린 것만 다시</button>` : ''}
+        <button class="quiz-next" onclick="quiz=null;renderQuiz();">🆕 새 퀴즈</button>
+      </div>
     </div>
   `;
 }
-/* ============================================================
-   CLOUD SYNC (stub — keeps button functional, no-op if not configured)
-============================================================ */
-let syncState = { enabled: false, status: 'disabled', pushTimer: null };
-function schedulePush() {}
-function renderSyncTab() {
-  const c = document.getElementById('syncContainer');
-  c.innerHTML = `
-    <h3 style="margin-top:0;">☁️ 동기화</h3>
-    <p style="color:var(--muted); font-size:13px;">이 노트북은 기본적으로 브라우저의 localStorage에 자동 저장됩니다. 다른 디바이스와 동기화는 💾 백업 탭의 JSON 내보내기/가져오기를 사용하세요.</p>
-  `;
+function retryWrongs() {
+  const wrongIds = new Set(quiz.results.filter(r=>!r.correct).map(r=>r.wordId));
+  const wrong = state.words.filter(w=>wrongIds.has(w.id));
+  quiz = { typeId: quiz.typeId, type: quiz.type, pool: state.words, questions: wrong.sort(()=>Math.random()-0.5), index:0, results:[], state:'running', startTime: Date.now(), answered: false };
+  renderQuiz();
 }
-/* ============================================================
-   ARTICLE READER
-============================================================ */
 let currentArticleId = null;
 function renderReader() {
   if (!Array.isArray(state.articles)) state.articles = [];
@@ -1352,381 +1156,211 @@ function renderArticleList() {
   const articles = state.articles || [];
   c.innerHTML = `
     <h3 style="margin-top:0;">📰 NYT 기사 reader</h3>
-    <div style="background:#eef1ff; border-left:4px solid var(--primary); padding:14px 18px; border-radius:8px; margin-bottom:16px; font-size:13px; line-height:1.7;">
-      <b style="color:var(--primary);">💡 사용 방법</b><br>
-      1. Claude에게 NYT 기사 본문을 통째로 보냅니다 ("이 기사 처리해줘: ...")<br>
-      2. Claude가 어려운 단어 30~60개에 한국어 뜻이 박힌 <b>JSON 파일</b>을 만들어 줌<br>
-      3. 그 JSON을 여기서 import → 비행기 등 오프라인에서도 단어 클릭으로 뜻 확인<br>
-      4. 모르는 단어는 <b>📌 노트북에 저장</b> → SRS 시스템에 자동 추가 (📰 뉴스·시사)
+    <div style="background:#eef1ff;border-left:4px solid var(--primary);padding:14px 18px;border-radius:8px;margin-bottom:16px;font-size:13px;line-height:1.7;">
+      <b>💡 사용 방법</b><br>
+      1. Claude에게 NYT 기사 본문 보내기 → JSON 파일 받기<br>
+      2. 여기서 import → 비행기 등 오프라인에서도 단어 클릭으로 뜻 확인<br>
+      3. 모르는 단어는 📌 노트북에 저장 → SRS 시스템에 추가 (📰 뉴스·시사)
     </div>
-    <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
-      <label style="background:var(--primary); color:white; padding:10px 18px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
-        📥 JSON 파일 import
-        <input type="file" id="articleImportInput" accept="application/json,.json" style="display:none;" />
-      </label>
-      <button onclick="showPasteArticleUI()" style="background:#eef1ff; color:var(--primary); border:1px solid var(--border); padding:10px 18px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600;">
-        📋 JSON 직접 붙여넣기
-      </button>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+      <label style="background:var(--primary);color:white;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;">📥 JSON 파일 import<input type="file" id="articleImportInput" accept="application/json,.json" style="display:none;" /></label>
+      <button onclick="showPasteArticleUI()" style="background:#eef1ff;color:var(--primary);border:1px solid var(--border);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;">📋 JSON 직접 붙여넣기</button>
     </div>
-    ${articles.length === 0 ? `
-      <div class="empty">
-        <div style="font-size: 48px;">📰</div>
-        <h3>아직 가져온 기사가 없습니다</h3>
-        <p>위 안내대로 Claude에게 기사를 보내고 받은 JSON을 import해 보세요.</p>
+    ${articles.length === 0 ? `<div class="empty"><div style="font-size:48px;">📰</div><h3>아직 가져온 기사가 없습니다</h3></div>` : articles.map(a => `
+      <div class="article-card" onclick="openArticle('${a.id}')">
+        <button class="icon-btn del" style="position:absolute;top:12px;right:12px;" onclick="event.stopPropagation();deleteArticle('${a.id}')">🗑️</button>
+        <div class="ar-title">${escapeHtml(a.title)}</div>
+        <div class="ar-meta">📰 ${escapeHtml(a.source||'Article')} · 📅 ${escapeHtml(a.date||'')} · 📚 ${(a.vocabulary||[]).length}개 단어</div>
+        ${a.summary ? `<div style="font-size:13px;color:var(--text);margin-bottom:6px;padding:8px 12px;background:#fffbea;border-left:3px solid #f1c40f;border-radius:6px;">📝 ${escapeHtml(a.summary)}</div>` : ''}
+        <div class="ar-preview">${escapeHtml((a.body||'').slice(0,200))}...</div>
       </div>
-    ` : `
-      <div style="font-size:12px; color:var(--muted); margin-bottom:8px;">총 ${articles.length}개 기사 (최근 추가 순)</div>
-      ${articles.map(a => `
-        <div class="article-card" onclick="openArticle('${a.id}')">
-          <button class="icon-btn del" style="position:absolute; top:12px; right:12px;" onclick="event.stopPropagation();deleteArticle('${a.id}')" title="삭제">🗑️</button>
-          <div class="ar-title">${escapeHtml(a.title)}</div>
-          <div class="ar-meta">📰 ${escapeHtml(a.source || 'Article')} · 📅 ${escapeHtml(a.date || '')} · 📚 ${(a.vocabulary || []).length}개 단어 박힘</div>
-          ${a.summary ? `<div style="font-size:13px; color:var(--text); margin-bottom:6px; padding:8px 12px; background:#fffbea; border-left:3px solid #f1c40f; border-radius:6px;">📝 ${escapeHtml(a.summary)}</div>` : ''}
-          <div class="ar-preview">${escapeHtml((a.body || '').slice(0, 220))}...</div>
-        </div>
-      `).join('')}
-    `}
+    `).join('')}
   `;
   const imp = document.getElementById('articleImportInput');
   if (imp) imp.addEventListener('change', handleArticleFileImport);
 }
 function handleArticleFileImport(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try { importArticle(JSON.parse(ev.target.result)); }
-    catch (err) { toast('❌ JSON 파싱 실패: ' + err.message); }
-  };
-  reader.readAsText(file);
-  e.target.value = '';
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => { try { importArticle(JSON.parse(ev.target.result)); } catch (err) { toast('JSON 파싱 실패: ' + err.message); } };
+  r.readAsText(f); e.target.value = '';
 }
 function showPasteArticleUI() {
   const c = document.getElementById('tab-reader');
-  c.innerHTML = `
-    <button onclick="renderReader()" style="background:#eef1ff; color:var(--primary); border:1px solid var(--border); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600; margin-bottom:14px;">← 뒤로</button>
-    <h3 style="margin-top:0;">📋 기사 JSON 직접 붙여넣기</h3>
-    <p style="color:var(--muted); font-size:13px;">Claude에게 받은 JSON 전체 텍스트를 그대로 붙여넣고 가져오기를 누르세요.</p>
-    <textarea id="pasteArticleText" placeholder='{ "title": "...", "source": "NYT", "body": "...", "vocabulary": [...] }' style="width:100%; min-height:340px; padding:12px; border:1px solid var(--border); border-radius:8px; font-family:'SF Mono',Monaco,monospace; font-size:12px; background:#fafbff;"></textarea>
-    <div style="display:flex; gap:8px; margin-top:14px;">
-      <button onclick="submitPastedArticle()" style="background:var(--primary); color:white; border:none; padding:12px 24px; border-radius:10px; cursor:pointer; font-weight:600; font-size:14px;">가져오기</button>
-      <button onclick="renderReader()" style="background:#eee; color:#555; border:none; padding:12px 24px; border-radius:10px; cursor:pointer; font-size:14px;">취소</button>
-    </div>
-  `;
+  c.innerHTML = `<button onclick="renderReader()" style="background:#eef1ff;color:var(--primary);border:1px solid var(--border);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;margin-bottom:14px;">← 뒤로</button><h3 style="margin-top:0;">📋 기사 JSON 붙여넣기</h3><textarea id="pasteArticleText" placeholder='{ "title":"...", "body":"...", "vocabulary":[...] }' style="width:100%;min-height:340px;padding:12px;border:1px solid var(--border);border-radius:8px;font-family:'SF Mono',Monaco,monospace;font-size:12px;background:#fafbff;"></textarea><div style="display:flex;gap:8px;margin-top:14px;"><button onclick="submitPastedArticle()" style="background:var(--primary);color:white;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;font-weight:600;">가져오기</button><button onclick="renderReader()" style="background:#eee;color:#555;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;">취소</button></div>`;
 }
 function submitPastedArticle() {
-  const text = document.getElementById('pasteArticleText').value.trim();
-  if (!text) { toast('JSON을 붙여넣어 주세요.'); return; }
-  try { importArticle(JSON.parse(text)); }
-  catch (err) { toast('❌ JSON 파싱 실패: ' + err.message); }
+  const t = document.getElementById('pasteArticleText').value.trim();
+  if (!t) { toast('JSON 입력 필요'); return; }
+  try { importArticle(JSON.parse(t)); } catch (err) { toast('JSON 파싱 실패: ' + err.message); }
 }
-function importArticle(data) {
-  if (!data.title || !data.body || !Array.isArray(data.vocabulary)) {
-    toast('❌ 필수 필드 누락 (title, body, vocabulary 배열)');
-    return;
-  }
-  const article = {
-    id: data.id || ('art_' + Date.now() + '_' + Math.random().toString(36).slice(2,7)),
-    title: data.title,
-    source: data.source || 'Article',
-    url: data.url || '',
-    date: data.date || todayStr(),
-    summary: data.summary || '',
-    body: data.body,
-    vocabulary: data.vocabulary,
-    importedAt: todayStr(),
-  };
+function importArticle(d) {
+  if (!d.title || !d.body || !Array.isArray(d.vocabulary)) { toast('필수 필드 누락'); return; }
+  const a = { id: d.id || ('art_'+Date.now()+'_'+Math.random().toString(36).slice(2,7)), title: d.title, source: d.source||'Article', url: d.url||'', date: d.date||todayStr(), summary: d.summary||'', body: d.body, vocabulary: d.vocabulary, importedAt: todayStr() };
   if (!Array.isArray(state.articles)) state.articles = [];
-  const existingIdx = state.articles.findIndex(a => a.id === article.id);
-  if (existingIdx >= 0) {
-    if (!confirm('같은 ID의 기사가 이미 있습니다. 덮어쓸까요?')) return;
-    state.articles[existingIdx] = article;
-  } else {
-    state.articles.unshift(article);
-  }
-  saveState();
-  toast(`✅ "${article.title}" 가져오기 완료 (${article.vocabulary.length}개 단어)`);
-  currentArticleId = article.id;
-  renderReader();
+  const ex = state.articles.findIndex(x => x.id === a.id);
+  if (ex >= 0) { if (!confirm('같은 ID 기사가 있음. 덮어쓸까?')) return; state.articles[ex] = a; }
+  else state.articles.unshift(a);
+  saveState(); toast(`✅ "${a.title}" 가져옴`); currentArticleId = a.id; renderReader();
 }
 function openArticle(id) { currentArticleId = id; renderReader(); }
 function deleteArticle(id) {
-  if (!confirm('이 기사를 삭제할까요? 노트북에 저장된 단어는 그대로 남습니다.')) return;
-  state.articles = state.articles.filter(a => a.id !== id);
-  saveState();
-  toast('삭제되었습니다.');
-  if (currentArticleId === id) currentArticleId = null;
+  if (!confirm('삭제? (저장된 단어는 그대로)')) return;
+  state.articles = state.articles.filter(a=>a.id!==id);
+  saveState(); if (currentArticleId === id) currentArticleId = null;
   renderReader();
 }
 function backToArticleList() { currentArticleId = null; renderReader(); }
 function renderArticleView(id) {
-  const a = state.articles.find(x => x.id === id);
-  if (!a) { currentArticleId = null; renderReader(); return; }
-  const bodyHtml = renderArticleBody(a);
-  const savedCount = (a.vocabulary || []).filter(v => isWordSavedInNotebook(v.word)).length;
+  const a = state.articles.find(x=>x.id===id); if (!a) { currentArticleId = null; renderReader(); return; }
+  const bh = renderArticleBody(a);
+  const saved = (a.vocabulary||[]).filter(v => isWordSavedInNotebook(v.word)).length;
   const c = document.getElementById('tab-reader');
   c.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
-      <button onclick="backToArticleList()" style="background:#eef1ff; color:var(--primary); border:1px solid var(--border); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600;">← 기사 목록</button>
-      <div style="color:var(--muted); font-size:12px;">📚 ${(a.vocabulary || []).length}개 단어 박힘 · 저장됨 ${savedCount}개 · <b>점선 단어 클릭</b></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+      <button onclick="backToArticleList()" style="background:#eef1ff;color:var(--primary);border:1px solid var(--border);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;">← 기사 목록</button>
+      <div style="color:var(--muted);font-size:12px;">📚 ${(a.vocabulary||[]).length}개 단어 · 저장됨 ${saved}개 · <b>점선 단어 클릭</b></div>
     </div>
     <div class="article-body">
-      <div style="border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:24px;">
-        <h2 style="margin:0 0 8px; font-size:26px;">${escapeHtml(a.title)}</h2>
-        <div style="color:var(--muted); font-size:13px;">📰 ${escapeHtml(a.source)} · 📅 ${escapeHtml(a.date)}</div>
-        ${a.summary ? `<div style="margin-top:12px; padding:10px 14px; background:#fffbea; border-left:3px solid #f1c40f; border-radius:6px; font-size:13px; line-height:1.6;">📝 ${escapeHtml(a.summary)}</div>` : ''}
+      <div style="border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:24px;">
+        <h2 style="margin:0 0 8px;font-size:26px;line-height:1.3;">${escapeHtml(a.title)}</h2>
+        <div style="color:var(--muted);font-size:13px;">📰 ${escapeHtml(a.source)} · 📅 ${escapeHtml(a.date)}</div>
+        ${a.summary ? `<div style="margin-top:12px;padding:10px 14px;background:#fffbea;border-left:3px solid #f1c40f;border-radius:6px;font-size:13px;line-height:1.6;">📝 ${escapeHtml(a.summary)}</div>` : ''}
       </div>
-      ${bodyHtml}
+      ${bh}
     </div>
   `;
   c.querySelectorAll('.vocab-word').forEach(span => {
     const idx = parseInt(span.dataset.vocabIdx);
-    const vocab = a.vocabulary[idx];
-    if (!vocab) return;
-    if (isWordSavedInNotebook(vocab.word)) span.classList.add('saved');
-    span.addEventListener('click', e => {
-      e.stopPropagation();
-      showVocabPopup(a, idx);
-    });
+    const v = a.vocabulary[idx]; if (!v) return;
+    if (isWordSavedInNotebook(v.word)) span.classList.add('saved');
+    span.addEventListener('click', e => { e.stopPropagation(); showVocabPopup(a, idx); });
   });
 }
 function renderArticleBody(article) {
   const body = article.body;
   const matches = [];
-  (article.vocabulary || []).forEach((v, idx) => {
+  (article.vocabulary||[]).forEach((v, idx) => {
     if (!v || !v.word) return;
-    const escapedWord = v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const ew = v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const isPhrase = v.word.includes(' ');
-    const pattern = isPhrase
-      ? '\\b' + escapedWord + '\\b'
-      : '\\b' + escapedWord + '(?:s|es|ed|ing|er|est|d|ly)?\\b';
-    let re;
-    try { re = new RegExp(pattern, 'gi'); } catch (err) { return; }
+    const pattern = isPhrase ? '\\b'+ew+'\\b' : '\\b'+ew+'(?:s|es|ed|ing|er|est|d|ly)?\\b';
+    let re; try { re = new RegExp(pattern, 'gi'); } catch (err) { return; }
     let m;
     while ((m = re.exec(body)) !== null) {
       matches.push({ start: m.index, end: m.index + m[0].length, text: m[0], vocabIdx: idx, len: m[0].length });
       if (m.index === re.lastIndex) re.lastIndex++;
     }
   });
-  matches.sort((a, b) => a.start - b.start || b.len - a.len);
-  const kept = [];
-  let lastEnd = 0;
-  for (const m of matches) {
-    if (m.start >= lastEnd) { kept.push(m); lastEnd = m.end; }
-  }
-  let out = '';
-  let pos = 0;
+  matches.sort((a,b) => a.start - b.start || b.len - a.len);
+  const kept = []; let lastEnd = 0;
+  for (const m of matches) { if (m.start >= lastEnd) { kept.push(m); lastEnd = m.end; } }
+  let out = '', pos = 0;
   for (const m of kept) {
     out += escapeHtml(body.slice(pos, m.start));
     out += `<span class="vocab-word" data-vocab-idx="${m.vocabIdx}">${escapeHtml(m.text)}</span>`;
     pos = m.end;
   }
   out += escapeHtml(body.slice(pos));
-  const paragraphs = out.split(/\n\n+/);
-  return paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+  return out.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
 }
 function isWordSavedInNotebook(word) {
   if (!word) return false;
   const lower = word.toLowerCase();
   return state.words.some(w => w.word.toLowerCase() === lower);
 }
-function showVocabPopup(article, vocabIdx) {
-  const v = article.vocabulary[vocabIdx];
-  if (!v) return;
-  const overlay = document.getElementById('vocabOverlay');
+function showVocabPopup(article, idx) {
+  const v = article.vocabulary[idx]; if (!v) return;
   const saved = isWordSavedInNotebook(v.word);
-  let contextSentence = v.context || '';
-  if (!contextSentence) {
+  let cs = v.context || '';
+  if (!cs) {
     const body = article.body;
-    const escaped = v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    let re;
-    try { re = new RegExp('\\b' + escaped + '\\w*', 'i'); } catch(e) { re = null; }
+    const ew = v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    let re; try { re = new RegExp('\\b'+ew+'\\w*', 'i'); } catch(e) { re = null; }
     const m = re ? re.exec(body) : null;
     if (m) {
-      let start = body.lastIndexOf('. ', m.index);
-      start = start < 0 ? 0 : start + 2;
-      let end = body.indexOf('. ', m.index);
-      if (end < 0) end = body.length; else end += 1;
-      contextSentence = body.slice(start, end).trim();
+      let start = body.lastIndexOf('. ', m.index); start = start < 0 ? 0 : start + 2;
+      let end = body.indexOf('. ', m.index); if (end < 0) end = body.length; else end += 1;
+      cs = body.slice(start, end).trim();
     }
   }
-  let contextHtml = '';
-  if (contextSentence) {
-    const escaped = v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    try {
-      const reH = new RegExp('\\b' + escaped + '\\w*', 'gi');
-      contextHtml = escapeHtml(contextSentence).replace(reH, m => `<span class="vp-highlight">${m}</span>`);
-    } catch(e) { contextHtml = escapeHtml(contextSentence); }
+  let ch = '';
+  if (cs) {
+    const ew = v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    try { ch = escapeHtml(cs).replace(new RegExp('\\b'+ew+'\\w*', 'gi'), m => `<span class="vp-highlight">${m}</span>`); }
+    catch(e) { ch = escapeHtml(cs); }
   }
   document.getElementById('vocabPopupBody').innerHTML = `
-    <div class="vocab-word-big">${escapeHtml(v.word)}
-      <button class="tts-btn lg" onclick="speak('${escapeJs(v.word)}')" title="단어 발음">${speakerIcon()}</button>
-    </div>
+    <div class="vocab-word-big">${escapeHtml(v.word)} <button class="tts-btn lg" onclick="speak('${escapeJs(v.word)}')">${speakerIcon()}</button></div>
     ${v.ipa ? `<div class="vocab-popup-ipa">${escapeHtml(v.ipa)}</div>` : ''}
     <div class="vocab-popup-meaning">${escapeHtml(v.meaning)}</div>
-    ${contextHtml ? `
-      <div class="vocab-popup-context">
-        <div class="label">📍 이 기사에서:</div>
-        <div class="quote">${contextHtml}
-          <button class="tts-btn sm" style="margin-left:6px; vertical-align:middle;" onclick="speak('${escapeJs(contextSentence)}')">${speakerIcon(11)}</button>
-        </div>
-      </div>` : ''}
-    ${(v.collocations && v.collocations.length > 0) ? `
-      <div style="margin-top:14px;">
-        <div style="font-size:12px; color:var(--muted); font-weight:600; margin-bottom:6px;">💬 자주 쓰이는 조합:</div>
-        <div>${v.collocations.map(co => `<span class="colloc-tag" style="margin:0 4px 4px 0;">${escapeHtml(co)}<button class="tts-btn sm" onclick="speak('${escapeJs(co)}')">${speakerIcon(10)}</button></span>`).join('')}</div>
-      </div>` : ''}
-    ${v.note ? `<div style="margin-top:12px; padding:10px 12px; background:#fff0f5; border-left:3px solid #c1387c; border-radius:6px; font-size:13px;">💡 ${escapeHtml(v.note)}</div>` : ''}
+    ${ch ? `<div class="vocab-popup-context"><div class="label">📍 이 기사에서:</div><div class="quote">${ch} <button class="tts-btn sm" style="margin-left:6px;vertical-align:middle;" onclick="speak('${escapeJs(cs)}')">${speakerIcon(11)}</button></div></div>` : ''}
+    ${(v.collocations && v.collocations.length > 0) ? `<div style="margin-top:14px;"><div style="font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px;">💬 자주 쓰이는 조합:</div><div>${v.collocations.map(co=>`<span class="colloc-tag" style="margin:0 4px 4px 0;">${escapeHtml(co)}<button class="tts-btn sm" onclick="speak('${escapeJs(co)}')">${speakerIcon(10)}</button></span>`).join('')}</div></div>` : ''}
+    ${v.note ? `<div style="margin-top:12px;padding:10px 12px;background:#fff0f5;border-left:3px solid #c1387c;border-radius:6px;font-size:13px;">💡 ${escapeHtml(v.note)}</div>` : ''}
     <div class="vocab-popup-actions">
-      ${saved ? `
-        <button style="background:#d8f4e3; color:var(--good); cursor:default;">✅ 노트북에 이미 있음</button>
-      ` : `
-        <button style="background:var(--primary); color:white;" onclick="saveVocabFromArticle('${article.id}', ${vocabIdx})">📌 노트북에 저장</button>
-      `}
-      <button style="background:#eef1ff; color:var(--text);" onclick="closeVocabPopup()">닫기</button>
+      ${saved ? `<button style="background:#d8f4e3;color:var(--good);cursor:default;">✅ 노트북에 이미 있음</button>` : `<button style="background:var(--primary);color:white;" onclick="saveVocabFromArticle('${article.id}', ${idx})">📌 노트북에 저장</button>`}
+      <button style="background:#eef1ff;color:var(--text);" onclick="closeVocabPopup()">닫기</button>
     </div>
   `;
-  overlay.classList.add('show');
+  document.getElementById('vocabOverlay').classList.add('show');
 }
-function closeVocabPopup() {
-  const overlay = document.getElementById('vocabOverlay');
-  if (overlay) overlay.classList.remove('show');
-}
-function saveVocabFromArticle(articleId, vocabIdx) {
-  const article = state.articles.find(a => a.id === articleId);
-  if (!article) return;
-  const v = article.vocabulary[vocabIdx];
-  if (!v) return;
-  if (isWordSavedInNotebook(v.word)) {
-    toast('이미 노트북에 저장된 단어입니다.');
-    closeVocabPopup();
-    return;
-  }
-  const examples = (v.examples && Array.isArray(v.examples) && v.examples.length > 0)
-    ? v.examples
-    : (v.context ? [v.context] : []);
-  const sourceNote = `[from: ${article.title}]`;
-  const fullNote = v.note ? (v.note + ' / ' + sourceNote) : sourceNote;
-  state.words.push({
-    id: cryptoId(),
-    word: v.word,
-    ipa: v.ipa || '',
-    meaning: v.meaning,
-    examples,
-    collocations: v.collocations || [],
-    category: 'news',
-    note: fullNote,
-    createdAt: todayStr(),
-    box: 0, reps: 0, lapses: 0,
-    lastReviewed: null,
-    nextReview: todayStr(),
-    history: [],
-    userSentence: '',
-    learningStage: 1,
-    lastAttemptDate: null,
-    failedToday: false,
-    recoveredToday: false,
-    passedToday: false,
-    coldStreak: 0,
-    lastResponseMs: 0,
-  });
+function closeVocabPopup() { document.getElementById('vocabOverlay').classList.remove('show'); }
+function saveVocabFromArticle(aid, idx) {
+  const article = state.articles.find(a=>a.id===aid); if (!article) return;
+  const v = article.vocabulary[idx]; if (!v) return;
+  if (isWordSavedInNotebook(v.word)) { toast('이미 저장됨'); closeVocabPopup(); return; }
+  const examples = (v.examples && Array.isArray(v.examples) && v.examples.length > 0) ? v.examples : (v.context ? [v.context] : []);
+  const sn = `[from: ${article.title}]`;
+  const fn = v.note ? (v.note + ' / ' + sn) : sn;
+  state.words.push({ id: cryptoId(), word: v.word, ipa: v.ipa||'', meaning: v.meaning, examples, collocations: v.collocations||[], category: 'news', note: fn, createdAt: todayStr(), box: 0, reps: 0, lapses: 0, lastReviewed: null, nextReview: todayStr(), history: [], userSentence: '', learningStage: 1, lastAttemptDate: null, failedToday: false, recoveredToday: false, passedToday: false, coldStreak: 0, lastResponseMs: 0 });
   saveState();
-  toast(`✅ "${v.word}" 노트북에 추가됨 (📰 뉴스·시사)`);
-  closeVocabPopup();
-  renderArticleView(articleId);
+  toast(`✅ "${v.word}" 추가됨`);
+  closeVocabPopup(); renderArticleView(aid);
 }
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const overlay = document.getElementById('vocabOverlay');
-    if (overlay && overlay.classList.contains('show')) closeVocabPopup();
-  }
+  if (e.key === 'Escape') { const o = document.getElementById('vocabOverlay'); if (o && o.classList.contains('show')) closeVocabPopup(); }
 });
-/* ============================================================
-   BACKUP / RESTORE
-============================================================ */
 document.getElementById('exportBtn').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type:'application/json' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `english_study_backup_${todayStr()}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  toast("백업 파일이 다운로드되었습니다.");
+  const a = document.createElement('a'); a.href = url; a.download = `english_study_backup_${todayStr()}.json`; a.click(); URL.revokeObjectURL(url);
+  toast("백업 다운로드 완료");
 });
 document.getElementById('importInput').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
     try {
-      const imported = JSON.parse(ev.target.result);
-      if (!imported.words) throw new Error('Invalid format');
+      const im = JSON.parse(ev.target.result);
+      if (!im.words) throw new Error('Invalid format');
       let added = 0;
-      const existingWords = new Set(state.words.map(w => w.word.toLowerCase()));
-      imported.words.forEach(w => {
-        if (!existingWords.has(w.word.toLowerCase())) {
-          state.words.push({ ...w, id: cryptoId() });
-          added += 1;
-        }
-      });
-      if (Array.isArray(imported.articles)) {
-        const existingArticles = new Set((state.articles||[]).map(a => a.id));
-        imported.articles.forEach(a => {
-          if (!existingArticles.has(a.id)) {
-            if (!Array.isArray(state.articles)) state.articles = [];
-            state.articles.push(a);
-          }
-        });
+      const existing = new Set(state.words.map(w=>w.word.toLowerCase()));
+      im.words.forEach(w => { if (!existing.has(w.word.toLowerCase())) { state.words.push({ ...w, id: cryptoId() }); added += 1; } });
+      if (Array.isArray(im.articles)) {
+        const ea = new Set((state.articles||[]).map(a=>a.id));
+        im.articles.forEach(a => { if (!ea.has(a.id)) { if (!Array.isArray(state.articles)) state.articles = []; state.articles.push(a); } });
       }
-      saveState();
-      toast(`${added}개의 단어가 추가되었습니다.`);
-      renderList();
-    } catch (err) {
-      toast("잘못된 파일입니다.");
-    }
+      saveState(); toast(`${added}개 단어 추가됨`); renderList();
+    } catch (err) { toast("잘못된 파일"); }
   };
-  reader.readAsText(file);
+  r.readAsText(f);
 });
 document.getElementById('resetBtn').addEventListener('click', () => {
-  if (!confirm('정말로 모든 데이터를 초기화하시겠습니까?\n학습 기록이 모두 사라집니다.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  state = seedInitial();
-  saveState();
-  toast("초기화되었습니다.");
-  renderStudy();
+  if (!confirm('정말로 모든 데이터 초기화?')) return;
+  localStorage.removeItem(STORAGE_KEY); state = seedInitial(); saveState();
+  toast("초기화 완료"); renderStudy();
 });
-/* ============================================================
-   UTILITIES
-============================================================ */
-function escapeHtml(s) {
-  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function escapeJs(s) {
-  return String(s||'').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ').replace(/\r/g, '');
-}
+function escapeHtml(s) { return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escapeJs(s) { return String(s||'').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ').replace(/\r/g, ''); }
 let toastTimer;
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
-}
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 1800); }
 function updateTodayInfo() {
   const today = todayStr();
-  const due = state.words.filter(w => (w.nextReview || today) <= today).length;
-  const todayLog = state.log[today] || { reviewed: 0 };
-  document.getElementById('todayInfo').textContent =
-    `📅 ${today} · 오늘 복습 대기 ${due}개 · 학습 완료 ${todayLog.reviewed}개`;
+  const due = state.words.filter(w => (w.nextReview||today) <= today).length;
+  const log = state.log[today] || { reviewed: 0 };
+  document.getElementById('todayInfo').textContent = `📅 ${today} · 복습 대기 ${due}개 · 학습 완료 ${log.reviewed}개`;
 }
-/* ============================================================
-   INIT
-============================================================ */
-populateCategorySelects();
-saveState();
-updateTodayInfo();
-renderStudy();
+dailyReset(); populateCategorySelects(); saveState(); updateTodayInfo(); renderStudy();
 </script>
 </body>
 </html>
